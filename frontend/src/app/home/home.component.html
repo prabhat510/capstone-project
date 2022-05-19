@@ -1,0 +1,27 @@
+<app-nav></app-nav>
+<!-- books are displayed here -->
+<div class="row row-cols-1 row-cols-md-5 g-3">
+  <!-- to pass _id of the book as a parameter, put it in the second place of routerLink array and also update the 
+   path in app-routing.module.ts -->
+  <div
+    class="col"
+    [routerLink]="['/book', book._id]"
+    *ngFor="let book of books"
+  >
+    <div class="card">
+      <img
+        [src]="book.image"
+        class="card-img-top"
+        alt="book image"
+        style="height: 220px; width: 270px"
+      />
+      <div class="card-body">
+        <strong class="card-title">{{ book.title }}</strong>
+        <p class="card-text">
+          {{ book.author }}
+        </p>
+        <strong>{{ book.genre }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

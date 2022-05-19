@@ -1,0 +1,100 @@
+<div class="card">
+  <h5 class="card-header" style="text-align: center">Add new book</h5>
+  <div class="card-body">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Book Name:</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="title.."
+        [(ngModel)]="title"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Author:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="author.."
+        [(ngModel)]="author"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Publisher:</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="publisher.."
+        [(ngModel)]="publisher"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Date published:</label
+      >
+      <input
+        type="date"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="published on.."
+        [(ngModel)]="date_published"
+      />
+    </div>
+    <label for="exampleFormControlInput1" class="form-label"> Genre:</label>
+    <select
+      class="form-select form-select-sm mb-3"
+      aria-label=".form-select-sm example"
+      [(ngModel)]="genre"
+    >
+      <option selected>select genre</option>
+      <option value="fiction">fiction</option>
+      <option value="autobiography">autobiography</option>
+      <option value="science">science</option>
+      <option value="history">history</option>
+      <option value="mathematics">mathematics</option>
+      <option value="law">law</option>
+      <option value="medicine">medicine</option>
+      <option value="technology & engineering">technology & engineering</option>
+      <option value="finance">finance</option>
+    </select>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Description:</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="enter description"
+        [(ngModel)]="description"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Image link:</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="image link.."
+        [(ngModel)]="image"
+      />
+    </div>
+    <button
+      type="button"
+      class="btn btn-success"
+      style="width: 100%"
+      (click)="submitBook()"
+    >
+      submit
+    </button>
+  </div>
+</div>

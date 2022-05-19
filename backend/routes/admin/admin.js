@@ -6,27 +6,37 @@ const Book = require("../mongoose/models");
 mongoose.connect(
   "mongodb+srv://prabhat510:Prabhat123@cluster0.h16ts.mongodb.net/capstone?retryWrites=true&w=majority"
 );
+// before adding the book to the database, validation is done using mongoose
 router.post("/add/book", async (req, res) => {
-  var new_book = new Book(req.body);
-  new_book.save(function (error, result) {
+  var new_book = await new Book(req.body);
+  await new_book.save(function (error, result) {
     if (error) {
       console.log(error);
-      res.send(error.message);
+      res.json(error);
     } else {
       console.log(result);
-      res.send(result);
+      res.json(result);
     }
   });
 });
 // while deleting the book, pass the _id as a query instead of params while making a request through angular
-router.delete("/remove", async (req, res) => {
-  const { bookId } = req.query;
-  console.log(bookId);
+router.delete("/remove/:bookId", async (req, res) => {
+  const { bookId } = req.params;
   try {
     await Book.deleteOne({ _id: new ObjectId(bookId) });
-    res.send("book deleted");
+    res.json({ message: "book deleted" });
   } catch (error) {
-    res.send(error);
+    res.json(error);
+  }
+});
+// route for book detail
+router.get("/:bookId", async (req, res) => {
+  try {
+    const { bookId } = req.params;
+    const book = await Book.findOne({ _id: bookId });
+    res.json(book);
+  } catch (error) {
+    res.json(error);
   }
 });
 module.exports = router;

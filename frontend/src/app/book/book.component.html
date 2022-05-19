@@ -1,0 +1,40 @@
+<div class="book-container">
+  <div class="card" style="width: 100%">
+    <img [src]="book.image" class="card-img-top" alt="book image" />
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ book.title }}
+      </h5>
+      Author:{{ book.author }}
+      <hr />
+      <strong>About the Book:</strong>
+      <p class="card-text">{{ book.description }}</p>
+      <hr />
+      <strong>Book details:</strong><br />
+      <table class="table caption-top">
+        <tbody>
+          <tr>
+            <td>published</td>
+            <td>{{ book.date_published }}</td>
+          </tr>
+          <tr>
+            <td>publisher</td>
+            <td>{{ book.publisher }}</td>
+          </tr>
+          <tr>
+            <td>genre</td>
+            <td>{{ book.genre }}</td>
+          </tr>
+          <tr>
+            <td>rating</td>
+            <td>{{ book.rating }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="removeBook()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
