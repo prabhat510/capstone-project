@@ -2,3 +2,13 @@
   cursor: pointer;
   align-items: center;
 }
+
+select {
+  width: 200px;
+  height: 40px;
+}
+.search {
+  display: inline;
+  width: 200px;
+  height: 40px;
+}

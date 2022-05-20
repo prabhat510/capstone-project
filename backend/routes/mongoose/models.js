@@ -11,6 +11,6 @@ const bookSchema = new mongoose.Schema({
   publisher: { type: String, required: true },
   genre: { type: String, required: true },
   description: { type: String, required: true },
-  date_published: { type: String, required: true },
+  date_published: { type: Date, required: true },
 });
 module.exports = mongoose.model("Book", bookSchema);

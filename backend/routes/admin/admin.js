@@ -19,6 +19,16 @@ router.post("/add/book", async (req, res) => {
     }
   });
 });
+// route for updating the details of a book
+router.put("/edit/:bookId", async (req, res) => {
+  const { bookId } = req.params;
+  try {
+    const book = await Book.updateOne({ _id: new ObjectId(bookId) }, req.body);
+    res.json(book);
+  } catch (error) {
+    res.json(error);
+  }
+});
 // while deleting the book, pass the _id as a query instead of params while making a request through angular
 router.delete("/remove/:bookId", async (req, res) => {
   const { bookId } = req.params;

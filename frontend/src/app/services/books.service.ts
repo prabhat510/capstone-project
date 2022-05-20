@@ -21,4 +21,7 @@ export class BooksService {
   addBook(url: string, body: object) {
     return this.httpclient.post(url, body)
   }
+  updateBook(url: string, body: object) {
+    return this.httpclient.put(url, body)
+  }
 }
