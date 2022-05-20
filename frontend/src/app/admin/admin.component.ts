@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -17,10 +18,21 @@ export class AdminComponent implements OnInit {
   description: string = ''
   image: string = ''
   date_published: string = ''
+  bookId: any = ''
+  book: any = {}
 
-  constructor(private bookservice: BooksService, private router: Router) { }
+  constructor(private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
+    this.activatedroute.queryParamMap.subscribe(params => this.bookId = params.get('id'))
+    console.log(this.bookId);
+    if (this.bookId) {
+      this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.book = data)
+    } else {
+      console.log('null');
+    }
   }
   submitBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }

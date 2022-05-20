@@ -23,4 +23,7 @@ export class BookComponent implements OnInit {
     this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe()
     this.router.navigate(['']).then(() => window.location.reload())
   }
+  changeBook() {
+    this.router.navigate(['/admin'], { queryParams: { id: this.bookId } })
+  }
 }
