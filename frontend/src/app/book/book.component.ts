@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-book',
@@ -17,7 +18,14 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
     this.bookId = this.activatedroute.snapshot.paramMap.get('id')
     console.log(this.bookId);
-    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.book = data)
+    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.book = data,
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.router.navigate(['/login'])
+          }
+        }
+      })
   }
   removeBook() {
     this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe()

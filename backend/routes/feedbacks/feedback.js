@@ -1,8 +1,9 @@
 const mongodb = require("mongodb");
 const router = require("express").Router();
+const authVerify = require("../auth/authVerify");
 const mongoClient = mongodb.MongoClient;
 
-router.get("/display", async (req, res) => {
+router.get("/display", authVerify, async (req, res) => {
   const client = await mongoClient.connect(process.env.DB_CONNECT);
   try {
     const db = await client.db("capstone");
@@ -15,7 +16,7 @@ router.get("/display", async (req, res) => {
     client.close();
   }
 });
-router.post("/add/feedback", async (req, res) => {
+router.post("/add/feedback", authVerify, async (req, res) => {
   const client = await mongoClient.connect(process.env.DB_CONNECT);
   try {
     const db = await client.db("capstone");

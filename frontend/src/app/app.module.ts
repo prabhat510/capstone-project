@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -13,6 +13,10 @@ import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 @NgModule({
@@ -23,7 +27,9 @@ import { FeedbacksComponent } from './feedbacks/feedbacks.component';
     NavComponent,
     AdminComponent,
     FeedbackComponent,
-    FeedbacksComponent
+    FeedbacksComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,11 @@ import { FeedbacksComponent } from './feedbacks/feedbacks.component';
     FormsModule,
     Ng2SearchPipeModule
   ],
-  providers: [BooksService],
+  providers: [BooksService, AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

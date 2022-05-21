@@ -2,6 +2,8 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -21,11 +23,21 @@ export class AdminComponent implements OnInit {
   bookId: any = ''
 
 
-  constructor(private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
+  constructor(private authservice: AuthService, private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
+    // check if the user is valid or not
+    this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => console.log(data),
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.router.navigate(['/login'])
+          }
+        }
+      }
+    )
     this.activatedroute.queryParamMap.subscribe(params => this.bookId = params.get('id'))
     console.log(this.bookId);
     if (this.bookId) {
@@ -58,7 +70,14 @@ export class AdminComponent implements OnInit {
   submitBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
     console.log(book);
-    this.bookservice.addBook('http://localhost:3000/books/add/book', book).subscribe(data => console.log(data)
+    this.bookservice.addBook('http://localhost:3000/books/add/book', book).subscribe(data => console.log(data),
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.router.navigate(['/login'])
+          }
+        }
+      }
     )
     // redirecting to home page
     this.router.navigate([''])

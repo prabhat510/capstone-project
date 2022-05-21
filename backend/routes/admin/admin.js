@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
-const Book = require("../mongoose/models");
+const { Book } = require("../mongoose/models");
+const authVerify = require("../auth/authVerify");
 
 mongoose.connect(
   "mongodb+srv://prabhat510:Prabhat123@cluster0.h16ts.mongodb.net/capstone?retryWrites=true&w=majority"
 );
 // before adding the book to the database, validation is done using mongoose
-router.post("/add/book", async (req, res) => {
+router.post("/add/book", authVerify, async (req, res) => {
   var new_book = await new Book(req.body);
   await new_book.save(function (error, result) {
     if (error) {
@@ -20,7 +21,7 @@ router.post("/add/book", async (req, res) => {
   });
 });
 // route for updating the details of a book
-router.put("/edit/:bookId", async (req, res) => {
+router.put("/edit/:bookId", authVerify, async (req, res) => {
   const { bookId } = req.params;
   try {
     const book = await Book.updateOne({ _id: new ObjectId(bookId) }, req.body);
@@ -30,7 +31,7 @@ router.put("/edit/:bookId", async (req, res) => {
   }
 });
 // while deleting the book, pass the _id as a query instead of params while making a request through angular
-router.delete("/remove/:bookId", async (req, res) => {
+router.delete("/remove/:bookId", authVerify, async (req, res) => {
   const { bookId } = req.params;
   try {
     await Book.deleteOne({ _id: new ObjectId(bookId) });
@@ -40,7 +41,7 @@ router.delete("/remove/:bookId", async (req, res) => {
   }
 });
 // route for book detail
-router.get("/:bookId", async (req, res) => {
+router.get("/:bookId", authVerify, async (req, res) => {
   try {
     const { bookId } = req.params;
     const book = await Book.findOne({ _id: bookId });
