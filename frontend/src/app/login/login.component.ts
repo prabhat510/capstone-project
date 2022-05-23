@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   signinUser() {
-
     const user = { username: this.username, password: this.password }
     console.log(user);
     this.authservice.loginUser('http://localhost:3000/auth/login/user', user).subscribe(data => this.isValidUser(data)
@@ -28,12 +27,13 @@ export class LoginComponent implements OnInit {
     // when credentials are correct
     if (data.status === 200) {
       localStorage.setItem('token', data.token)
-      console.log(data.username);
+      // data {token,user,message }
+      console.log(data.user.username);
       this.router.navigate([''])
     } else if (data.status === 404) {
       this.errorMessage = 'invalid user'
     } else {
-      this.errorMessage = 'passowrd is incorrect'
+      this.errorMessage = 'password is incorrect'
     }
   }
 }

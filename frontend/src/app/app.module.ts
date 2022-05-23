@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BooksService } from './services/books.service';
 import { BookComponent } from './book/book.component';
-import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
@@ -18,13 +17,13 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
+// the HTTP_INTERCEPTORS module is used to send the token to the backend and verify the token using the TokenInterceptorService 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     BookComponent,
-    NavComponent,
     AdminComponent,
     FeedbackComponent,
     FeedbacksComponent,

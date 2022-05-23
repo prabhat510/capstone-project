@@ -21,7 +21,7 @@ router.post("/add/feedback", authVerify, async (req, res) => {
   try {
     const db = await client.db("capstone");
     const feedback = await db.collection("feedbacks").insertOne(req.body);
-    res.send({ message: "feedback created" });
+    res.json(feedback);
   } catch (error) {
     console.log(error);
   } finally {

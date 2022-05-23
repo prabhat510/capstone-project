@@ -25,7 +25,7 @@ router.post("/login/user", async (req, res) => {
   if (user) {
     if (user.password === req.body.password) {
       const token = jwt.sign({ _id: user._id }, "random_string");
-      res.json({ status: 200, token: token, username: user.username });
+      res.json({ status: 200, token: token, user: user });
     } else {
       res.json({ status: 401, message: "passwords doesnot match" });
     }
