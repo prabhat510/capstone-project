@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem("token")) {
+      this.router.navigate([''])
+    }
   }
   signinUser() {
     const user = { username: this.username, password: this.password }
@@ -29,7 +32,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', data.token)
       // data {token,user,message }
       console.log(data.user.username);
+      localStorage.setItem('user', JSON.stringify(data.user))
       this.router.navigate([''])
+      window.location.reload()
     } else if (data.status === 404) {
       this.errorMessage = 'invalid user'
     } else {

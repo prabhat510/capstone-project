@@ -28,4 +28,22 @@ router.post("/add/feedback", authVerify, async (req, res) => {
     client.close();
   }
 });
+// checking if the user has already given the feedback
+router.post("/user/feedback/exists", async (req, res) => {
+  const client = await mongoClient.connect(process.env.DB_CONNECT);
+  try {
+    const db = await client.db("capstone");
+    const feedbacks = await db.collection("feedbacks").find().toArray();
+    for (const feedback of feedbacks) {
+      if (feedback.username === req.body.username) {
+        return res.send("");
+      }
+    }
+    res.send("random");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    client.close();
+  }
+});
 module.exports = router;

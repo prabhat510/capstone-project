@@ -13,4 +13,7 @@ export class FeedbackServiceService {
   getFeedbacks(url: string) {
     return this.httpclient.get(url)
   }
+  feedbackExists(url: string, body: object) {
+    return this.httpclient.post(url, body)
+  }
 }

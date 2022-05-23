@@ -12,25 +12,18 @@ export class AppComponent implements OnInit {
   constructor(private authservice: AuthService, private router: Router) {
 
   }
-
-  isLoggedIn: Boolean = true
-  signOut() {
-    this.authservice.logoutUser()
-    this.isLoggedIn = false
-  }
   ngOnInit(): void {
     console.log('executed');
 
-    this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => console.log(data),
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            // this.router.navigate(['/login'])
-            this.isLoggedIn = false
-          }
-        }
-      }
-    )
+    //   this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => console.log(data),
+    //     err => {
+    //       if (err instanceof HttpErrorResponse) {
+    //         if (err.status === 401) {
+    //           // this.router.navigate(['/login'])
+    //         }
+    //       }
+    //     }
+    //   )
   }
 
 

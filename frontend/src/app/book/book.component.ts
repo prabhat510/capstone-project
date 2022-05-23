@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BookComponent implements OnInit {
 
+  isAdmin: Boolean = false
   bookId: any = ''
   book: any = {}
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
@@ -26,6 +27,7 @@ export class BookComponent implements OnInit {
           }
         }
       })
+    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin
   }
   removeBook() {
     this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe()

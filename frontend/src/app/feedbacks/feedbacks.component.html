@@ -1,1 +1,20 @@
-<p>feedbacks works!</p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Issues</th>
+        <th scope="col">Feedback</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userFeedback of feedbacks; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ userFeedback.username }}</td>
+        <td>{{ userFeedback.issues[0] }}</td>
+        <td>{{ userFeedback.feedback }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

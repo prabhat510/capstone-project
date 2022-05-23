@@ -13,13 +13,17 @@ export class RegisterComponent implements OnInit {
   username: string = ''
   email: string = ''
   password: string = ''
+  isAdmin: Boolean = false
 
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
+  toggleValue() {
+    this.isAdmin = !this.isAdmin
+  }
   createUser() {
-    const user = { name: this.name, username: this.username, email: this.email, password: this.password }
+    const user = { name: this.name, username: this.username, email: this.email, password: this.password, isAdmin: this.isAdmin }
     console.log(user);
     this.authservice.registerUser('http://localhost:3000/auth/register/user', user).subscribe(data => console.log(data)
     )

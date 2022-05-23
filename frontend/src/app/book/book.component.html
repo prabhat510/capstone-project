@@ -31,12 +31,14 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-primary" (click)="changeBook()">
-        Edit
-      </button>
-      <button type="button" class="btn btn-danger" (click)="removeBook()">
-        Delete
-      </button>
+      <span [hidden]="!isAdmin">
+        <button type="button" class="btn btn-primary" (click)="changeBook()">
+          Edit
+        </button>
+        <button type="button" class="btn btn-danger" (click)="removeBook()">
+          Delete
+        </button></span
+      >
     </div>
   </div>
 </div>
