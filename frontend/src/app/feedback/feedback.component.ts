@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class FeedbackComponent implements OnInit {
 
-  feedbackExists: any = ''
+
 
   // visibility of form2 and form3
   form2: Boolean = true
@@ -23,12 +23,8 @@ export class FeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     // check if user has already given the feedback
-    this.feedbackservice.feedbackExists('http://localhost:3000/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => console.log(data)
-    )
-    if (this.feedbackExists) {
-      alert('you have already given the feedback')
-      this.router.navigate([''])
-    }
+    this.feedbackservice.feedbackExists('http://localhost:3000/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
+
   }
   retrieveFirstResponse(value: string) {
     this.res1 = value
@@ -45,9 +41,16 @@ export class FeedbackComponent implements OnInit {
     this.feedbackservice.addFeedback('http://localhost:3000/feedbacks/add/feedback', {
       liked: this.res1,
       issues: this.res2, feedback: this.res3,
-      username: JSON.parse(localStorage.getItem('user')).username
+      username: JSON.parse(localStorage.getItem('user')).username,
+      date_added: new Date(Date.now())
     }).subscribe(data => console.log(data)
     )
     this.router.navigate([''])
+  }
+  checkFeedbackExistsResponse(data: any) {
+    if (data.message === 'feedback exists') {
+      alert('you have already given the feedback')
+      this.router.navigate([''])
+    }
   }
 }

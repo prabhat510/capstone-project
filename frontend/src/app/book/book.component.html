@@ -15,7 +15,7 @@
         <tbody>
           <tr>
             <td>published</td>
-            <td>{{ book.date_published }}</td>
+            <td>{{ book.date_published.split("T")[0] }}</td>
           </tr>
           <tr>
             <td>publisher</td>
@@ -25,10 +25,10 @@
             <td>genre</td>
             <td>{{ book.genre }}</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>rating</td>
             <td>{{ book.rating }}</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       <span [hidden]="!isAdmin">

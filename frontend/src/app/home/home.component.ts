@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
   }
   onSelect(event) {
     console.log(event.target.value);
-    this.booksservice.getAllBooks(`http://localhost:3000/home/${event.target.value}`).subscribe(data => console.log(data)
+    this.booksservice.getAllBooks(`http://localhost:3000/home/${event.target.value}`).subscribe(data => this.books = data
     )
-
+    // window.location.reload()
   }
 }

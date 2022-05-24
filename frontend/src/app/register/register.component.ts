@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+
 
   name: string = ''
   username: string = ''
@@ -29,4 +32,5 @@ export class RegisterComponent implements OnInit {
     )
     this.router.navigate(['/login'])
   }
+
 }

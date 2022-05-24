@@ -34,6 +34,7 @@ app.use("/auth", auth);
 
 // this route returns the list of all the books
 app.get("/home/:para?", verify, async (req, res) => {
+  console.log(req.url);
   const sort_using = req.params.para;
   const client = await mongoClient.connect(process.env.DB_CONNECT);
   try {

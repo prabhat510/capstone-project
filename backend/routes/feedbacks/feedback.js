@@ -36,10 +36,10 @@ router.post("/user/feedback/exists", async (req, res) => {
     const feedbacks = await db.collection("feedbacks").find().toArray();
     for (const feedback of feedbacks) {
       if (feedback.username === req.body.username) {
-        return res.send("");
+        return res.json({ message: "feedback exists" });
       }
     }
-    res.send("random");
+    res.json({ message: "feedback not given" });
   } catch (error) {
     console.log(error);
   } finally {
