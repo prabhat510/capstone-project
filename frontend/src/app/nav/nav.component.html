@@ -21,15 +21,17 @@
           <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin" [hidden]="!isAdmin">Admin</a>
+          <a class="nav-link" [routerLink]="['/admin']" [hidden]="!isAdmin"
+            >Admin</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/feedbacks" [hidden]="!isAdmin"
+          <a class="nav-link" [routerLink]="['/feedbacks']" [hidden]="!isAdmin"
             >feedbacks</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/feedback">submit feedback</a>
+          <a class="nav-link" [routerLink]="['/feedback']">submit feedback</a>
         </li>
       </ul>
       <span>Welcome {{ username }}&nbsp;|&nbsp;</span>

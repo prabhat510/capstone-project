@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem("token")) {
       this.router.navigate([''])
+    } else if(window.location.href==='http://localhost:3000/login') {
+      this.router.navigate(['/login'])
     }
   }
   signinUser() {
@@ -30,7 +32,6 @@ export class LoginComponent implements OnInit {
     // when credentials are correct
     if (data.status === 200) {
       localStorage.setItem('token', data.token)
-      // data {token,user,message }
       console.log(data.user.username);
       localStorage.setItem('user', JSON.stringify(data.user))
       this.router.navigate([''])

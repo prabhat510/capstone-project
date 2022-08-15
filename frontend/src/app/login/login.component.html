@@ -22,7 +22,7 @@
   <button type="submit" class="btn btn-primary mt-3" (click)="signinUser()">
     login
   </button>
-  <p class="mt-3" style="text-align: center">
-    don't have an account?&nbsp;<a href="/register">signup</a>
+  <p class="mt-3" style="text-align: center" [routerLink]="['/register']">
+    don't have an account?&nbsp;signup
   </p>
 </div>

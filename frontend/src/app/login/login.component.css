@@ -12,3 +12,6 @@ button {
   border: none;
   color: red;
 }
+p:hover{
+  cursor:pointer ;
+}
