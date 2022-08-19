@@ -1,12 +1,15 @@
 const router = require("express").Router();
+const dotenv = require("dotenv");
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
+
 const { Book } = require("../mongoose/models");
 const authVerify = require("../auth/authVerify");
 
-mongoose.connect(
-  "mongodb+srv://prabhat510:Prabhat123@cluster0.h16ts.mongodb.net/capstone?retryWrites=true&w=majority"
-);
+// supports functionality of .env file
+dotenv.config();
+mongoose.connect(process.env.MONGODB_URI);
+
 // before adding the book to the database, validation is done using mongoose
 router.post("/add/book", authVerify, async (req, res) => {
   var new_book = await new Book(req.body);

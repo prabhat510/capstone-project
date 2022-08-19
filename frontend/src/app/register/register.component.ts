@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   createUser() {
     const user = { name: this.name, username: this.username, email: this.email, password: this.password, isAdmin: this.isAdmin }
     console.log(user);
-    this.authservice.registerUser('http://localhost:3000/auth/register/user', user).subscribe(data => console.log(data)
+    this.authservice.registerUser('https://getbookinfo.herokuapp.com/auth/register/user', user).subscribe(data => console.log(data)
     )
     this.router.navigate(['/login'])
   }

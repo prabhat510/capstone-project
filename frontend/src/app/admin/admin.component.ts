@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     // check if the user is valid or not
-    this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => console.log(data),
+    this.authservice.verifyToken(`https://getbookinfo.herokuapp.com/verify/token`).subscribe(data => console.log(data),
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     this.activatedroute.queryParamMap.subscribe(params => this.bookId = params.get('id'))
     console.log(this.bookId);
     if (this.bookId) {
-      this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.populateDom(data))
+      this.bookservice.getBook(`https://getbookinfo.herokuapp.com/books/${this.bookId}`).subscribe(data => this.populateDom(data))
       // once we got the book that we need to edit, we will populate the dom with the previous data
     } else {
       console.log('null');
@@ -70,7 +70,7 @@ export class AdminComponent implements OnInit {
   submitBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
     console.log(book);
-    this.bookservice.addBook('http://localhost:3000/books/add/book', book).subscribe(data => console.log(data),
+    this.bookservice.addBook('https://getbookinfo.herokuapp.com/books/add/book', book).subscribe(data => console.log(data),
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -85,7 +85,7 @@ export class AdminComponent implements OnInit {
   updateBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
     console.log(book);
-    this.bookservice.updateBook(`http://localhost:3000/books/edit/${this.bookId}`, book).subscribe(data => console.log(data)
+    this.bookservice.updateBook(`https://getbookinfo.herokuapp.com/books/edit/${this.bookId}`, book).subscribe(data => console.log(data)
     )
     this.router.navigate(['/book', this.bookId])
   }

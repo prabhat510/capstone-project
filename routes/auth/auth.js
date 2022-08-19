@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
 const { User } = require("../mongoose/models");
 
-mongoose.connect(
-  "mongodb+srv://prabhat510:Prabhat123@cluster0.h16ts.mongodb.net/capstone?retryWrites=true&w=majority"
-);
+dotenv.config();
+mongoose.connect(process.env.MONGODB_URI);
 
 router.post("/register/user", async (req, res) => {
   const user = req.body;

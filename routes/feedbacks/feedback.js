@@ -4,7 +4,7 @@ const authVerify = require("../auth/authVerify");
 const mongoClient = mongodb.MongoClient;
 
 router.get("/display", authVerify, async (req, res) => {
-  const client = await mongoClient.connect(process.env.DB_CONNECT);
+  const client = await mongoClient.connect(process.env.MONGODB_URI);
   try {
     const db = await client.db("capstone");
     const feedbacks = await db.collection("feedbacks").find().toArray();
@@ -17,7 +17,7 @@ router.get("/display", authVerify, async (req, res) => {
   }
 });
 router.post("/add/feedback", authVerify, async (req, res) => {
-  const client = await mongoClient.connect(process.env.DB_CONNECT);
+  const client = await mongoClient.connect(process.env.MONGODB_URI);
   try {
     const db = await client.db("capstone");
     const feedback = await db.collection("feedbacks").insertOne(req.body);
@@ -30,7 +30,7 @@ router.post("/add/feedback", authVerify, async (req, res) => {
 });
 // checking if the user has already given the feedback
 router.post("/user/feedback/exists", async (req, res) => {
-  const client = await mongoClient.connect(process.env.DB_CONNECT);
+  const client = await mongoClient.connect(process.env.MONGODB_URI);
   try {
     const db = await client.db("capstone");
     const feedbacks = await db.collection("feedbacks").find().toArray();

@@ -23,7 +23,7 @@ export class FeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     // check if user has already given the feedback
-    this.feedbackservice.feedbackExists('http://localhost:3000/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
+    this.feedbackservice.feedbackExists('https://getbookinfo.herokuapp.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
 
   }
   retrieveFirstResponse(value: string) {
@@ -38,7 +38,7 @@ export class FeedbackComponent implements OnInit {
     this.res2.push(value)
   }
   submitFeedback() {
-    this.feedbackservice.addFeedback('http://localhost:3000/feedbacks/add/feedback', {
+    this.feedbackservice.addFeedback('https://getbookinfo.herokuapp.com/feedbacks/add/feedback', {
       liked: this.res1,
       issues: this.res2, feedback: this.res3,
       username: JSON.parse(localStorage.getItem('user')).username,
