@@ -2,7 +2,6 @@
 
 
 # Compiled output
-dist
 tmp
 out-tsc
 bazel-out
@@ -22,15 +21,10 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-frontend/.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+.vscode
 
 # Miscellaneous
-frontend/.angular/*
+.angular
 .sass-cache/
 connect.lock
 coverage
