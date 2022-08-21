@@ -78,6 +78,8 @@ app.get("/verify/token", verify, (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
+
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/dist/frontend"));
   app.get("/*", (req, res) => {
