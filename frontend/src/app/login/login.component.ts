@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem("token")) {
       this.router.navigate([''])
-    } else if(window.location.href==='https://getbookinfo.herokuapp.com/login') {
-      this.router.navigate(['/login'])
     }
   }
   signinUser() {
