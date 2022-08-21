@@ -10,7 +10,7 @@ export class NavComponent implements OnInit {
 
   isAdmin: Boolean = false
   username: any = ''
-  constructor(private authservice: AuthService) { 
+  constructor(private authservice: AuthService) {
 
   }
   isLoggedIn: Boolean = false
@@ -29,5 +29,5 @@ export class NavComponent implements OnInit {
     this.isLoggedIn = false
     localStorage.removeItem('user')
   }
-  
+
 }

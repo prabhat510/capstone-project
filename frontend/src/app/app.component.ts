@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     console.log('executed');
 
-    //   this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => console.log(data),
+    //   this.authservice.verifyToken(`https://getbookinfo.herokuapp.com/verify/token`).subscribe(data => console.log(data),
     //     err => {
     //       if (err instanceof HttpErrorResponse) {
     //         if (err.status === 401) {
