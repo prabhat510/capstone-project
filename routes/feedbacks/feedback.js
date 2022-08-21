@@ -1,6 +1,8 @@
 const mongodb = require("mongodb");
 const router = require("express").Router();
-const authVerify = require("../auth/authVerify");
+const path = require("path");
+
+const authVerify = require(path.join(__dirname, "../auth/authVerify"));
 const mongoClient = mongodb.MongoClient;
 
 router.get("/display", authVerify, async (req, res) => {

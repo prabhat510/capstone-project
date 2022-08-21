@@ -3,8 +3,10 @@ const dotenv = require("dotenv");
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 
-const { Book } = require("../mongoose/models");
-const authVerify = require("../auth/authVerify");
+const path = require("path");
+
+const { Book } = require(path.join(__dirname, "../mongoose/models"));
+const authVerify = require(path.join(__dirname, "../auth/authVerify"));
 
 // supports functionality of .env file
 dotenv.config();
