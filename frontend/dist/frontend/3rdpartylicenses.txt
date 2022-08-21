@@ -13,6 +13,12 @@ MIT
 @angular/router
 MIT
 
+@ngx-loading-bar/core
+MIT
+
+@ngx-loading-bar/router
+MIT
+
 ng2-search-filter
 MIT
 MIT License
