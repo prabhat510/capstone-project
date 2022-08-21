@@ -11,7 +11,7 @@ export class FeedbacksComponent implements OnInit {
   constructor(private feedbackservice: FeedbackServiceService) { }
   feedbacks: any = []
   ngOnInit(): void {
-    this.feedbackservice.getFeedbacks('https://getbookinfo.herokuapp.com/feedbacks/display').subscribe(data => this.feedbacks = data)
+    this.feedbackservice.getFeedbacks('http://localhost:3000/feedbacks/display').subscribe(data => this.feedbacks = data)
   }
 
 }

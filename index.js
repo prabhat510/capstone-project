@@ -72,7 +72,7 @@ app.get("/verify/token", verify, (req, res) => {
 
 // in production if 3000 is not available then it might give error, so to avoid it
 // in production set NODE_ENV to production and MONGODB_URI to the database string
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/dist/frontend"));

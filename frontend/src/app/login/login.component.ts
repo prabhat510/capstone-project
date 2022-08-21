@@ -17,14 +17,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem("token")) {
       this.router.navigate([''])
-    } else if(window.location.href==='https://getbookinfo.herokuapp.com/login') {
+    } else if(window.location.href==='http://localhost:3000/login') {
       this.router.navigate(['/login'])
     }
   }
   signinUser() {
     const user = { username: this.username, password: this.password }
     console.log(user);
-    this.authservice.loginUser('https://getbookinfo.herokuapp.com/auth/login/user', user).subscribe(data => this.isValidUser(data)
+    this.authservice.loginUser('http://localhost:3000/auth/login/user', user).subscribe(data => this.isValidUser(data)
     )
     // this.router.navigate([''])
   }
