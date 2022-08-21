@@ -1,15 +1,14 @@
 const router = require("express").Router();
-const dotenv = require("dotenv");
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
-
-const { Book } = require("../mongoose/models");
-const authVerify = require("../auth/authVerify");
-
-// supports functionality of .env file
+const path = require("path");
+const dotenv = require("dotenv");
 dotenv.config();
-mongoose.connect(process.env.MONGODB_URI);
 
+const { Book } = require(path.join(__dirname, "../mongoose/models"));
+const authVerify = require(path.join(__dirname, "../auth/authVerify"));
+
+mongoose.connect(process.env.MONGODB_URI);
 // before adding the book to the database, validation is done using mongoose
 router.post("/add/book", authVerify, async (req, res) => {
   var new_book = await new Book(req.body);

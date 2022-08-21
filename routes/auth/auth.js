@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+const path = require("path");
 
-const { User } = require("../mongoose/models");
+const { User } = require(path.join(__dirname, "../mongoose/models"));
+const uri = process.env.MONGODB_URI;
 
-dotenv.config();
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(uri);
 
 router.post("/register/user", async (req, res) => {
   const user = req.body;
