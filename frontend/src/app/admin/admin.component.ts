@@ -44,7 +44,7 @@ export class AdminComponent implements OnInit {
       this.bookservice.getBook(`https://getbookinfo.herokuapp.com/books/${this.bookId}`).subscribe(data => this.populateDom(data))
       // once we got the book that we need to edit, we will populate the dom with the previous data
     } else {
-      console.log('null');
+      location.reload()
     }
   }
 
