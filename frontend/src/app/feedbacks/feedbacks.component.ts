@@ -13,7 +13,7 @@ export class FeedbacksComponent implements OnInit {
   feedbacks: any = []
   ngOnInit(): void {
     this.isLoading = true
-    this.feedbackservice.getFeedbacks('http://localhost:3000/feedbacks/display').subscribe(data => {
+    this.feedbackservice.getFeedbacks('https://getbookinfo.herokuapp.com/feedbacks/display').subscribe(data => {
       this.feedbacks = data;
       this.isLoading = false;
     })

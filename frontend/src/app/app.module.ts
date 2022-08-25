@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NavComponent } from './nav/nav.component';
+import { UpdateBookComponent } from './update-book/update-book.component';
 
 // the HTTP_INTERCEPTORS module is used to send the token to the backend and verify the token using the TokenInterceptorService 
 
@@ -31,7 +32,8 @@ import { NavComponent } from './nav/nav.component';
     FeedbacksComponent,
     LoginComponent,
     RegisterComponent,
-    NavComponent
+    NavComponent,
+    UpdateBookComponent
   ],
   imports: [
     BrowserModule,

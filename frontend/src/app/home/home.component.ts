@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true
-    this.booksservice.getAllBooks('http://localhost:3000/home').subscribe(data => {
+    this.booksservice.getAllBooks('https://getbookinfo.herokuapp.com/home').subscribe(data => {
       this.books = data;
       this.isLoading = false;
     },
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   onSelect(event) {
     console.log(event.target.value);
-    this.booksservice.getAllBooks(`http://localhost:3000/home/${event.target.value}`).subscribe(data => this.books = data
+    this.booksservice.getAllBooks(`https://getbookinfo.herokuapp.com/home/${event.target.value}`).subscribe(data => this.books = data
     )
     // window.location.reload()
   }
