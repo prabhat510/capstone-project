@@ -12,3 +12,7 @@ select {
   width: 200px;
   height: 40px;
 }
+.loader{
+  text-align: center;
+  margin-top: 250px;
+  }

@@ -1,6 +1,9 @@
-<div class="book-container">
+<div *ngIf="isLoading" class="loader">
+  <img src="assets/img/loader.gif" />
+</div>
+<div class="book-container" *ngIf="!isLoading">
   <div class="card" style="width: 100%">
-    <img [src]="book.image" class="card-img-top" alt="book image" />
+    <img [src]="book.image" class="card-img-top book-img" alt="book image" />
     <div class="card-body">
       <h5 class="card-title">
         {{ book.title }}

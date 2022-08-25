@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, VERSION, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BooksService } from '../services/books.service';
 
@@ -9,13 +9,17 @@ import { BooksService } from '../services/books.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  isLoading: Boolean;
   books: any;
   filterTerm: string = '';
   constructor(private booksservice: BooksService, private router: Router) { }
 
   ngOnInit() {
-    this.booksservice.getAllBooks('https://getbookinfo.herokuapp.com/home').subscribe(data => this.books = data,
+    this.isLoading = true
+    this.booksservice.getAllBooks('http://localhost:3000/home').subscribe(data => {
+      this.books = data;
+      this.isLoading = false;
+    },
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -25,9 +29,11 @@ export class HomeComponent implements OnInit {
       })
 
   }
+
+
   onSelect(event) {
     console.log(event.target.value);
-    this.booksservice.getAllBooks(`https://getbookinfo.herokuapp.com/home/${event.target.value}`).subscribe(data => this.books = data
+    this.booksservice.getAllBooks(`http://localhost:3000/home/${event.target.value}`).subscribe(data => this.books = data
     )
     // window.location.reload()
   }

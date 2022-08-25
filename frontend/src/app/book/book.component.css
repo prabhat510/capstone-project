@@ -1,4 +1,4 @@
-img {
+.book-img {
   height: 400px;
   width: 500px;
 }
@@ -16,3 +16,7 @@ button {
   min-width: 100px;
   margin-right: 10px;
 }
+.loader{
+  text-align: center;
+  margin-top: 250px;
+  }
