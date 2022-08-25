@@ -9,9 +9,15 @@ import { FeedbackServiceService } from '../services/feedback-service.service';
 export class FeedbacksComponent implements OnInit {
 
   constructor(private feedbackservice: FeedbackServiceService) { }
+  isLoading: Boolean;
   feedbacks: any = []
   ngOnInit(): void {
-    this.feedbackservice.getFeedbacks('https://getbookinfo.herokuapp.com/feedbacks/display').subscribe(data => this.feedbacks = data)
+    this.isLoading = true
+    this.feedbackservice.getFeedbacks('http://localhost:3000/feedbacks/display').subscribe(data => {
+      this.feedbacks = data;
+      this.isLoading = false;
+    })
+
   }
 
 }
