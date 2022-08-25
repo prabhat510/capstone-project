@@ -26,7 +26,7 @@ export class UpdateBookComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true
     // check if the user is valid or not
-    this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => {
+    this.authservice.verifyToken(`https://getbookinfo.herokuapp.com/verify/token`).subscribe(data => {
       this.isLoading = false
     },
       err => {
@@ -40,7 +40,7 @@ export class UpdateBookComponent implements OnInit {
     this.bookId = this.activatedroute.snapshot.paramMap.get('id')
 
     // once we got the book that we need to edit, we will populate the dom with the previous data
-    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.populateDom(data)
+    this.bookservice.getBook(`https://getbookinfo.herokuapp.com/books/${this.bookId}`).subscribe(data => this.populateDom(data)
     )
 
   }
@@ -58,7 +58,7 @@ export class UpdateBookComponent implements OnInit {
   updateBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
     console.log(book);
-    this.bookservice.updateBook(`http://localhost:3000/books/edit/${this.bookId}`, book).subscribe(data => console.log(data)
+    this.bookservice.updateBook(`https://getbookinfo.herokuapp.com/books/edit/${this.bookId}`, book).subscribe(data => console.log(data)
     )
     this.router.navigate(['/book', this.bookId])
   }

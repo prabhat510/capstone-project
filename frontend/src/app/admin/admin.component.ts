@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true
     // check if the user is valid or not
-    this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => {
+    this.authservice.verifyToken(`https://getbookinfo.herokuapp.com/verify/token`).subscribe(data => {
       console.log(data),
         this.isLoading = false
     },
@@ -48,7 +48,7 @@ export class AdminComponent implements OnInit {
   submitBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
     console.log(book);
-    this.bookservice.addBook('http://localhost:3000/books/add/book', book).subscribe(data => console.log(data),
+    this.bookservice.addBook('https://getbookinfo.herokuapp.com/books/add/book', book).subscribe(data => console.log(data),
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
