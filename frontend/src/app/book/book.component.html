@@ -35,7 +35,11 @@
         </tbody>
       </table>
       <span [hidden]="!isAdmin">
-        <button type="button" class="btn btn-primary" (click)="changeBook()">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/book/edit', bookId]"
+        >
           Edit
         </button>
         <button type="button" class="btn btn-danger" (click)="removeBook()">

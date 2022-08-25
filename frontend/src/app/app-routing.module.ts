@@ -8,6 +8,7 @@ import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
+import { UpdateBookComponent } from './update-book/update-book.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
     // when we try to navigate to this route, AuthGuard is executed, if it returns true navigation is allowed otherwise it 
     // redirects us to login page
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'book/edit/:id',
+    component: UpdateBookComponent,
   },
   {
     path: 'feedback', component: FeedbackComponent,

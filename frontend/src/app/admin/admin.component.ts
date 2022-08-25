@@ -31,7 +31,8 @@ export class AdminComponent implements OnInit {
     this.isLoading = true
     // check if the user is valid or not
     this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => {
-      this.isLoading = false
+      console.log(data),
+        this.isLoading = false
     },
       err => {
         if (err instanceof HttpErrorResponse) {
@@ -41,35 +42,9 @@ export class AdminComponent implements OnInit {
         }
       }
     )
-    this.activatedroute.queryParamMap.subscribe(params => this.bookId = params.get('id'))
-    console.log(this.bookId);
-    if (this.bookId) {
-      this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.populateDom(data))
-      // once we got the book that we need to edit, we will populate the dom with the previous data
-    } else {
-      console.log('null');
-    }
+
   }
 
-  populateDom(data: any) {
-    this.title = data.title
-    this.author = data.author
-    this.publisher = data.publisher
-    this.genre = data.genre
-    this.description = data.description
-    this.date_published = data.date_published
-    this.image = data.image
-  }
-  // it decides whether to call submitBook method or updateBook method
-  confirmEvent() {
-    // update the book, when this component was rendered by the click of a edit button
-    if (this.bookId) {
-      this.updateBook()
-    } else {
-      // add a new book, when this component was rendered by the click of a admin button from navbar
-      this.submitBook()
-    }
-  }
   submitBook() {
     const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
     console.log(book);
@@ -85,11 +60,5 @@ export class AdminComponent implements OnInit {
     // redirecting to home page
     this.router.navigate([''])
   }
-  updateBook() {
-    const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
-    console.log(book);
-    this.bookservice.updateBook(`http://localhost:3000/books/edit/${this.bookId}`, book).subscribe(data => console.log(data)
-    )
-    this.router.navigate(['/book', this.bookId])
-  }
+
 }
