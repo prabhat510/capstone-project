@@ -22,8 +22,6 @@ export class FeedbackComponent implements OnInit {
   constructor(private router: Router, private feedbackservice: FeedbackServiceService) { }
 
   ngOnInit(): void {
-    // check if user has already given the feedback
-    this.feedbackservice.feedbackExists('https://getbookinfo.herokuapp.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
 
   }
   retrieveFirstResponse(value: string) {
@@ -47,10 +45,5 @@ export class FeedbackComponent implements OnInit {
     )
     this.router.navigate([''])
   }
-  checkFeedbackExistsResponse(data: any) {
-    if (data.message === 'feedback exists') {
-      alert('you have already given the feedback')
-      this.router.navigate([''])
-    }
-  }
+
 }

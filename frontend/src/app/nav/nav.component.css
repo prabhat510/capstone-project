@@ -2,4 +2,5 @@
 .nav-link,
 span {
   color: whitesmoke;
+  cursor: pointer;
 }

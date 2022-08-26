@@ -31,7 +31,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/feedback']">submit feedback</a>
+          <a class="nav-link" (click)="handleFeedback()">submit feedback</a>
         </li>
       </ul>
       <span>Welcome {{ username }}&nbsp;|&nbsp;</span>
