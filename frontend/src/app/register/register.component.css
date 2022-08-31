@@ -1,5 +1,5 @@
-.container {
-  width: 600px;
+form {
+  width: 700px;
   margin: auto;
   border: 1px solid lightgray;
   margin-top: 100px;
@@ -11,3 +11,12 @@ button {
 p:hover{
 cursor: pointer;
 }
+small{
+align-items: center;
+  color: red;
+}
+.error {
+  text-align: center;
+    color: red;
+  
+  }

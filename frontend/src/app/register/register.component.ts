@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../user';
 
 @Component({
   selector: 'app-register',
@@ -11,24 +12,24 @@ export class RegisterComponent implements OnInit {
 
 
   errorMessage: string;
-  name: string = ''
-  username: string = ''
-  email: string = ''
-  password: string = ''
-  isAdmin: Boolean = false
 
+  userModel = new User('', '', '', '', false)
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  toggleValue() {
-    this.isAdmin = !this.isAdmin
-  }
   createUser() {
-    const user = { name: this.name, username: this.username, email: this.email, password: this.password, isAdmin: this.isAdmin }
-    this.authservice.registerUser('https://getbookinfo.herokuapp.com/auth/register/user', user).subscribe(data => console.log(data)
+    console.log(this.userModel);
+    this.authservice.registerUser('https://getbookinfo.herokuapp.com/auth/register/user', this.userModel).subscribe(response => {
+      if (response.error) {
+        this.errorMessage = response.error;
+      } else {
+        this.router.navigate(['/login'])
+      }
+    }
+
     )
-    this.router.navigate(['/login'])
+
   }
 
 }

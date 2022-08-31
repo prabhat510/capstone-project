@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { UpdateBookComponent } from './update-book/update-book.component';
+import { DisplayUsersComponent } from './display-users/display-users.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
     path: 'feedbacks', component: FeedbacksComponent,
     canActivate: [AuthGuard]
   },
+  { path: 'users', component: DisplayUsersComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
 ];

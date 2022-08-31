@@ -46,5 +46,8 @@ export class NavComponent implements OnInit {
       this.router.navigate(['/feedback'])
     }
   }
+  displayUsers() {
+    this.router.navigate(['/users']);
+  }
 
 }

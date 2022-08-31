@@ -1,0 +1,23 @@
+<div *ngIf="isLoading" class="loader">
+  <img src="assets/img/loader.gif" />
+</div>
+<div class="table-responsive-sm">
+  <table class="table table-danger">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.isAdmin ? "yes" : "no" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

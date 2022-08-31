@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,12 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   constructor(private httpclient: HttpClient, private router: Router) { }
-  registerUser(url: string, user: object) {
+
+  fetchUsers(url: string): Observable<any> {
+    return this.httpclient.get(url)
+  }
+
+  registerUser(url: string, user: object): Observable<any> {
     return this.httpclient.post(url, user)
   }
   loginUser(url: string, user: object) {

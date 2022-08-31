@@ -33,8 +33,6 @@ export class HomeComponent implements OnInit {
 
   onSelect(event) {
     console.log(event.target.value);
-    this.booksservice.getAllBooks(`https://getbookinfo.herokuapp.com/home/${event.target.value}`).subscribe(data => this.books = data
-    )
-    // window.location.reload()
+    //  sort using logic
   }
 }
