@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { BooksService } from '../services/books.service';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -10,8 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  isLoading: Boolean;
-  isAdmin: Boolean = false
+  isLoading: boolean;
+  isAdmin: boolean = false
   bookId: any = ''
   book: any = {}
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }

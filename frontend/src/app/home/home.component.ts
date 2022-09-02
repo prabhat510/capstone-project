@@ -9,7 +9,7 @@ import { BooksService } from '../services/books.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isLoading: Boolean;
+  isLoading: boolean;
   books: any;
   filterTerm: string = '';
   constructor(private booksservice: BooksService, private router: Router) { }

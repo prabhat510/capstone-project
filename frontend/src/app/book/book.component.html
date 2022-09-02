@@ -1,9 +1,13 @@
 <div *ngIf="isLoading" class="loader">
-  <img src="assets/img/loader.gif" />
+  <img src="assets/img/loader.gif" alt="loader" />
 </div>
 <div class="book-container" *ngIf="!isLoading">
   <div class="card" style="width: 100%">
-    <img [src]="book.image" class="card-img-top book-img" alt="book image" />
+    <img
+      [src]="book.image"
+      class="card-img-top book-img"
+      alt="{{ book.title }}"
+    />
     <div class="card-body">
       <h5 class="card-title">
         {{ book.title }}
@@ -13,27 +17,15 @@
       <strong>About the Book:</strong>
       <p class="card-text">{{ book.description }}</p>
       <hr />
-      <strong>Book details:</strong><br />
-      <table class="table caption-top">
-        <tbody>
-          <tr>
-            <td>published</td>
-            <td>{{ book.date_published.split("T")[0] }}</td>
-          </tr>
-          <tr>
-            <td>publisher</td>
-            <td>{{ book.publisher }}</td>
-          </tr>
-          <tr>
-            <td>genre</td>
-            <td>{{ book.genre }}</td>
-          </tr>
-          <!-- <tr>
-            <td>rating</td>
-            <td>{{ book.rating }}</td>
-          </tr> -->
-        </tbody>
-      </table>
+      <div class="grid text-center" style="row-gap: 0;">
+        <div class="g-col-6">published</div>
+        <div class="g-col-6">{{ book.date_published.split("T")[0] }}</div>
+        <div class="g-col-6">publisher</div>
+        <div class="g-col-6">{{ book.publisher }}</div>
+        <div class="g-col-6">genre</div>
+        <div class="g-col-6">{{ book.genre }}</div>
+      </div>
+
       <span [hidden]="!isAdmin">
         <button
           type="button"

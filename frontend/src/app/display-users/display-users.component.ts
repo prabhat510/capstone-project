@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./display-users.component.css']
 })
 export class DisplayUsersComponent implements OnInit {
-  isLoading: Boolean;
+  isLoading: boolean;
   users: any;
   constructor(private authservice: AuthService) { }
 

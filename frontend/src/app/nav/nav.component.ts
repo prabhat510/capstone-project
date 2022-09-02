@@ -10,13 +10,13 @@ import { FeedbackServiceService } from '../services/feedback-service.service';
 })
 export class NavComponent implements OnInit {
 
-  feedbackExists: Boolean = false;
-  isAdmin: Boolean = false;
+  feedbackExists: boolean = false;
+  isAdmin: boolean = false;
   username: any = '';
   constructor(private router: Router, private authservice: AuthService, private feedbackservice: FeedbackServiceService) {
 
   }
-  isLoggedIn: Boolean = false
+  isLoggedIn: boolean = false
 
 
   ngOnInit(): void {

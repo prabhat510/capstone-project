@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -20,7 +19,7 @@ export class UpdateBookComponent implements OnInit {
   image: string = ''
   date_published: string = ''
   bookId: string = ''
-  isLoading: Boolean;
+  isLoading: boolean;
 
   constructor(private authservice: AuthService, private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) { }
   ngOnInit(): void {

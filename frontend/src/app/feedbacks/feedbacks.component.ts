@@ -9,7 +9,7 @@ import { FeedbackServiceService } from '../services/feedback-service.service';
 export class FeedbacksComponent implements OnInit {
 
   constructor(private feedbackservice: FeedbackServiceService) { }
-  isLoading: Boolean;
+  isLoading: boolean;
   feedbacks: any = []
   ngOnInit(): void {
     this.isLoading = true

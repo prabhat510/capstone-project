@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FeedbackServiceService } from '../services/feedback-service.service';
 import { Router } from '@angular/router';
 
@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
 })
-export class FeedbackComponent implements OnInit {
-
-
+export class FeedbackComponent {
 
   // visibility of form2 and form3
-  form2: Boolean = true
-  form3: Boolean = true
+  form2: boolean = true
+  form3: boolean = true
 
   res1: any = ''
   res2: any = []
@@ -21,9 +19,6 @@ export class FeedbackComponent implements OnInit {
 
   constructor(private router: Router, private feedbackservice: FeedbackServiceService) { }
 
-  ngOnInit(): void {
-
-  }
   retrieveFirstResponse(value: string) {
     this.res1 = value
     if (value === 'yes' || value === 'not sure') {

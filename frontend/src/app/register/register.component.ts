@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
@@ -8,16 +8,13 @@ import { User } from '../user';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
 
   errorMessage: string;
 
   userModel = new User('', '', '', '', false)
   constructor(private authservice: AuthService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
   createUser() {
     console.log(this.userModel);
     this.authservice.registerUser('https://getbookinfo.herokuapp.com/auth/register/user', this.userModel).subscribe(response => {

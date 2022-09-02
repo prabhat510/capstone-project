@@ -1,7 +1,6 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 
@@ -21,7 +20,7 @@ export class AdminComponent implements OnInit {
   image: string = ''
   date_published: string = ''
   bookId: any = ''
-  isLoading: Boolean;
+  isLoading: boolean;
 
   constructor(private authservice: AuthService, private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
 
@@ -31,8 +30,8 @@ export class AdminComponent implements OnInit {
     this.isLoading = true
     // check if the user is valid or not
     this.authservice.verifyToken(`https://getbookinfo.herokuapp.com/verify/token`).subscribe(data => {
-      console.log(data),
-        this.isLoading = false
+      console.log(data);
+        this.isLoading = false;
     },
       err => {
         if (err instanceof HttpErrorResponse) {
