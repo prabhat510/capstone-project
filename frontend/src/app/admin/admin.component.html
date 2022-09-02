@@ -121,15 +121,17 @@
         >
           enter a valid description
         </p>
-        <input
-          #descriptionInput="ngModel"
-          type="text"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="enter description"
-          [(ngModel)]="description"
-          required
-        />
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            #descriptionInput="ngModel"
+            type="text"
+            [(ngModel)]="description"
+            required
+            style="height: 100px"
+          ></textarea>
+          <label for="floatingTextarea2">description</label>
+        </div>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label"
