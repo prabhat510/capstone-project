@@ -1,16 +1,18 @@
-<div *ngIf="isLoading" class="loader">
-  <img src="assets/img/loader.gif" />
-</div>
+
 <div class="table-responsive-sm">
   <table class="table table-danger">
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Admin</th>
+        <th scope="col">name</th>
+        <th scope="col">username</th>
+        <th scope="col">email</th>
+        <th scope="col">admin</th>
       </tr>
     </thead>
+    <div *ngIf="isLoading" class="loader">
+      <img src="assets/img/loader.gif" />
+    </div>
     <tbody>
       <tr *ngFor="let user of users; index as i">
         <th scope="row">{{ i + 1 }}</th>
