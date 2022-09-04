@@ -1,9 +1,10 @@
-<div *ngIf="isLoading" class="loader">
-  <img src="assets/img/loader.gif" alt="loader" />
+<div class="text-center loader"*ngIf="isLoading">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </div>
 <div class="table-responsive-sm" *ngIf="!isLoading">
   <table class="table table-danger">
-   <strong><caption>user details</caption></strong>
     <thead>
       <tr>
         <th scope="col">#</th>

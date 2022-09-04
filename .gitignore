@@ -24,7 +24,7 @@ yarn-error.log
 .vscode
 
 # Miscellaneous
-.angular
+.angular/
 .sass-cache/
 connect.lock
 coverage

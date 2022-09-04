@@ -11,7 +11,7 @@ const authVerify = require(path.join(__dirname, "../auth/authVerify"));
 mongoose.connect(process.env.MONGODB_URI);
 // before adding the book to the database, validation is done using mongoose
 router.post("/add/book", authVerify, async (req, res) => {
-  var new_book = await new Book(req.body);
+  let new_book = await new Book(req.body);
   await new_book.save(function (error, result) {
     if (error) {
       console.log(error);

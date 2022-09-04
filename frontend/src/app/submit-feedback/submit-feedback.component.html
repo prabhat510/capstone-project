@@ -1,0 +1,83 @@
+<div class="text-center loader"*ngIf="isLoading">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="container" *ngIf="!isLoading">
+  <div class="mb-3 form1">
+    <label for="exampleInputEmail1" class="form-label"
+      >Did you like this site?</label
+    >
+    <select
+      class="form-select form-select-sm"
+      aria-label=".form-select-sm example"
+      (change)="retrieveFirstResponse($event.target.value)"
+    >
+      <option selected>select</option>
+      <option value="yes">yes</option>
+      <option value="no">no</option>
+      <option value="not sure">not sure</option>
+    </select>
+  </div>
+
+  <div class="mb-3 form2" [hidden]="form2">
+    <label for="exampleInputEmail1" class="form-label"
+      >we're sorry to hear that, how can we improve our article?
+    </label>
+    <div class="container2">
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="contains inaccurate or outdated information"
+          (change)="retrieveSecondResponse($event.target.value)"
+        />
+        <label class="form-check-label" for="defaultCheck1">
+          contains inaccurate or outdated information
+        </label>
+      </div>
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="missing important information"
+          (change)="retrieveSecondResponse($event.target.value)"
+        />
+        <label class="form-check-label" for="defaultCheck1">
+          missing important information
+        </label>
+      </div>
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="confusing or difficult to understand"
+          (change)="retrieveSecondResponse($event.target.value)"
+        />
+        <label class="form-check-label" for="defaultCheck1">
+          confusing or difficult to understand
+        </label>
+      </div>
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="something else"
+          (change)="retrieveSecondResponse($event.target.value)"
+        />
+        <label class="form-check-label" for="defaultCheck1">
+          something else
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 form3" [hidden]="form3">
+    <label for="exampleInputPassword1" class="form-label"
+      >Any other feedback..</label
+    >
+    <textarea name="feedback" class="form-control" [(ngModel)]="res3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="submitFeedback()">
+    Submit
+  </button>
+</div>

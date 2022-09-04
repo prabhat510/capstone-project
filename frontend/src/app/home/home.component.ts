@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BooksService } from '../services/books.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -10,29 +11,29 @@ import { BooksService } from '../services/books.service';
 })
 export class HomeComponent implements OnInit {
   isLoading: boolean;
-  books: any;
+  booksData: any;
   filterTerm: string = '';
-  constructor(private booksservice: BooksService, private router: Router) { }
+  constructor(private titleservice:Title, private booksservice: BooksService, private router: Router) { }
 
   ngOnInit() {
-    this.isLoading = true
-    this.booksservice.getAllBooks('https://getbookinfo.herokuapp.com/home').subscribe(data => {
-      this.books = data;
-      this.isLoading = false;
-    },
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(['/login'])
-          }
-        }
-      })
-
+    this.titleservice.setTitle('BookStore');
+    this.isLoading = true;
+    this.getAllBooks();
   }
 
+  getAllBooks(filter?: string) {
+    this.booksservice.getAllBooks('https://getbookinfo.herokuapp.com/home').subscribe(data => {
+      if (filter === 'reverse') {
+        data.reverse();
+      }
+      this.booksData = data;
+      this.isLoading = false;
+    })
+  }
 
   onSelect(event) {
     console.log(event.target.value);
-    //  sort using logic
+    this.getAllBooks('reverse')
+    this.isLoading=true;
   }
 }

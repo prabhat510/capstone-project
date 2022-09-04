@@ -1,175 +1,168 @@
-<div *ngIf="isLoading" class="loader">
-  <img src="assets/img/loader.gif" alt="loader"/>
+<div class="text-center loader"*ngIf="isLoading">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </div>
 <div class="container" *ngIf="!isLoading">
   <div class="card">
     <h5 class="card-header" style="text-align: center">Add new book</h5>
     <div class="card-body">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Book Name:</label
-        >
-        <p
-          class="error-message"
-          *ngIf="titleInput.touched && titleInput.errors"
-        >
-          enter a valid title
-        </p>
-        <input
-          #titleInput="ngModel"
-          type="text"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="title.."
-          [(ngModel)]="title"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Author:</label>
-        <p
-          class="error-message"
-          *ngIf="authorInput.touched && authorInput.errors"
-        >
-          enter a valid author name
-        </p>
-        <input
-          #authorInput="ngModel"
-          type="text"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="author.."
-          [(ngModel)]="author"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Publisher:</label
-        >
-        <p
-          class="error-message"
-          *ngIf="publisherInput.touched && publisherInput.errors"
-        >
-          enter a valid publisher name
-        </p>
-        <input
-          #publisherInput="ngModel"
-          type="text"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="publisher.."
-          [(ngModel)]="publisher"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Date published:</label
-        >
-        <p class="error-message" *ngIf="dateInput.touched && dateInput.errors">
-          choose a valid date
-        </p>
-        <input
-          #dateInput="ngModel"
-          type="date"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="published on.."
-          [(ngModel)]="date_published"
-          required
-        />
-      </div>
-      <label for="exampleFormControlInput1" class="form-label"> Genre:</label>
-      <select
-        #genreInput="ngModel"
-        class="form-select form-select-sm mb-3"
-        aria-label=".form-select-sm example"
-        [(ngModel)]="genre"
-        required
-      >
-        <p
-          class="error-message"
-          *ngIf="genreInput.touched && genreInput.errors"
-        >
-          enter a valid genre
-        </p>
-        <option selected>select genre</option>
-        <option value="fiction">fiction</option>
-        <option value="autobiography">autobiography</option>
-        <option value="science">science</option>
-        <option value="history">history</option>
-        <option value="mathematics">mathematics</option>
-        <option value="law">law</option>
-        <option value="medicine">medicine</option>
-        <option value="technology & engineering">
-          technology & engineering
-        </option>
-        <option value="finance">finance</option>
-        <option value="art">art</option>
-        <option value="travel">travel</option>
-        <option value="self-help book">self-help book</option>
-        <option value="thriller">thriller</option>
-      </select>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Description:</label
-        >
-        <p
-          class="error-message"
-          *ngIf="descriptionInput.touched && descriptionInput.errors"
-        >
-          enter a valid description
-        </p>
-        <div class="form-floating">
-          <textarea
-            class="form-control"
-            #descriptionInput="ngModel"
+      <form #bookForm="ngForm" (submit)="updateBook()">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Book Name:</label
+          >
+          <input
+            name="title"
+            #title="ngModel"
             type="text"
-            [(ngModel)]="description"
+            class="form-control"
+            [class.is-invalid]="title.touched && title.invalid"
+            placeholder="title.."
+            [(ngModel)]="bookModel.title"
             required
-            style="height: 100px"
-          ></textarea>
-          <label for="floatingTextarea2">description</label>
+          />
+          <small *ngIf="title.touched && title.invalid">
+            enter a valid title</small
+          >
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Image link:</label
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Author:</label
+          >
+          <input
+            name="author"
+            #author="ngModel"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="author.touched && author.invalid"
+            placeholder="author.."
+            [(ngModel)]="bookModel.author"
+            required
+          />
+          <small *ngIf="author.touched && author.invalid">
+            enter a valid author name</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Publisher:</label
+          >
+          <input
+            name="publisher"
+            #publisher="ngModel"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="publisher.touched && publisher.invalid"
+            placeholder="publisher.."
+            [(ngModel)]="bookModel.publisher"
+            required
+          />
+          <small *ngIf="publisher.touched && publisher.invalid">
+            enter a valid publisher name</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Date published:</label
+          >
+          <input
+            name="date"
+            #date="ngModel"
+            type="date"
+            class="form-control"
+            [class.is-invalid]="date.touched && date.invalid"
+            placeholder="published on.."
+            [(ngModel)]="bookModel.date_published"
+            required
+          />
+          <small *ngIf="date.touched && date.invalid">
+            choose a valid date</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">
+            Genre:</label
+          >
+          <select
+            name="genre"
+            #genre="ngModel"
+            class="form-select form-select-sm mb-3"
+            aria-label=".form-select-sm example"
+            [class.is-invalid]="genre.touched && genre.invalid"
+            [(ngModel)]="bookModel.genre"
+            required
+          >
+            <option selected>select genre</option>
+            <option value="fiction">fiction</option>
+            <option value="autobiography">autobiography</option>
+            <option value="science">science</option>
+            <option value="history">history</option>
+            <option value="mathematics">mathematics</option>
+            <option value="law">law</option>
+            <option value="medicine">medicine</option>
+            <option value="technology & engineering">
+              technology & engineering
+            </option>
+            <option value="finance">finance</option>
+            <option value="art">art</option>
+            <option value="travel">travel</option>
+            <option value="self-help book">self-help book</option>
+            <option value="thriller">thriller</option>
+          </select>
+          <small *ngIf="genre.touched && genre.invalid">
+            select a genre</small
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Description:</label
+          >
+          <div class="form-floating">
+            <textarea
+              name="description"
+              class="form-control"
+              #description="ngModel"
+              type="text"
+              [(ngModel)]="bookModel.description"
+              required
+              style="height: 100px"
+            ></textarea>
+            <label for="floatingTextarea2">description</label>
+          </div>
+          <small *ngIf="description.touched && description.invalid">
+            enter a valid description</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Image link:</label
+          >
+
+          <input
+            name="image"
+            #image="ngModel"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="image.touched && image.invalid"
+            placeholder="image link.."
+            [(ngModel)]="bookModel.image"
+            required
+          />
+          <small *ngIf="image.touched && image.invalid"
+            >enter a valid image link</small
+          >
+        </div>
+        <button
+          type="submit"
+          class="btn btn-success"
+          style="width: 100%"
+          [disabled]="bookForm.form.invalid"
         >
-        <p
-          class="error-message"
-          *ngIf="imageInput.touched && imageInput.errors"
-        >
-          enter a valid image link
-        </p>
-        <input
-          #imageInput="ngModel"
-          type="text"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="image link.."
-          [(ngModel)]="image"
-          required
-        />
-      </div>
-      <button
-        type="button"
-        class="btn btn-success"
-        style="width: 100%"
-        [disabled]="
-          titleInput.errors ||
-          authorInput.errors ||
-          publisherInput.errors ||
-          dateInput.errors ||
-          genreInput.errors ||
-          descriptionInput.errors ||
-          imageInput.errors
-        "
-        (click)="updateBook()"
-      >
-        submit
-      </button>
+          submit
+        </button>
+      </form>
     </div>
   </div>
 </div>

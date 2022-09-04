@@ -1,0 +1,53 @@
+<div class="text-center loader" *ngIf="isLoading">
+  <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="book-container" *ngIf="!isLoading">
+  <div class="card" style="width: 100%">
+    <img
+      [src]="book.image"
+      class="card-img-top book-img"
+      alt="{{ book.title }}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ book.title }}
+      </h5>
+      Author:{{ book.author }}
+      <hr />
+      <strong>About the Book:</strong>
+      <p class="card-text">{{ book.description }}</p>
+      <hr />
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">published</th>
+            <td>{{ book.date_published.split("T")[0] }}</td>
+          </tr>
+          <tr>
+            <th scope="row">publisher</th>
+            <td>{{ book.publisher }}</td>
+          </tr>
+          <tr>
+            <th scope="row">genre</th>
+            <td colspan="2">{{ book.genre }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <span [hidden]="!isAdmin">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/book/edit', bookId]"
+        >
+          Edit
+        </button>
+        <button type="button" class="btn btn-danger" (click)="removeBook()">
+          Delete
+        </button></span
+      >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.book-img {
+  height: 400px;
+  width: 500px;
+}
+.book-container {
+  margin: auto;
+  width: 700px;
+}
+.card {
+  align-items: center;
+}
+.card-body {
+  text-align: center;
+}
+button {
+  min-width: 100px;
+  margin-right: 10px;
+}
+.loader{
+  margin-top: 250px;
+  }

@@ -16,7 +16,7 @@ router.post("/register/user", async (req, res) => {
   if (user_exists !== null) {
     res.json({ error: "this username already exists" });
   } else {
-    var new_user = new User(req.body);
+    let new_user = new User(req.body);
     await new_user.save(function (error, result) {
       if (error) {
         console.log(error);

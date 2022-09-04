@@ -9,6 +9,8 @@
     font-size: small;
   }
   .loader{
-    text-align: center;
     margin-top: 250px;
+    }
+    small{
+      color: red;
     }
