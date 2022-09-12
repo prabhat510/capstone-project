@@ -25,7 +25,7 @@ export class BookDetailComponent implements OnInit {
       this.titleservice.setTitle(this.book.title);
       this.isLoading = false;
     });
-    if(this.authservice.loggedIn)
+    if(this.authservice.loggedIn())
     {
       this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
     }
