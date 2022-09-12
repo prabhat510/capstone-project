@@ -43,7 +43,7 @@ router.delete("/remove/:bookId", authVerify, async (req, res) => {
   }
 });
 // route for book detail
-router.get("/:bookId", authVerify, async (req, res) => {
+router.get("/:bookId", async (req, res) => {
   try {
     const { bookId } = req.params;
     const book = await Book.findOne({ _id: bookId });
