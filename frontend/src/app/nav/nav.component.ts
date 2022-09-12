@@ -10,20 +10,21 @@ import { FeedbackServiceService } from '../services/feedback-service.service';
 })
 export class NavComponent implements OnInit {
 
+  displayConfirmLogout:boolean=false;
   feedbackExists: boolean = false;
   isAdmin: boolean = false;
   username: any = '';
   constructor(private router: Router, private authservice: AuthService, private feedbackservice: FeedbackServiceService) {
 
   }
-  isLoggedIn: boolean = false
+  isLoggedIn: boolean = false;
 
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authservice.loggedIn()
+    this.isLoggedIn = this.authservice.loggedIn();
     if (localStorage.getItem('user')) {
-      this.username = JSON.parse(localStorage.getItem('user')).username
-      this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin
+      this.username = JSON.parse(localStorage.getItem('user')).username;
+      this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
 
       // check if user has already given the feedback
       this.feedbackservice.feedbackExists('https://getbookinfo.herokuapp.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
@@ -35,19 +36,26 @@ export class NavComponent implements OnInit {
     }
   }
   signOut() {
-    this.authservice.logoutUser()
-    this.isLoggedIn = false
-    localStorage.removeItem('user')
+    this.authservice.logoutUser();
+    this.isLoggedIn = false;
+    localStorage.removeItem('user');
+    this.router.navigate(['']);
+    location.reload();
   }
   handleFeedback() {
     if (this.feedbackExists) {
-      alert('feedback already given')
+      alert('feedback already given');
     } else {
-      this.router.navigate(['/feedback'])
+      this.router.navigate(['/feedback']);
     }
   }
   displayUsers() {
     this.router.navigate(['/users']);
   }
+  confirmLogout(){
+    this.displayConfirmLogout=true;
+    const button = document.getElementById('triggerModal');
+    button.click();
+  } 
 
 }

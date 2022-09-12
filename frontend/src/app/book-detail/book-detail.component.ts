@@ -24,15 +24,8 @@ export class BookDetailComponent implements OnInit {
       this.book = data;
       this.titleservice.setTitle(this.book.title);
       this.isLoading = false;
-    },
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(['/login'])
-          }
-        }
-      })
-    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin
+    });
+    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
   }
   removeBook() {
     this.bookservice.deleteBook(`https://getbookinfo.herokuapp.com/books/remove/${this.bookId}`).subscribe()

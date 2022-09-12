@@ -9,18 +9,22 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./login-user.component.css']
 })
 export class LoginUserComponent implements OnInit {
-
+  
+  isLoading: boolean;
   username: string = ''
   password: string = ''
   errorMessage: string = ''
   constructor(private titleservice:Title, private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.titleservice.setTitle('login');
     if (localStorage.getItem("token")) {
       this.router.navigate(['']);
     }
+    this.isLoading=false;
   }
+
   signinUser() {
     const user = { username: this.username, password: this.password }
     console.log(user);

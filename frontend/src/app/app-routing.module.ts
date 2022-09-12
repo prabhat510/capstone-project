@@ -13,12 +13,10 @@ import { DisplayUsersComponent } from './display-users/display-users.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent,
-    canActivate: [AuthGuard]
+    path: '', component: HomeComponent
   },
   {
-    path: 'book/:id', component: BookDetailComponent,
-    canActivate: [AuthGuard]
+    path: 'book/:id', component: BookDetailComponent
   },
   {
     path: 'admin', component: AddBookComponent,
@@ -29,16 +27,16 @@ const routes: Routes = [
   {
     path: 'book/edit/:id',
     component: UpdateBookComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'feedback', component: SubmitFeedbackComponent,
-    canActivate: [AuthGuard]
+    path: 'feedback', component: SubmitFeedbackComponent
   },
   {
     path: 'feedbacks', component: DisplayFeedbacksComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'users', component: DisplayUsersComponent },
+  { path: 'users', component: DisplayUsersComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginUserComponent },
   { path: 'register', component: RegisterUserComponent }
 ];
