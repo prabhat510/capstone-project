@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { BooksService } from '../services/books.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -14,7 +14,7 @@ export class BookDetailComponent implements OnInit {
   isAdmin: boolean = false
   bookId: any = ''
   book: any = {}
-  constructor(private titleservice:Title, private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
+  constructor(private authservice:AuthService, private titleservice:Title, private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -25,7 +25,10 @@ export class BookDetailComponent implements OnInit {
       this.titleservice.setTitle(this.book.title);
       this.isLoading = false;
     });
-    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
+    if(this.authservice.loggedIn)
+    {
+      this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
+    }
   }
   removeBook() {
     this.bookservice.deleteBook(`https://getbookinfo.herokuapp.com/books/remove/${this.bookId}`).subscribe()
