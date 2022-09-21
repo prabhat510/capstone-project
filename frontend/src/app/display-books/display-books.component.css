@@ -1,0 +1,13 @@
+.card {
+  cursor: pointer;
+  align-items: center;
+}
+* {
+  box-sizing: border-box;
+}
+img{
+    height: 70%;
+}
+.container{
+margin-top: 5px;
+}

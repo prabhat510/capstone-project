@@ -1,29 +1,47 @@
-<nav class="navbar" style="background-color: #e3f2fd">
-  <div class="container-fluid">
-    <select
-      class="form-select form-select-sm"
-      aria-label=".form-select-sm example"
-      role="search"
-      (change)="onSelect($event)"
-    >
-      <option selected>sort using</option>
-      <option value="date_published">date published</option>
-      <option value="title">book name</option>
-      <option value="author">author name</option>
-      <option value="rating">rating</option>
-    </select>
-    <input
-      class="search form-control me-2"
-      type="search"
-      placeholder="Search"
-      aria-label="Search"
-      [(ngModel)]="filterTerm"
-    />
-  </div>
-</nav>
-<div class="text-center loader"*ngIf="isLoading">
-  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-<app-display-books [books]="booksData" [filterTerm]="filterTerm" *ngIf="!isLoading"></app-display-books>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <nav class="navbar" style="background-color: #e3f2fd">
+      <div class="container-fluid">
+        <select
+          class="form-select form-select-sm"
+          aria-label=".form-select-sm example"
+          role="search"
+          (change)="onSelect($event)"
+        >
+          <option selected>sort using</option>
+          <option value="date_published">date published</option>
+          <option value="title">book name</option>
+          <option value="author">author name</option>
+          <option value="rating">rating</option>
+        </select>
+        <input
+          class="search form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          [(ngModel)]="filterTerm"
+        />
+      </div>
+    </nav>
+    <div class="text-center loader" *ngIf="isLoading">
+      <div
+        class="spinner-border"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <app-display-books
+      [books]="booksData"
+      [filterTerm]="filterTerm"
+      *ngIf="!isLoading"
+    ></app-display-books>
+  </body>
+</html>

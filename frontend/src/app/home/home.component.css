@@ -1,15 +1,11 @@
-.card {
-  cursor: pointer;
-  align-items: center;
-}
 
 select {
-  width: 200px;
+  width: 15%;
   height: 40px;
 }
 .search {
   display: inline;
-  width: 200px;
+  width: 15%;
   height: 40px;
 }
 .loader{

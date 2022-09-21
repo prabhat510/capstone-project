@@ -1,16 +1,13 @@
 .card {
-    width: 700px;
-    margin: auto;
-    margin-top: 50px;
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
+}
+.error-message, small {
+  color: red;
+  text-align: center;
+  font-size: small;
+}
+.loader{
+  margin-top: 250px;
   }
-  .error-message {
-    color: red;
-    text-align: center;
-    font-size: small;
-  }
-  .loader{
-    margin-top: 250px;
-    }
-    small{
-      color: red;
-    }

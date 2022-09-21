@@ -5,3 +5,6 @@ span, a {
   color: whitesmoke;
   cursor: pointer;
 }
+nav{
+  width: 100%;
+}

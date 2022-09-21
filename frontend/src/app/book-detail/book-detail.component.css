@@ -1,10 +1,10 @@
 .book-img {
   height: 400px;
-  width: 500px;
+  width: 40%;
 }
 .book-container {
   margin: auto;
-  width: 700px;
+  width: 60%;
 }
 .card {
   align-items: center;
