@@ -27,7 +27,7 @@ export class NavComponent implements OnInit {
       this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
 
       // check if user has already given the feedback
-      this.feedbackservice.feedbackExists('https://getbookinfo.herokuapp.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
+      this.feedbackservice.feedbackExists('http://localhost:3000/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
     }
   }
   checkFeedbackExistsResponse(data: any) {

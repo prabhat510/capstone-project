@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllBooks(filter?: string) {
-    this.booksservice.getAllBooks('https://getbookinfo.herokuapp.com/home').subscribe(data => {
+    this.booksservice.getAllBooks('http://localhost:3000/home').subscribe(data => {
       if (filter === 'reverse') {
         data.reverse();
       }

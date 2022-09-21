@@ -28,7 +28,7 @@ export class LoginUserComponent implements OnInit {
   signinUser() {
     const user = { username: this.username, password: this.password }
     console.log(user);
-    this.authservice.loginUser('https://getbookinfo.herokuapp.com/auth/login/user', user).subscribe(data => this.isValidUser(data)
+    this.authservice.loginUser('http://localhost:3000/auth/login/user', user).subscribe(data => this.isValidUser(data)
     )
   }
   isValidUser(data: any) {

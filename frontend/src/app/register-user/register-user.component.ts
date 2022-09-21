@@ -20,7 +20,7 @@ export class RegisterUserComponent implements OnInit {
       this.titleservice.setTitle('signup');
   }
   createUser() {
-    this.authservice.registerUser('https://getbookinfo.herokuapp.com/auth/register/user', this.userModel).subscribe(response => {
+    this.authservice.registerUser('http://localhost:3000/auth/register/user', this.userModel).subscribe(response => {
       if (response.error) {
         this.errorMessage = response.error;
       } else {

@@ -20,7 +20,7 @@ export class BookDetailComponent implements OnInit {
     this.isLoading = true;
     this.bookId = this.activatedroute.snapshot.paramMap.get('id')
     console.log(this.bookId);
-    this.bookservice.getBook(`https://getbookinfo.herokuapp.com/books/${this.bookId}`).subscribe(data => {
+    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => {
       this.book = data;
       this.titleservice.setTitle(this.book.title);
       this.isLoading = false;
@@ -31,7 +31,7 @@ export class BookDetailComponent implements OnInit {
     }
   }
   removeBook() {
-    this.bookservice.deleteBook(`https://getbookinfo.herokuapp.com/books/remove/${this.bookId}`).subscribe()
+    this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe()
     this.router.navigate(['']).then(() => window.location.reload())
   }
 

@@ -15,7 +15,7 @@ export class DisplayUsersComponent implements OnInit {
   ngOnInit(): void {
     this.titleservice.setTitle('user list');
     this.isLoading = true
-    this.authservice.fetchUsers('https://getbookinfo.herokuapp.com/auth/users').subscribe(res => { this.users = res.users; this.isLoading = false }
+    this.authservice.fetchUsers('http://localhost:3000/auth/users').subscribe(res => { this.users = res.users; this.isLoading = false }
     )
   }
 

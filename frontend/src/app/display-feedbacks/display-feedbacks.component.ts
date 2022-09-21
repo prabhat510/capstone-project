@@ -15,7 +15,7 @@ export class DisplayFeedbacksComponent implements OnInit {
   ngOnInit(): void {
     this.titleservice.setTitle('user feedbacks');
     this.isLoading = true
-    this.feedbackservice.getFeedbacks('https://getbookinfo.herokuapp.com/feedbacks/display').subscribe(data => {
+    this.feedbackservice.getFeedbacks('http://localhost:3000/feedbacks/display').subscribe(data => {
       this.feedbacks = data;
       this.isLoading = false;
     })

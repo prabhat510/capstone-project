@@ -40,7 +40,7 @@ export class SubmitFeedbackComponent implements OnInit {
     this.res2.push(value);
   }
   submitFeedback() {
-    this.feedbackservice.addFeedback('https://getbookinfo.herokuapp.com/feedbacks/add/feedback', {
+    this.feedbackservice.addFeedback('http://localhost:3000/feedbacks/add/feedback', {
       liked: this.res1,
       issues: this.res2, feedback: this.res3,
       username: JSON.parse(localStorage.getItem('user')).username,
