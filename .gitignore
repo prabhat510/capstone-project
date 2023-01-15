@@ -1,9 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 frontend/.angular
+.env
 
 # Compiled output
-dist
 tmp
 out-tsc
 bazel-out

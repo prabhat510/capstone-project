@@ -1,0 +1,43 @@
+<nav>
+  <ul *ngIf="!showMenu" class="welcome-user-sm">
+    <li>
+      <span>Welcome {{ username }}&nbsp;|&nbsp;</span>
+      <span type="submit" (click)="signOut()"> logout </span>
+    </li>
+  </ul>
+  <ul *ngIf="showMenu || isdesktopResolution" class="nav-links">
+    <li class="nav-item"><a class="navbar-brand" href="#">BookStore</a></li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/admin']" [hidden]="!isAdmin"
+        >add book</a
+      >
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/feedbacks']" [hidden]="!isAdmin"
+        >feedbacks</a
+      >
+    </li> -->
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/feedback']">submit feedback</a>
+    </li>
+    <li *ngIf="isLoggedIn" class="welcome-user-lg">
+      <span>welcome {{ username }}&nbsp;|&nbsp;</span>
+      <span type="submit" (click)="signOut()" style="cursor: pointer">
+        logout
+      </span>
+    </li>
+    <li *ngIf="!isLoggedIn" >
+      <a [routerLink]="['/register']" style="cursor: pointer;color: white;">signup</a>
+    </li>
+    <li *ngIf="!isLoggedIn" class="welcome-user-lg">
+      <a [routerLink]="['/login']" style="cursor: pointer;color: white;"> login </a>
+    </li>
+  </ul>
+  <ul class="menu-bar" (click)="toggleMenu()">
+    <li class="burger-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </li>
+  </ul>
+</nav>

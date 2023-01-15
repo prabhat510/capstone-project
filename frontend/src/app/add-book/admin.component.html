@@ -1,0 +1,169 @@
+<div class="book-form">
+  <h5 style="text-align: center">Add new book</h5>
+  <div class="input-row">
+    <label class="label">Book Name:</label>
+
+    <input
+      #titleInput="ngModel"
+      type="text"
+      class="text-input"
+      id="exampleFormControlInput1"
+      placeholder="title.."
+      [(ngModel)]="title"
+      required
+    />
+    <small
+      class="error-message"
+      *ngIf="titleInput.touched && titleInput.errors"
+    >
+      enter a valid title
+    </small>
+  </div>
+  <div class="input-row">
+    <label for="exampleFormControlInput1" class="label">Author:</label>
+
+    <input
+      #authorInput="ngModel"
+      type="text"
+      class="text-input"
+      id="exampleFormControlInput1"
+      placeholder="author.."
+      [(ngModel)]="author"
+      required
+    />
+    <small
+      class="error-message"
+      *ngIf="authorInput.touched && authorInput.errors"
+    >
+      enter a valid author name
+    </small>
+  </div>
+  <div class="input-row">
+    <label for="exampleFormControlInput1" class="form-label">Publisher:</label>
+
+    <input
+      #publisherInput="ngModel"
+      type="text"
+      class="text-input"
+      id="exampleFormControlInput1"
+      placeholder="publisher.."
+      [(ngModel)]="publisher"
+      required
+    />
+    <small
+      class="error-message"
+      *ngIf="publisherInput.touched && publisherInput.errors"
+    >
+      enter a valid publisher name
+    </small>
+  </div>
+  <div class="input-row">
+    <label for="exampleFormControlInput1" class="label">Date published:</label>
+
+    <input
+      #dateInput="ngModel"
+      type="date"
+      id="exampleFormControlInput1"
+      placeholder="published on.."
+      [(ngModel)]="date_published"
+      required
+    />
+    <small class="error-message" *ngIf="dateInput.touched && dateInput.errors">
+      choose a valid date
+    </small>
+  </div>
+  <div class="input-row">
+    <label for="exampleFormControlInput1" class="label"> Genre:</label>
+    <select
+      #genreInput="ngModel"
+      aria-label=".form-select-sm example"
+      [(ngModel)]="genre"
+      required
+    >
+      <option selected>select genre</option>
+      <option value="fiction">fiction</option>
+      <option value="autobiography">autobiography</option>
+      <option value="science">science</option>
+      <option value="history">history</option>
+      <option value="mathematics">mathematics</option>
+      <option value="law">law</option>
+      <option value="medicine">medicine</option>
+      <option value="technology & engineering">technology & engineering</option>
+      <option value="finance">finance</option>
+      <option value="art">art</option>
+      <option value="travel">travel</option>
+      <option value="self-help book">self-help book</option>
+      <option value="thriller">thriller</option>
+    </select>
+    <small
+      class="error-message"
+      *ngIf="genreInput.touched && genreInput.errors"
+    >
+      enter a valid genre
+    </small>
+  </div>
+  <div class="input-row">
+    <label for="exampleFormControlInput1" class="label">Description:</label>
+    <input
+      #descriptionInput="ngModel"
+      type="text"
+      class="text-input"
+      id="exampleFormControlInput1"
+      placeholder="enter description"
+      [(ngModel)]="description"
+      required
+    />
+    <small
+      class="error-message"
+      *ngIf="descriptionInput.touched && descriptionInput.errors"
+    >
+      enter a valid description
+    </small>
+  </div>
+  <div class="input-row">
+    <label for="exampleFormControlInput1" class="label">Image link:</label>
+
+    <input
+      #imageInput="ngModel"
+      type="text"
+      class="text-input"
+      id="exampleFormControlInput1"
+      placeholder="image link.."
+      [(ngModel)]="image"
+      required
+    />
+    <small
+      class="error-message"
+      *ngIf="imageInput.touched && imageInput.errors"
+    >
+      enter a valid image link
+    </small>
+  </div>
+
+  <button
+    type="button"
+    style="width: 100%"
+    [disabled]="
+      titleInput.errors ||
+      authorInput.errors ||
+      publisherInput.errors ||
+      dateInput.errors ||
+      genreInput.errors ||
+      descriptionInput.errors ||
+      imageInput.errors
+    "
+    [ngClass]="{
+      disabled:
+        titleInput.errors ||
+        authorInput.errors ||
+        publisherInput.errors ||
+        dateInput.errors ||
+        genreInput.errors ||
+        descriptionInput.errors ||
+        imageInput.errors
+    }"
+    (click)="confirmEvent()"
+  >
+    submit
+  </button>
+</div>

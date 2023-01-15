@@ -1,0 +1,26 @@
+<div class="login-container">
+  <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+  <div class="input-row">
+    <label for="exampleInputEmail1">Username:</label>
+    <input
+      type="email"
+      aria-describedby="emailHelp"
+      placeholder="Enter username"
+      [(ngModel)]="username"
+    />
+  </div>
+  <div class="input-row">
+    <label for="exampleInputPassword1">Password:</label>
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+    />
+  </div>
+  <button type="submit" class="button" (click)="signinUser()">
+    login
+  </button>
+  <p class="register" [routerLink]="['/register']">
+    don't have an account?&nbsp;<strong style="text-decoration: underline; cursor: pointer;">signup</strong>
+  </p>
+</div>

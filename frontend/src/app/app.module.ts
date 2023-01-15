@@ -8,15 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BooksService } from './services/books.service';
-import { BookComponent } from './book/book.component';
-import { AdminComponent } from './admin/admin.component';
-import { FeedbackComponent } from './feedback/feedback.component';
-import { FeedbacksComponent } from './feedbacks/feedbacks.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { BookComponent } from './book-detail/book.component';
+import { AdminComponent } from './add-book/admin.component';
+import { FeedbackComponent } from './submit-feedback/feedback.component';
+import { FeedbacksComponent } from './display-feedbacks/feedbacks.component';
+import { LoginComponent } from './user-login/login.component';
+import { RegisterComponent } from './user-registration/register.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './navbar/nav.component';
 
 // the HTTP_INTERCEPTORS module is used to send the token to the backend and verify the token using the TokenInterceptorService 
 

@@ -1,0 +1,53 @@
+.login-container {
+  width: 60vw;
+  margin-top: 50px;
+  margin-left: 20vw;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+button {
+  border: none;
+  background-color: rgb(12, 12, 223);
+  color: white;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  opacity: 0.75;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+.register {
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 576px) {
+  * {
+    font-size: 12px;
+  }
+  input {
+    padding: 2px;
+  }
+  button {
+    padding: 5px;
+  }
+  .login-container {
+    width: 80vw;
+    margin-top: 20px;
+    margin-left: 10vw;
+  }
+}
