@@ -38,9 +38,6 @@ button:hover {
   color: #fff;
 }
 
-/* .disabled {
-  opacity: 0.75;
-} */
 
 @media (max-width: 576px) {
   label, input {
@@ -53,4 +50,8 @@ button:hover {
   h5 {
     font-size: 14px;
   }
+}
+
+.loader {
+  margin-top: calc(50vh - 171px);
 }

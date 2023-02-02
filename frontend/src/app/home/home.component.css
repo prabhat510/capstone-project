@@ -78,3 +78,6 @@
     flex-basis: 200px;
   }
 }
+.loader {
+  margin-top: calc(50vh - 220px);
+}
