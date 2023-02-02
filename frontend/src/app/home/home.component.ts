@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(private activatedroute: ActivatedRoute, private booksservice: BooksService, private router: Router) { }
 
   ngOnInit() {
-    this.booksservice.getAllBooks('http://localhost:3000/home').subscribe((data) => {
+    this.booksservice.getAllBooks('https://bookstore-backend-hv3g.onrender.com/home').subscribe((data) => {
       this.books = data;
       this.loading = false;
     });
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
   onSelect(event) {
     console.log(event.target.value);
-    this.booksservice.getAllBooks(`http://localhost:3000/home/${event.target.value}`).subscribe(data => this.books = data
+    this.booksservice.getAllBooks(`https://bookstore-backend-hv3g.onrender.com/home/${event.target.value}`).subscribe(data => this.books = data
     )
   }
 }

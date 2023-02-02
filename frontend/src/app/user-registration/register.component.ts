@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
   createUser(registration_form: NgForm) {
     if (registration_form.valid) {
-      this.authservice.registerUser('http://localhost:3000/auth/register/user', this.registration_form).subscribe(data =>
+      this.authservice.registerUser('https://bookstore-backend-hv3g.onrender.com/auth/register/user', this.registration_form).subscribe(data =>
         this.validateUser(data)
       )
     } else {

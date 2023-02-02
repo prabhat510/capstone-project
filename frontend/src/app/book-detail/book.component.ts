@@ -20,14 +20,14 @@ export class BookComponent implements OnInit {
     this.activatedroute.url.subscribe(res => console.log("url is::::", res[0]));
 
     console.log(this.bookId);
-    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => {
+    this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId}`).subscribe(data => {
       this.book = data;
       this.loading = false;
     });
     this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
   }
   removeBook() {
-    this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe();
+    this.bookservice.deleteBook(`https://bookstore-backend-hv3g.onrender.com/books/remove/${this.bookId}`).subscribe();
     this.router.navigate(['']).then(() => window.location.reload());
   }
   changeBook() {

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (localStorage.getItem("token")) {
       this.router.navigate(['']);
-    } else if (window.location.href === 'http://localhost:3000/login') {
+    } else if (window.location.href === 'https://bookstore-backend-hv3g.onrender.com/login') {
       this.router.navigate(['/login']);
     }
   }
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
   signinUser(usrForm: NgForm) {
     if (usrForm.valid) {
-      this.authservice.loginUser('http://localhost:3000/auth/login/user', this.login_form).subscribe(data => this.isValidUser(data)
+      this.authservice.loginUser('https://bookstore-backend-hv3g.onrender.com/auth/login/user', this.login_form).subscribe(data => this.isValidUser(data)
       );
     } else {
       usrForm.control.markAllAsTouched();

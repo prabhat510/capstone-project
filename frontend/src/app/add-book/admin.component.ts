@@ -42,7 +42,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // check if the user is valid or not
-    this.authservice.verifyToken(`http://localhost:3000/verify/token`).subscribe(data => console.log(data),
+    this.authservice.verifyToken(`https://bookstore-backend-hv3g.onrender.com/verify/token`).subscribe(data => console.log(data),
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -55,7 +55,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     console.log('book id param', this.bookId_param);
 
     if (this.bookId_param) {
-      this.bookservice.getBook(`http://localhost:3000/books/${this.bookId_param}`).subscribe(data => {
+      this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId_param}`).subscribe(data => {
         this.populateDom(data);
         this.loading = false
       })
@@ -107,12 +107,12 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   }
   submitBook() {
-    this.bookservice.addBook('http://localhost:3000/books/add/book', this.book_form).subscribe(data => console.log(data));
+    this.bookservice.addBook('https://bookstore-backend-hv3g.onrender.com/books/add/book', this.book_form).subscribe(data => console.log(data));
     // redirecting to home page
     this.router.navigate(['']);
   }
   updateBook() {
-    this.bookservice.updateBook(`http://localhost:3000/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
+    this.bookservice.updateBook(`https://bookstore-backend-hv3g.onrender.com/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
     )
     this.router.navigate(['/book', this.bookId_param])
   }
