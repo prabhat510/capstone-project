@@ -4,14 +4,11 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser"); // added to help post data on mongodb
 
-
 const admin = require("./routes/admin/admin");
 const feedback = require("./routes/feedbacks/feedback");
 const auth = require("./routes/auth/auth");
 const verify = require("./routes/auth/authVerify");
-const books_data = require('./books_data.js');
-
-
+const path = require('path');
 
 const mongoClient = mongodb.MongoClient;
 const port = process.env.PORT || 3000;
@@ -57,11 +54,15 @@ app.get("/home", async (req, res) => {
 app.get("/verify/token", verify, (req, res) => {
   res.status(200).send({ message: "token verified" });
 });
-
-if(process.env.ENV==='production') {
-  app.use(express.static('frontend/dist/frontend'))
+console.log('dgdiygiyd', path.resolve(__dirname, "frontend", "dist", "frontend", "index.html"));
+if (process.env.ENV === "production") {
+  app.use(express.static("frontend/dist/frontend"));
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "frontend", "dist", "frontend", "index.html")
+    )
+  );
 }
-
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);
