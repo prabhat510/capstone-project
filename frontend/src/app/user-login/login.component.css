@@ -17,17 +17,18 @@ input {
 }
 
 button {
-  border: none;
-  background-color: rgb(12, 12, 223);
-  color: white;
+  border: 1.2px solid black;
+  color: black;
   border-radius: 5px;
   width: 100%;
   padding: 10px;
-  opacity: 0.75;
+  transition: background-color 0.4s;
+  letter-spacing: 1px;
 }
 
 button:hover {
-  opacity: 1;
+  color: #fff;
+  background-color: #333;
 }
 
 .register {
@@ -50,4 +51,10 @@ button:hover {
     margin-top: 20px;
     margin-left: 10vw;
   }
+}
+
+h2 {
+  font-size: larger;
+  text-align: center;
+  color: rgb(0, 0, 0, 0.8);
 }

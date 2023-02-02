@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from '../services/books.service';
 
 @Component({
@@ -12,23 +12,19 @@ export class HomeComponent implements OnInit {
 
   books: any;
   filterTerm: string = '';
-  constructor(private booksservice: BooksService, private router: Router) { }
+  loading: boolean = true;
+  constructor(private activatedroute: ActivatedRoute, private booksservice: BooksService, private router: Router) { }
 
   ngOnInit() {
-    this.booksservice.getAllBooks('http://localhost:3000/home').subscribe(data => this.books = data,
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(['/login'])
-          }
-        }
-      })
-
+    this.booksservice.getAllBooks('http://localhost:3000/home').subscribe((data) => {
+      this.books = data;
+      this.loading = false;
+    });
+    this.activatedroute.url.subscribe(res => console.log("url is::::", res[0]));
   }
   onSelect(event) {
     console.log(event.target.value);
     this.booksservice.getAllBooks(`http://localhost:3000/home/${event.target.value}`).subscribe(data => this.books = data
     )
-    // window.location.reload()
   }
 }

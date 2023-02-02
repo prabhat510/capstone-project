@@ -1,29 +1,14 @@
-nav {
-  position: relative;
-  top: 0;
-  left: 0;
+.search {
   display: flex;
-  justify-content: space-between;
-  height: auto;
-  padding: 12px;
-  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
-
-nav select {
-  margin-left: 5px;
-  padding: 5px;
-  flex: 1;
+.search input {
+  padding: 8px;
+  flex-basis: 400px;
 }
-
-nav input {
-  padding: 5px;
-  flex: 7;
-  margin-left: 20vw;
-  margin-right: 20vw;
-}
-
-nav input {
-  outline-offset: 0px;
+.search input:focus, .search input:active {
+  border: 2px solid black;
 }
 
 .book-container {
@@ -48,6 +33,7 @@ nav input {
 .book {
   border: 1px solid black;
   box-shadow: 5px 5px 12px lightgray;
+  padding: 5px 8px 0px 8px;
 }
 .cover-image {
   width: 100%;
@@ -71,6 +57,10 @@ nav input {
     grid-auto-rows: minmax(280px, auto);
     gap: 15px;
   }
+  .search input {
+    padding: 5px;
+    flex-basis: 250px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -82,5 +72,9 @@ nav input {
   }
   nav input {
     margin-left: 5vw;
+  }
+  .search input {
+    padding: 4px;
+    flex-basis: 200px;
   }
 }

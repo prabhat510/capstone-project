@@ -1,52 +1,68 @@
 <div class="signup-container">
-  <div class="input-row">
-    <label for="exampleInputEmail1">Name:</label>
-    <input
-      type="text"
-      aria-describedby="emailHelp"
-      placeholder="Enter name"
-      [(ngModel)]="name"
-      required
-    />
+  <h2>Register Your Account</h2>
+  <div class="error-message">
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
-  <div class="input-row">
-    <label for="exampleInputEmail1">Username:</label>
-    <input
-      type="text"
-      aria-describedby="emailHelp"
-      placeholder="Enter username"
-      [(ngModel)]="username"
-      required
-    />
-  </div>
-  <div class="input-row">
-    <label for="exampleInputEmail1">Email:</label>
-    <input
-      type="email"
-      aria-describedby="emailHelp"
-      placeholder="Enter email"
-      [(ngModel)]="email"
-      required
-    />
-  </div>
-  <div class="input-row">
-    <label>Password:</label>
-    <input
-      type="password"
-      placeholder="Password"
-      [(ngModel)]="password"
-      required
-    />
-  </div>
-  <div class="input-row">
-    <label> register as admin </label>
-    <input type="checkbox" value="admin" (change)="toggleValue()" />
-  </div>
-  <button type="submit" class="button" (click)="createUser()">
-    create account
-  </button>
-
-  <p class="login" [routerLink]="['/login']">
-    already have account?&nbsp;<strong style="text-decoration: underline; cursor: pointer;">login</strong>
-  </p>
+  <form (ngSubmit)="createUser(registr_form)" #registr_form="ngForm">
+    <div class="input-row">
+      <label for="exampleInputEmail1">Name:</label>
+      <input
+        type="text"
+        aria-describedby="emailHelp"
+        placeholder="Enter name"
+        [(ngModel)]="registration_form.name"
+        name="name"
+        #_name
+        required
+      />
+    </div>
+    <div class="input-row">
+      <label for="exampleInputEmail1">Username:</label>
+      <input
+        type="text"
+        aria-describedby="emailHelp"
+        placeholder="Enter username"
+        [(ngModel)]="registration_form.username"
+        name="username"
+        #_username
+        required
+      />
+    </div>
+    <div class="input-row">
+      <label for="exampleInputEmail1">Email:</label>
+      <input
+        type="email"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        [(ngModel)]="registration_form.email"
+        name="email"
+        #_email
+        required
+      />
+    </div>
+    <div class="input-row">
+      <label>Password:</label>
+      <input
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="registration_form.password"
+        name="password"
+        #_password
+        required
+      />
+    </div>
+    <div class="input-row">
+      <label> register as admin </label>
+      <input type="checkbox" value="admin" (change)="toggleValue()" #_isAdmin name="isadmin"/>
+    </div>
+    <button type="submit" class="button">
+      Register
+    </button>
+    <p class="login" [routerLink]="['/login']">
+      already have account?&nbsp;<strong
+        style="text-decoration: underline; cursor: pointer"
+        >login</strong
+      >
+    </p>
+  </form>
 </div>

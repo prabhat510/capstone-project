@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-book',
@@ -10,28 +9,26 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-
+  loading: boolean = true;
   isAdmin: Boolean = false
   bookId: any = ''
-  book: any = {}
+  book: any;
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedroute.snapshot.paramMap.get('id')
+    this.activatedroute.url.subscribe(res => console.log("url is::::", res[0]));
+
     console.log(this.bookId);
-    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.book = data,
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(['/login'])
-          }
-        }
-      })
-    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin
+    this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => {
+      this.book = data;
+      this.loading = false;
+    });
+    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
   }
   removeBook() {
-    this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe()
-    this.router.navigate(['']).then(() => window.location.reload())
+    this.bookservice.deleteBook(`http://localhost:3000/books/remove/${this.bookId}`).subscribe();
+    this.router.navigate(['']).then(() => window.location.reload());
   }
   changeBook() {
     this.router.navigate(['/admin'], { queryParams: { id: this.bookId } })

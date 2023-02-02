@@ -1,38 +1,51 @@
-<div class="book-container">
-  <div class="book-image flex-item"><img [src]="book.image" alt="book image" /></div>
-  <div class="book-data flex-item">
-    <h5>
-      {{ book.title }}
-    </h5>
-   <p> Author:{{ book.author }}</p>
-    <strong>Book details:</strong><br />
-    <table>
-      <tbody>
-        <tr>
-          <td>published</td>
-          <td>{{ book.date_published.split("T")[0] }}</td>
-        </tr>
-        <tr>
-          <td>publisher</td>
-          <td>{{ book.publisher }}</td>
-        </tr>
-        <tr>
-          <td>genre</td>
-          <td>{{ book.genre }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <span class="action-buttons" [hidden]="!isAdmin">
-      <button type="button" class="button edit-button" (click)="changeBook()">
-        Edit
-      </button>
-      <button type="button" class="button remove-button" (click)="removeBook()">
-        Delete
-      </button></span
-    >
-  </div> 
+<div class="container" *ngIf="!loading">
+  <div class="book-container">
+    <div class="book-image">
+      <img [src]="book.image" alt="book image"  />
+    </div>
+    <div class="book-data">
+      <h5>
+        {{ book.title }}
+      </h5>
+      <p>Author:{{ book.author }}</p>
+      <strong>Book details:</strong><br />
+
+      <table class="book-metadata">
+        <tbody>
+          <tr>
+            <td>genre</td>
+            <td>{{ book.genre }}</td>
+          </tr>
+          <tr>
+            <td>published by</td>
+            <td>{{ book.publisher }}</td>
+          </tr>
+          <tr>
+            <td>published on</td>
+            <td>{{ book.date_published | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <span class="action-buttons" [hidden]="!isAdmin">
+        <button type="button" class="button edit-button" (click)="changeBook()">
+          Edit
+        </button>
+        <button
+          type="button"
+          class="button remove-button"
+          (click)="removeBook()"
+        >
+          Delete
+        </button></span
+      >
+    </div>
+  </div>
+  <div class="about-section">
+    <strong>About the Book:</strong>
+    <p>{{ book.description }}</p>
+  </div>
 </div>
-<div class="about-section">
-  <strong>About the Book:</strong>
-  <p>{{ book.description }}</p>
-</div> 
+
+<div class="loader" *ngIf="loading">
+  <img src="assets/Spinner-1s-200px.gif" alt="" />
+</div>

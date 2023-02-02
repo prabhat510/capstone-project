@@ -1,26 +1,39 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, ElementRef, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
+import { NgForm } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('titleInput') titleInput: ElementRef;
+  @ViewChild('authorInput') authorInput: ElementRef;
+  @ViewChild('publisherInput') publisherInput: ElementRef;
+  @ViewChild('dateInput') dateInput: ElementRef;
+  @ViewChild('genreInput') genreInput: ElementRef;
+  @ViewChild('descriptionInput') descriptionInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
+
+  errorMessage: string = '';
+  loading: boolean = true;
+  bookId_param: string = ''
   // book attributes---two way data binding
-  title: string = ''
-  author: string = ''
-  publisher: string = ''
-  genre: string = ''
-  description: string = ''
-  image: string = ''
-  date_published: string = ''
-  bookId: any = ''
+  book_form = {
+    title: '',
+    author: '',
+    publisher: '',
+    genre: '',
+    description: '',
+    image: '',
+    date_published: ''
+  };
 
 
   constructor(private authservice: AuthService, private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
@@ -37,56 +50,70 @@ export class AdminComponent implements OnInit {
           }
         }
       }
-    )
-    this.activatedroute.queryParamMap.subscribe(params => this.bookId = params.get('id'))
-    console.log(this.bookId);
-    if (this.bookId) {
-      this.bookservice.getBook(`http://localhost:3000/books/${this.bookId}`).subscribe(data => this.populateDom(data))
+    );
+    this.activatedroute.queryParamMap.subscribe(params => this.bookId_param = params.get('id'));
+    console.log('book id param', this.bookId_param);
+
+    if (this.bookId_param) {
+      this.bookservice.getBook(`http://localhost:3000/books/${this.bookId_param}`).subscribe(data => {
+        this.populateDom(data);
+        this.loading = false
+      })
       // once we got the book that we need to edit, we will populate the dom with the previous data
     } else {
-      console.log('null');
+      this.loading = false;
     }
   }
-
+  ngAfterViewInit(): void {
+    this.titleInput.nativeElement.focus();
+  }
+  checkInvalidForm() {
+    console.log('checkInvalidForm called ');
+    if (!this.book_form.title) {
+      this.titleInput.nativeElement.focus();
+    } else if (!this.book_form.author) {
+      this.authorInput.nativeElement.focus();
+    } else if (!this.book_form.publisher) {
+      this.publisherInput.nativeElement.focus();
+    } else if (!this.book_form.genre) {
+      this.genreInput.nativeElement.focus();
+    } else if (!this.book_form.image) {
+      this.imageInput.nativeElement.focus();
+    }
+  }
   populateDom(data: any) {
-    this.title = data.title
-    this.author = data.author
-    this.publisher = data.publisher
-    this.genre = data.genre
-    this.description = data.description
-    this.date_published = data.date_published
-    this.image = data.image
+    this.book_form.title = data.title
+    this.book_form.author = data.author
+    this.book_form.publisher = data.publisher
+    this.book_form.genre = data.genre
+    this.book_form.description = data.description
+    this.book_form.date_published = data.date_published
+    this.book_form.image = data.image
   }
   // it decides whether to call submitBook method or updateBook method
-  confirmEvent() {
-    // update the book, when this component was rendered by the click of a edit button
-    if (this.bookId) {
-      this.updateBook()
+  confirmEvent(bok_form: NgForm) {
+    if (bok_form.valid) {
+      // update the book, when this component was rendered by the click of a edit button
+      if (this.bookId_param) {
+        this.updateBook();
+      } else {
+        // add a new book, when this component was rendered by the click of a admin button from navbar
+        this.submitBook();
+      }
     } else {
-      // add a new book, when this component was rendered by the click of a admin button from navbar
-      this.submitBook()
+      this.errorMessage = "all fields are mandatory";
+      this.checkInvalidForm();
     }
+
   }
   submitBook() {
-    const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
-    console.log(book);
-    this.bookservice.addBook('http://localhost:3000/books/add/book', book).subscribe(data => console.log(data),
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(['/login'])
-          }
-        }
-      }
-    )
+    this.bookservice.addBook('http://localhost:3000/books/add/book', this.book_form).subscribe(data => console.log(data));
     // redirecting to home page
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
   updateBook() {
-    const book = { title: this.title, author: this.author, publisher: this.publisher, genre: this.genre, description: this.description, image: this.image, date_published: this.date_published }
-    console.log(book);
-    this.bookservice.updateBook(`http://localhost:3000/books/edit/${this.bookId}`, book).subscribe(data => console.log(data)
+    this.bookservice.updateBook(`http://localhost:3000/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
     )
-    this.router.navigate(['/book', this.bookId])
+    this.router.navigate(['/book', this.bookId_param])
   }
 }

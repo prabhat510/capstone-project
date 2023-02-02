@@ -15,7 +15,6 @@ const routes: Routes = [
   },
   {
     path: 'book/:id', component: BookComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'admin', component: AdminComponent,

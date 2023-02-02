@@ -1,79 +1,78 @@
-.navbar-brand,
-.nav-link,
-span {
-  color: whitesmoke;
-}
-
-.welcome-user-sm {
-  display: none;
-}
-
-nav {
-  background-color: black;
+.navbar {
   display: flex;
-  justify-content:space-between;
+  background-color: #333;
+  justify-content: space-between;
   align-items: center;
-  height: auto;
-  padding: 16px;
+  color: white;
 }
-
-ul {
+.navbar-links ul {
   display: flex;
-  justify-content: space-around;
 }
 
-ul.nav-links {
-  flex: 9;
-}
-
-ul.menu-bar {
-  display: none;
-  flex: 1;
-}
-
-li {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-}
-
-.burger-menu {
+.brand-title {
+  font-size: 1.5rem;
+  padding: 0.5rem;
   cursor: pointer;
-  display: flex;
+}
+
+.navbar-links li {
+  list-style: none;
+  margin: 0;
+}
+
+.navbar-links ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  display: block;
+}
+
+.navbar-links li:hover {
+  background-color: #555;
+}
+.toggle-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: none;
   flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
 }
-.burger-menu.bar {
-  display: inherit;
-}
-
-.bar {
-  flex: 1 2px;
-  width: 23px;
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
   background-color: white;
-  margin-bottom: 5px;
+  border-radius: 10px;
 }
 
-@media (max-width: 1023px) {
-
-  
-
-  ul.nav-links {
+@media (width<=1023px) {
+  .toggle-button {
+    display: flex;
+  }
+  .navbar {
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
   }
-  .welcome-user-lg{
+  .navbar-links {
     display: none;
+    width: 100%;
   }
-  ul.menu-bar {
+  .navbar-links ul {
+    flex-direction: column;
+    width: 100%;
+  }
+  .navbar-links li {
+    text-align: center;
+  }
+  .navbar-links li a {
+    padding: 0.5rem 1rem;
+  }
+  .navbar-links.active {
     display: flex;
   }
-  .nav-item {
-    flex: 1 30px;
-  }
-  .welcome-user-sm {
-    display: flex;
-    flex: 8;
+  .brand-title {
+    font-size: 1.2rem;
   }
 }

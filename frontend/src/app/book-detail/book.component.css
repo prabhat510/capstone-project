@@ -1,3 +1,14 @@
+.book-metadata tbody tr {
+  display: block;
+  border: 1px solid black;
+  padding: 7px;
+  display: flex;
+  justify-content: space-around;
+  border-collapse: collapse;
+}
+.book-metadata tbody {
+  width: 100%;
+}
 .book-container {
   display: flex;
   justify-content: space-evenly;
@@ -10,9 +21,7 @@ img {
 .book-image {
   box-shadow: 5px 5px 12px lightgray;
   margin-bottom: 15px;
-}
-.flex-item {
-  flex-basis: 250px;
+  flex-basis: 200px;
 }
 h5,
 p,
@@ -28,7 +37,7 @@ strong {
     align-items: center;
   }
   .book-image {
-    height: 300px;
+    height: 200px;
   }
 }
 
@@ -42,23 +51,29 @@ strong {
   justify-content: center;
 }
 button {
-  color: white;
-  border: none;
+  color: black;
   padding: 5px;
   border-radius: 5px;
-}
-.remove-button {
-  background-color: red;
+  width: 70px;
+  transition: background-color 0.2s;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 .edit-button {
-  background-color: blue;
   margin-right: 10px;
 }
-
-table {
-  border: 1px solid black;
+.remove-button:hover {
+  color: #fff;
+  background-color: #ff0000;
+  border: none;
+}
+.edit-button:hover {
+  color: #fff;
+  background-color: #2174e7;
+  border: none;
 }
 
-table tbody td {
-  padding: 10px;
+.book-metadata {
+  display: flex;
+  justify-content: space-between;
 }

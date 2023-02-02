@@ -1,32 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
-  username: string = ''
-  password: string = ''
-  errorMessage: string = ''
+  @ViewChild('usrname') usrname: ElementRef;
+  @ViewChild('passwrd') passwrd: ElementRef;
+  errorMessage: string = '';
+  login_form = {
+    username: '',
+    password: ''
+  };
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem("token")) {
-      this.router.navigate([''])
-    } else if(window.location.href==='http://localhost:3000/login') {
-      this.router.navigate(['/login'])
+      this.router.navigate(['']);
+    } else if (window.location.href === 'http://localhost:3000/login') {
+      this.router.navigate(['/login']);
     }
   }
-  signinUser() {
-    const user = { username: this.username, password: this.password }
-    console.log(user);
-    this.authservice.loginUser('http://localhost:3000/auth/login/user', user).subscribe(data => this.isValidUser(data)
-    )
-    // this.router.navigate([''])
+  ngAfterViewInit(): void {
+    this.usrname.nativeElement.focus();
+  }
+  signinUser(usrForm: NgForm) {
+    if (usrForm.valid) {
+      this.authservice.loginUser('http://localhost:3000/auth/login/user', this.login_form).subscribe(data => this.isValidUser(data)
+      );
+    } else {
+      usrForm.control.markAllAsTouched();
+      this.errorMessage = "all fields are mandatory";
+      this.checkInvalidForm();
+    }
+
   }
   isValidUser(data: any) {
     // when credentials are correct
@@ -38,8 +50,18 @@ export class LoginComponent implements OnInit {
       window.location.reload()
     } else if (data.status === 404) {
       this.errorMessage = 'invalid user'
+      console.log('invalid user called');
+
     } else {
-      this.errorMessage = 'password is incorrect'
+      this.errorMessage = 'password is incorrect';
+    }
+  }
+
+  checkInvalidForm() {
+    if (!this.login_form.username) {
+      this.usrname.nativeElement.focus();
+    } else if (!this.login_form.password) {
+      this.passwrd.nativeElement.focus();
     }
   }
 }

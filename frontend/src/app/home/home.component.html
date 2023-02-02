@@ -1,22 +1,14 @@
-<nav class="navbar" style="background-color: #e3f2fd">
-  <select (change)="onSelect($event)"
-  >
-    <option selected>sort using</option>
-    <option value="date_published">date published</option>
-    <option value="title">book name</option>
-    <option value="author">author name</option>
-    <option value="rating">rating</option>
-  </select>
+<div class="search">
   <input
     type="search"
     placeholder="Search"
     aria-label="Search"
     [(ngModel)]="filterTerm"
   />
-</nav>
+</div>
 
 <!-- books are displayed here -->
-<div class="book-container">
+<div class="book-container" *ngIf="!loading">
   <!-- to pass _id of the book as a parameter, put it in the second place of routerLink array and also update the 
    path in app-routing.module.ts -->
   <div
@@ -35,4 +27,7 @@
       </div>
     </div>
   </div>
+</div>
+<div class="loader" *ngIf="loading">
+  <img src="assets/Spinner-1s-200px.gif" alt="">
 </div>
