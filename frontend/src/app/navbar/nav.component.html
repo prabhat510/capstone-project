@@ -8,19 +8,19 @@
   <div class="navbar-links" [ngClass]="{'active': showMenu}">
     <ul>
       <li class="nav-item" [hidden]="!isAdmin">
-        <a class="nav-link" [routerLink]="['/admin']">Add book</a>
+        <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/admin']">Add book</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/feedback']">Submit feedback</a>
+        <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/feedback']">Submit feedback</a>
       </li>
       <li *ngIf="isLoggedIn" class="welcome-user">
-        <a href="#" (click)="signOut()"> Logout </a>
+        <a href="#" (click)="[signOut(), toggleMenu()]"> Logout </a>
       </li>
       <li *ngIf="!isLoggedIn" class="nav-link">
-        <a [routerLink]="['/register']">Signup</a>
+        <a (click)="toggleMenu()" [routerLink]="['/register']">Signup</a>
       </li>
       <li *ngIf="!isLoggedIn" class="welcome-user nav-link">
-        <a [routerLink]="['/login']">Login</a>
+        <a (click)="toggleMenu()" [routerLink]="['/login']">Login</a>
       </li>
     </ul>
   </div>

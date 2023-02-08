@@ -50,6 +50,7 @@
 @media (width<=1023px) {
   .toggle-button {
     display: flex;
+    top: 0.5rem;
   }
   .navbar {
     flex-direction: column;
@@ -74,5 +75,8 @@
   }
   .brand-title {
     font-size: 1.2rem;
+  }
+  .toggle-button .bar {
+    border-radius: 8px;
   }
 }

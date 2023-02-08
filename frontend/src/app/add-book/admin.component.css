@@ -1,21 +1,30 @@
-.book-form {
-  margin-left: 20vw;
-  width: 60vw;
-  margin-top: 20px;
+:host {
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
 }
 
+.book-form {
+  margin: auto;
+  width: 50vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h5 {
+  font-size: 20px;
+}
 
 small {
   color: red;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   display: block;
   width: 100%;
-  padding: 5px;
+  padding: 7px;
 }
-
-
 
 .input-row {
   margin-bottom: 15px;
@@ -38,9 +47,9 @@ button:hover {
   color: #fff;
 }
 
-
 @media (max-width: 576px) {
-  label, input {
+  label,
+  input {
     font-size: 12px;
   }
   button {
@@ -49,6 +58,9 @@ button:hover {
   }
   h5 {
     font-size: 14px;
+  }
+  .book-form {
+    width: 60vw;
   }
 }
 

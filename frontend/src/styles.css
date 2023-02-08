@@ -26,8 +26,8 @@ body {
 }
 
 .loader > img {
-  height: 120px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
 }
 
 input {
@@ -53,4 +53,10 @@ small {
 .error {
   color: red;
   text-align: center;
+}
+button {
+  cursor: pointer;
+}
+.error-message {
+  margin-top: 5px;
 }

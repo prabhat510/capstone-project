@@ -101,7 +101,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
         this.submitBook();
       }
     } else {
-      this.errorMessage = "all fields are mandatory";
+      this.errorMessage = "Please fill all the fields";
       this.checkInvalidForm();
     }
 

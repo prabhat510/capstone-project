@@ -19,11 +19,11 @@
     <div>
       <img [src]="book.image" class="cover-image" alt="book image" />
       <div class="book-info">
-        <strong>{{ book.title }}</strong>
+        <strong>{{ book.title | titlecase }}</strong>
         <p>
-          {{ book.author }}
+          {{ book.author | titlecase }}
         </p>
-        <strong>{{ book.genre }}</strong>
+        <strong>{{ book.genre | titlecase}}</strong>
       </div>
     </div>
   </div>

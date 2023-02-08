@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       );
     } else {
       usrForm.control.markAllAsTouched();
-      this.errorMessage = "all fields are mandatory";
+      this.errorMessage = "Please fill all the fields";
       this.checkInvalidForm();
     }
 

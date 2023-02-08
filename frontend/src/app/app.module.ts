@@ -17,6 +17,7 @@ import { RegisterComponent } from './user-registration/register.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NavComponent } from './navbar/nav.component';
+import { FooterComponent } from './footer/footer.component';
 
 // the HTTP_INTERCEPTORS module is used to send the token to the backend and verify the token using the TokenInterceptorService 
 
@@ -30,7 +31,8 @@ import { NavComponent } from './navbar/nav.component';
     FeedbacksComponent,
     LoginComponent,
     RegisterComponent,
-    NavComponent
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

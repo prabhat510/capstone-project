@@ -1,0 +1,51 @@
+.footer {
+  background: #333;
+  color: #fff;
+  height: fit-content;
+  padding: 20px;
+  display: flex;
+}
+
+.brand-name span {
+  font-size: larger;
+  font-weight: bolder;
+}
+.footer-form {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  margin: auto;
+}
+
+.footer-form label,
+input,
+textarea {
+  margin-bottom: 10px;
+}
+.footer-form button {
+  padding: 5px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+}
+.footer-form input,
+textarea {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+}
+/* .footer-form input {
+    margin-right: 20px;
+}  */
+
+@media (max-width: 767px) {
+  .footer-form {
+    width: 55vw;
+    margin-top: 7px;
+  }
+  .footer {
+    flex-direction: column;
+  }
+  .brand-name {
+    text-align: center;
+  }
+}

@@ -1,18 +1,8 @@
-.book-metadata tbody tr {
-  display: block;
-  border: 1px solid black;
-  padding: 7px;
-  display: flex;
-  justify-content: space-around;
-  border-collapse: collapse;
-}
-.book-metadata tbody {
-  width: 100%;
-}
 .book-container {
   display: flex;
-  justify-content: space-evenly;
   margin-top: 20px;
+  margin-left: 20vw;
+  gap: 50px;
 }
 .book-image img {
   width: 100%;
@@ -23,21 +13,78 @@
   margin-bottom: 15px;
   flex-basis: 200px;
 }
+.book-data {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.book-title {
+  font-size: 20px;
+}
+
+.data-row {
+  display: flex;
+}
+.placeholder {
+  color: #333;
+  width: 120px;
+}
 h5,
 p,
 strong {
   display: block;
-  text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 576px) {
   .book-container {
     flex-direction: column;
     align-items: center;
+    margin-left: 0;
   }
   .book-image {
     height: 200px;
+  }
+  .book-title {
+    font-size: 16px;
+  }
+  .book-metadata {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85vw;
+  }
+  .book-metadata p {
+    font-size: 14px;
+  }
+  .data-row {
+    width: 100%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+  .book-container {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+  .book-image {
+    height: 250px;
+  }
+  .book-title {
+    font-size: 18px;
+  }
+  .book-metadata {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .book-metadata p {
+    font-size: 16px;
+  }
+  .data-row {
+    width: 100%;
   }
 }
 
@@ -49,13 +96,12 @@ strong {
 .action-buttons {
   display: flex;
   margin-top: 10px;
-  justify-content: center;
 }
 button {
   color: black;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 5px;
-  width: 70px;
+  width: 90px;
   transition: background-color 0.2s;
   letter-spacing: 1px;
   cursor: pointer;
@@ -74,11 +120,14 @@ button {
   border: none;
 }
 
-.book-metadata {
-  display: flex;
-  justify-content: space-between;
-}
-
 .loader {
   margin-top: calc(50vh - 171px);
+}
+button span {
+  display: flex;
+  justify-content: space-evenly;
+}
+button span img {
+  height: 20px;
+  width: 20px;
 }

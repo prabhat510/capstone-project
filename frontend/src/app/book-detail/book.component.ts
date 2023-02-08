@@ -16,15 +16,14 @@ export class BookComponent implements OnInit {
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
 
   ngOnInit(): void {
-    this.bookId = this.activatedroute.snapshot.paramMap.get('id')
-    this.activatedroute.url.subscribe(res => console.log("url is::::", res[0]));
-
-    console.log(this.bookId);
+    this.bookId = this.activatedroute.snapshot.paramMap.get('id');
     this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId}`).subscribe(data => {
       this.book = data;
+      if (localStorage.getItem('user')) {
+        this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
+      }
       this.loading = false;
     });
-    this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
   }
   removeBook() {
     this.bookservice.deleteBook(`https://bookstore-backend-hv3g.onrender.com/books/remove/${this.bookId}`).subscribe();

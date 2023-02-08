@@ -1,43 +1,47 @@
 <div class="container" *ngIf="!loading">
   <div class="book-container">
     <div class="book-image">
-      <img [src]="book.image" alt="book image"  />
+      <img [src]="book.image" alt="book image" />
     </div>
     <div class="book-data">
-      <h5>
-        {{ book.title }}
-      </h5>
-      <p>Author:{{ book.author }}</p>
-      <strong>Book details:</strong><br />
-
-      <table class="book-metadata">
-        <tbody>
-          <tr>
-            <td>genre</td>
-            <td>{{ book.genre }}</td>
-          </tr>
-          <tr>
-            <td>published by</td>
-            <td>{{ book.publisher }}</td>
-          </tr>
-          <tr>
-            <td>published on</td>
-            <td>{{ book.date_published | date }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <span class="action-buttons" [hidden]="!isAdmin">
-        <button type="button" class="button edit-button" (click)="changeBook()">
-          Edit
-        </button>
-        <button
-          type="button"
-          class="button remove-button"
-          (click)="removeBook()"
+      <div class="book-metadata">
+        <h5 class="book-title">
+          {{ book.title | titlecase }}
+        </h5>
+        <p class="data-row">
+          <span class="placeholder">author:</span><span>{{ book.author }}</span>
+        </p>
+        <p class="data-row">
+          <span class="placeholder">genre:</span
+          ><span>{{ book.genre | titlecase }}</span>
+        </p>
+        <p class="data-row">
+          <span class="placeholder">published by:</span
+          ><span>{{ book.publisher | titlecase }}</span>
+        </p>
+        <p class="data-row">
+          <span class="placeholder">published on:</span
+          ><span>{{ book.date_published | date }}</span>
+        </p>
+      </div>
+      <div [hidden]="!isAdmin">
+        <span class="action-buttons">
+          <button
+            type="button"
+            class="button edit-button"
+            (click)="changeBook()"
+          >
+            <span> <img src="assets/edit.png" /> Edit</span>
+          </button>
+          <button
+            type="button"
+            class="button remove-button"
+            (click)="removeBook()"
+          >
+            <span> <img src="assets/bin (1).png" /> Delete</span>
+          </button></span
         >
-          Delete
-        </button></span
-      >
+      </div>
     </div>
   </div>
   <div class="about-section">
