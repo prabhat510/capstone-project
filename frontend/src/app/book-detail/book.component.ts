@@ -30,6 +30,6 @@ export class BookComponent implements OnInit {
     this.router.navigate(['']).then(() => window.location.reload());
   }
   changeBook() {
-    this.router.navigate(['/admin'], { queryParams: { id: this.bookId } })
+    this.router.navigate(['/update-book'], { queryParams: { id: this.bookId } })
   }
 }

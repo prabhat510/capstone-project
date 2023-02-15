@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BooksService } from './services/books.service';
 import { BookComponent } from './book-detail/book.component';
-import { AdminComponent } from './add-book/admin.component';
+import { AddBookComponent } from './add-book/add-book..component';
 import { FeedbackComponent } from './submit-feedback/feedback.component';
 import { FeedbacksComponent } from './display-feedbacks/feedbacks.component';
 import { LoginComponent } from './user-login/login.component';
@@ -18,6 +18,7 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NavComponent } from './navbar/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import { UpdateBookComponent } from './update-book/update-book.component';
 
 // the HTTP_INTERCEPTORS module is used to send the token to the backend and verify the token using the TokenInterceptorService 
 
@@ -26,13 +27,14 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
     HomeComponent,
     BookComponent,
-    AdminComponent,
+    AddBookComponent,
     FeedbackComponent,
     FeedbacksComponent,
     LoginComponent,
     RegisterComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    UpdateBookComponent
   ],
   imports: [
     BrowserModule,
