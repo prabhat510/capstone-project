@@ -57,8 +57,10 @@
     align-items: flex-start;
   }
   .navbar-links {
-    display: none;
+    /* display: none; */
     width: 100%;
+    max-height: 0px;
+    transition: max-height 0.5s ease-in-out;
   }
   .navbar-links ul {
     flex-direction: column;
@@ -72,11 +74,39 @@
   }
   .navbar-links.active {
     display: flex;
+    max-height: 400px;
   }
   .brand-title {
     font-size: 1.2rem;
   }
   .toggle-button .bar {
     border-radius: 8px;
+  }
+  .bar {
+    position: absolute;
+    transition: 0.25s ease-in-out;
+  }
+  .bar-1 {
+    top: 0px;
+    transform: rotate(0deg);
+  }
+  .bar-2 {
+    top: 9px;
+    transform: rotate(0deg);
+  }
+  .bar-3 {
+    top: 18px;
+    transform: rotate(0deg);
+  }
+  .cross .bar-2 {
+    opacity: 0;
+  }
+  .cross .bar-1 {
+    top: 9px;
+    transform: rotate(-45deg);
+  }
+  .cross .bar-3 {
+    top: 9px;
+    transform: rotate(45deg);
   }
 }
