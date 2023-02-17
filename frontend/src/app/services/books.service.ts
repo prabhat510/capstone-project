@@ -16,6 +16,8 @@ export class BooksService {
     return this.httpclient.get(url)
   }
   deleteBook(url: string) {
+    console.log('deletebook called');
+    
     return this.httpclient.delete(url)
   }
   addBook(url: string, body: object) {

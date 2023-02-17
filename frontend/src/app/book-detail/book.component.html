@@ -9,19 +9,19 @@
           {{ book.title | titlecase }}
         </h5>
         <p class="data-row">
-          <span class="placeholder">author:</span><span>{{ book.author }}</span>
+          <span class="placeholder">author:</span><span class="value">{{ book.author }}</span>
         </p>
         <p class="data-row">
           <span class="placeholder">genre:</span
-          ><span>{{ book.genre | titlecase }}</span>
+          ><span class="value">{{ book.genre | titlecase }}</span>
         </p>
         <p class="data-row">
           <span class="placeholder">published by:</span
-          ><span>{{ book.publisher | titlecase }}</span>
+          ><span class="value">{{ book.publisher | titlecase }}</span>
         </p>
         <p class="data-row">
           <span class="placeholder">published on:</span
-          ><span>{{ book.date_published | date }}</span>
+          ><span class="value">{{ book.date_published | date }}</span>
         </p>
       </div>
       <div [hidden]="!isAdmin">

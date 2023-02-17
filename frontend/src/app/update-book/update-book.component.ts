@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ViewChild, ElementRef, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -6,12 +6,13 @@ import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
+
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-update-book',
+  templateUrl: './update-book.component.html',
+  styleUrls: ['./update-book.component.css']
 })
-export class AdminComponent implements OnInit, AfterViewInit {
+export class UpdateBookComponent implements OnInit, AfterViewInit {
 
   @ViewChild('titleInput') titleInput: ElementRef;
   @ViewChild('authorInput') authorInput: ElementRef;
@@ -41,6 +42,8 @@ export class AdminComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    console.log('ngoninit called');
+
     // check if the user is valid or not
     this.authservice.verifyToken(`https://bookstore-backend-hv3g.onrender.com/verify/token`).subscribe(data => console.log(data),
       err => {
@@ -90,30 +93,16 @@ export class AdminComponent implements OnInit, AfterViewInit {
     this.book_form.date_published = data.date_published
     this.book_form.image = data.image
   }
-  // it decides whether to call submitBook method or updateBook method
-  confirmEvent(bok_form: NgForm) {
+
+  updateBook(bok_form: NgForm) {
     if (bok_form.valid) {
-      // update the book, when this component was rendered by the click of a edit button
-      if (this.bookId_param) {
-        this.updateBook();
-      } else {
-        // add a new book, when this component was rendered by the click of a admin button from navbar
-        this.submitBook();
-      }
+      this.bookservice.updateBook(`https://bookstore-backend-hv3g.onrender.com/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
+      )
+      this.router.navigate(['/book', this.bookId_param])
     } else {
       this.errorMessage = "Please fill all the fields";
       this.checkInvalidForm();
     }
 
-  }
-  submitBook() {
-    this.bookservice.addBook('https://bookstore-backend-hv3g.onrender.com/books/add/book', this.book_form).subscribe(data => console.log(data));
-    // redirecting to home page
-    this.router.navigate(['']);
-  }
-  updateBook() {
-    this.bookservice.updateBook(`https://bookstore-backend-hv3g.onrender.com/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
-    )
-    this.router.navigate(['/book', this.bookId_param])
   }
 }

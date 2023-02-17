@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class BookComponent implements OnInit {
   loading: boolean = true;
   isAdmin: Boolean = false
-  bookId: any = ''
+  bookId: string = ''
   book: any;
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
 
@@ -30,6 +30,8 @@ export class BookComponent implements OnInit {
     this.router.navigate(['']).then(() => window.location.reload());
   }
   changeBook() {
-    this.router.navigate(['/admin'], { queryParams: { id: this.bookId } })
+    console.log('prabhat', this.bookId);
+    
+    this.router.navigate(['/update-book'], { queryParams: { id: this.bookId } })
   }
 }

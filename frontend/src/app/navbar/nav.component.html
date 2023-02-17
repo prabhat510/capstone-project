@@ -1,14 +1,14 @@
 <nav class="navbar">
   <div class="brand-title" [routerLink]="['/']">BookStore</div>
-  <a href="javascript:void(0);" class="toggle-button" (click)="toggleMenu()">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
+  <a href="javascript:void(0);" [ngClass]="{'cross': showMenu}" class="toggle-button" (click)="toggleMenu()">
+    <span class="bar bar-1"></span>
+    <span class="bar bar-2"></span>
+    <span class="bar bar-3"></span>
   </a>
   <div class="navbar-links" [ngClass]="{'active': showMenu}">
     <ul>
       <li class="nav-item" [hidden]="!isAdmin">
-        <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/admin']">Add book</a>
+        <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/add-book']">Add book</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/feedback']">Submit feedback</a>

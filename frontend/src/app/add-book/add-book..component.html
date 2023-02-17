@@ -6,7 +6,7 @@
   <div class="error-message">
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
-  <form (ngSubmit)="confirmEvent(bok_form)" #bok_form="ngForm">
+  <form (ngSubmit)="submitBook(bok_form)" #bok_form="ngForm">
     <div class="input-row">
       <label class="label">Book Name:</label>
       <input
