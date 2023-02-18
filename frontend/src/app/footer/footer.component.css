@@ -9,6 +9,7 @@
 .brand-name span {
   font-size: larger;
   font-weight: bolder;
+  cursor:pointer;
 }
 .footer-form {
   display: flex;

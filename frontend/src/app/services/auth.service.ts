@@ -18,10 +18,10 @@ export class AuthService {
     // when the token is set user is logged in 
     return !!localStorage.getItem('token')
   }
-  logoutUser() {
-    localStorage.removeItem('token')
-    this.router.navigate(['/login'])
-  }
+  // logoutUser() {
+  //   localStorage.removeItem('token')
+  //   this.router.navigate(['/login'])
+  // }
   getToken() {
     return localStorage.getItem('token')
   }

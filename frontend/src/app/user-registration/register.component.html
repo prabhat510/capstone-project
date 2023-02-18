@@ -1,5 +1,8 @@
 <div class="signup-container">
-  <h2>Register Your Account</h2>
+  <div class="header">
+    <img class="header-icon" src="assets/register.png" alt="" />
+    <h2>Register Your Account</h2>
+  </div>
   <div class="error-message">
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -53,11 +56,15 @@
     </div>
     <div class="input-row">
       <label> register as admin </label>
-      <input type="checkbox" value="admin" (change)="toggleValue()" #_isAdmin name="isadmin"/>
+      <input
+        type="checkbox"
+        value="admin"
+        (change)="toggleValue()"
+        #_isAdmin
+        name="isadmin"
+      />
     </div>
-    <button type="submit" class="button">
-      Register
-    </button>
+    <button type="submit" class="button">Register</button>
     <p class="login" [routerLink]="['/login']">
       already have account?&nbsp;<strong
         style="text-decoration: underline; cursor: pointer"

@@ -16,7 +16,7 @@
     [routerLink]="['/book', book._id]"
     *ngFor="let book of books | filter : filterTerm"
   >
-    <div>
+    <div class="sub-container">
       <img [src]="book.image" class="cover-image" alt="book image" />
       <div class="book-info">
         <strong>{{ book.title | titlecase }}</strong>

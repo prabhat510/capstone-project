@@ -51,7 +51,7 @@ button:hover {
     padding: 6px;
   }
   button {
-    padding: 5px;
+    padding: 8px;
   }
   .login-container {
     width: 80vw;
@@ -66,4 +66,6 @@ h2 {
   color: rgb(0, 0, 0, 0.8);
 }
 
-
+.header {
+  gap: 20px;
+}

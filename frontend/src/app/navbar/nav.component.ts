@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class NavComponent implements OnInit {
   showMenu: boolean = false;
   isAdmin: Boolean = false;
   username: any = '';
-  constructor(private authservice: AuthService) { }
+  constructor(private authservice: AuthService, private router: Router) { }
   isLoggedIn: Boolean = false;
 
 
@@ -22,8 +23,8 @@ export class NavComponent implements OnInit {
     }
   }
   signOut() {
-    this.authservice.logoutUser();
     this.isLoggedIn = false;
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
 

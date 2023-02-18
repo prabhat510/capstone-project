@@ -35,11 +35,22 @@
   box-shadow: 5px 5px 12px lightgray;
   padding: 5px 8px 0px 8px;
   cursor: pointer;
+  transition:  0.2s ease-in-out;
+}
+.book:hover {
+  transform: scale(1.05);
+  z-index: 999;
 }
 .cover-image {
   width: 100%;
+  flex: 1;
 }
-
+.sub-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 /* 576px, 768px, 992px, and 1200px. */
 
 @media (min-width: 768px) and (max-width: 1023px) {

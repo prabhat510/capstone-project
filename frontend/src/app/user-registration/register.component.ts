@@ -61,10 +61,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       this.authservice.registerUser('https://bookstore-backend-hv3g.onrender.com/auth/register/user', this.registration_form).subscribe(data =>
         this.validateUser(data)
       )
-    } else {
-      
+    } 
+    else {
       registration_form.control.markAllAsTouched();
-      this.errorMessage = "all fields are mandatory";
+      this.errorMessage = "please fill all the fields";
       this.checkInvalidForm();
     }
   }

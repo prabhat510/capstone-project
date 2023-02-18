@@ -105,25 +105,25 @@ strong {
   margin-top: 10px;
 }
 button {
-  color: black;
+  color: #fff;
   padding: 5px 10px;
   border-radius: 5px;
   width: 90px;
   transition: background-color 0.2s;
   letter-spacing: 1px;
   cursor: pointer;
+  border: none;
 }
 .edit-button {
+  background-color: #333;
   margin-right: 10px;
+}
+.remove-button {
+  background-color: #d43131;
 }
 .remove-button:hover {
   color: #fff;
   background-color: #ff0000;
-  border: none;
-}
-.edit-button:hover {
-  color: #fff;
-  background-color: #2174e7;
   border: none;
 }
 
