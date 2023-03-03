@@ -1,15 +1,15 @@
 <div class="login-container">
   <div class="header">
     <img class="header-icon" src="assets/enter.png" alt="" />
-    <h2>Login</h2>
+    <h2>Login to BookStore</h2>
   </div>
   <div class="error-message">
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
   <form (ngSubmit)="signinUser(usrForm)" #usrForm="ngForm">
     <div class="input-row">
-      <label for="exampleInputEmail1">Username:</label>
       <input
+        id="usrname"
         type="text"
         aria-describedby="emailHelp"
         placeholder="Enter username"
@@ -20,11 +20,14 @@
         #usrname
         required
       />
+      <label for="usrname" [ngClass]="{'active':login_form.username}">Username</label>
     </div>
-    <small *ngIf="usrname.invalid && usrname.touched">this field is required</small>
+    <small *ngIf="usrname.invalid && usrname.touched"
+      >this field is required</small
+    >
     <div class="input-row">
-      <label for="exampleInputPassword1">Password:</label>
       <input
+        id="password"
         type="password"
         placeholder="Password"
         [(ngModel)]="login_form.password"
@@ -34,9 +37,14 @@
         #passwrd
         required
       />
-      <small *ngIf="usrname.invalid && usrname.touched">this field is required</small>
+      <label for="password" [ngClass]="{'active':login_form.password}">Password</label>
+      <small *ngIf="usrname.invalid && usrname.touched"
+        >this field is required</small
+      >
     </div>
-    <button type="submit" class="button">Login</button>
+    <div class="input-row">
+      <button type="submit" class="button">Login</button>
+    </div>
     <p class="register" [routerLink]="['/register']">
       don't have an account?&nbsp;<strong
         style="text-decoration: underline; cursor: pointer"

@@ -3,59 +3,62 @@
     <img class="header-icon" src="assets/register.png" alt="" />
     <h2>Register Your Account</h2>
   </div>
-  <div class="error-message">
+  <div class="error-message" style="margin-bottom: 15px">
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
   <form (ngSubmit)="createUser(registr_form)" #registr_form="ngForm">
     <div class="input-row">
-      <label for="exampleInputEmail1">Name:</label>
       <input
+        id="nme"
         type="text"
         aria-describedby="emailHelp"
-        placeholder="Enter name"
         [(ngModel)]="registration_form.name"
         name="name"
+        placeholder="Name"
         #_name
         required
       />
+      <label for="nme" class="input-label" [ngClass]="{'active': registration_form.name}">Name</label>
     </div>
     <div class="input-row">
-      <label for="exampleInputEmail1">Username:</label>
       <input
+        id="username"
         type="text"
         aria-describedby="emailHelp"
-        placeholder="Enter username"
         [(ngModel)]="registration_form.username"
         name="username"
+        placeholder="Username"
         #_username
         required
       />
+      <label for="username" class="input-label" [ngClass]="{'active': registration_form.username}">Username</label>
     </div>
     <div class="input-row">
-      <label for="exampleInputEmail1">Email:</label>
       <input
+        id="email"
         type="email"
         aria-describedby="emailHelp"
-        placeholder="Enter email"
         [(ngModel)]="registration_form.email"
         name="email"
+        placeholder="Email"
         #_email
         required
       />
+      <label for="email" class="input-label" [ngClass]="{'active': registration_form.email}">Email</label>
     </div>
     <div class="input-row">
-      <label>Password:</label>
       <input
+        id="password"
         type="password"
-        placeholder="Password"
         [(ngModel)]="registration_form.password"
         name="password"
+        placeholder="Password"
         #_password
         required
       />
+      <label for="password" class="input-label" [ngClass]="{'active': registration_form.password}">Password</label>
     </div>
     <div class="input-row">
-      <label> register as admin </label>
       <input
         type="checkbox"
         value="admin"
@@ -63,8 +66,11 @@
         #_isAdmin
         name="isadmin"
       />
+      <label> register as admin </label>
     </div>
-    <button type="submit" class="button">Register</button>
+    <div class="input-row">
+      <button type="submit" class="button">Register</button>
+    </div>
     <p class="login" [routerLink]="['/login']">
       already have account?&nbsp;<strong
         style="text-decoration: underline; cursor: pointer"

@@ -17,7 +17,7 @@
     *ngFor="let book of books | filter : filterTerm"
   >
     <div class="sub-container">
-      <img [src]="book.image" class="cover-image" alt="book image" />
+      <img [src]="book.image" class="cover-image" alt="book image" loading="lazy" />
       <div class="book-info">
         <strong>{{ book.title | titlecase }}</strong>
         <p>

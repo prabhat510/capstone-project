@@ -7,7 +7,21 @@ body {
   font-size: 16px;
 }
 
-@media (width < 1024px) {
+@media (width < 767px) {
+  .loader > img {
+    height: 50px;
+    width: 50px;
+  }
+  .header {
+    font-size: 12px !important;
+  }
+  .header-icon {
+    height: 35px !important;
+    width: 35px !important;
+  }
+}
+
+@media (width > 767px) and (width < 1024px) {
   .loader > img {
     height: 70px;
     width: 70px;
@@ -45,7 +59,6 @@ select:focus,
 textarea:focus,
 input:focus {
   border: none;
-  margin-top: 2px;
   outline: 2px solid black;
 }
 
