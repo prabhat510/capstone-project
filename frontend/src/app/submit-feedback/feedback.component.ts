@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FeedbackServiceService } from '../services/feedback-service.service';
 import { Router } from '@angular/router';
 
@@ -19,12 +20,13 @@ export class FeedbackComponent implements OnInit {
   res2: any = []
   res3: any = ''
 
-  constructor(private router: Router, private feedbackservice: FeedbackServiceService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private feedbackservice: FeedbackServiceService) { }
 
   ngOnInit(): void {
     // check if user has already given the feedback
-    this.feedbackservice.feedbackExists('https://bookstore-backend-hv3g.onrender.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
-
+    if (isPlatformBrowser(this.platformId)) {
+      this.feedbackservice.feedbackExists('https://bookstore-backend-hv3g.onrender.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
+    }
   }
   retrieveFirstResponse(value: string) {
     this.res1 = value

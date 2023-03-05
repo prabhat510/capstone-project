@@ -37,7 +37,7 @@ import { UpdateBookComponent } from './update-book/update-book.component';
     UpdateBookComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

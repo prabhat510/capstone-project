@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
@@ -13,16 +14,18 @@ export class BookComponent implements OnInit {
   isAdmin: Boolean = false
   bookId: string = ''
   book: any;
-  constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedroute.snapshot.paramMap.get('id');
     this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId}`).subscribe(data => {
       this.book = data;
-      if (localStorage.getItem('user')) {
-        this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
+      if (isPlatformBrowser(this.platformId)) {
+        if (localStorage.getItem('user')) {
+          this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
+        }
+        this.loading = false;
       }
-      this.loading = false;
     });
   }
   removeBook() {
@@ -31,7 +34,7 @@ export class BookComponent implements OnInit {
   }
   changeBook() {
     console.log('prabhat', this.bookId);
-    
+
     this.router.navigate(['/update-book'], { queryParams: { id: this.bookId } })
   }
 }

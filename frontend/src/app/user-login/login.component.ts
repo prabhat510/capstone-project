@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -17,13 +18,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
     username: '',
     password: ''
   };
-  constructor(private authservice: AuthService, private router: Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem("token")) {
-      this.router.navigate(['']);
-    } else if (window.location.href === 'https://bookstore-backend-hv3g.onrender.com/login') {
-      this.router.navigate(['/login']);
+    if (isPlatformBrowser(this.platformId)) {
+      if (localStorage.getItem("token")) {
+        this.router.navigate(['']);
+      } else if (window.location.href === 'https://bookstore-backend-hv3g.onrender.com/login') {
+        this.router.navigate(['/login']);
+      }
     }
   }
   ngAfterViewInit(): void {

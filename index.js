@@ -54,12 +54,12 @@ app.get("/home", async (req, res) => {
 app.get("/verify/token", verify, (req, res) => {
   res.status(200).send({ message: "token verified" });
 });
-console.log('dgdiygiyd', path.resolve(__dirname, "frontend", "dist", "frontend", "index.html"));
+console.log('dgdiygiyd', path.resolve(__dirname, "frontend", "dist", "frontend", "browser",  "index.html"));
 if (process.env.ENV === "production") {
-  app.use(express.static("frontend/dist/frontend"));
+  app.use(express.static("frontend/dist/frontend/browser"));
   app.get("*", (req, res) =>
     res.sendFile(
-      path.resolve(__dirname, "frontend", "dist", "frontend", "index.html")
+      path.resolve(__dirname, "frontend", "dist", "frontend", "browser", "index.html")
     )
   );
 }
