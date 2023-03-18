@@ -3,11 +3,15 @@
   justify-content: center;
   margin-top: 10px;
 }
+
 .search input {
   padding: 8px;
-  flex-basis: 400px;
+  height: 40px;
+  width: 300px;
 }
-.search input:focus, .search input:active {
+
+.search input:focus,
+.search input:active {
   border: 2px solid black;
 }
 
@@ -18,39 +22,47 @@
   grid-auto-rows: minmax(320px, auto);
   gap: 20px;
 }
+
 .book-info {
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: space-around;
 }
+
 .book-info strong {
   margin-bottom: 5px;
 }
+
 .book-info p {
   margin-bottom: 5px;
 }
+
 .book {
   border: 1px solid black;
   box-shadow: 5px 5px 12px lightgray;
   padding: 5px 8px 0px 8px;
   cursor: pointer;
-  transition:  0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
+
 .book:hover {
   transform: scale(1.05);
   z-index: 999;
 }
+
 .cover-image {
   width: 100%;
   flex: 1;
 }
+
 .sub-container {
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+
 /* 576px, 768px, 992px, and 1200px. */
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -69,9 +81,9 @@
     grid-auto-rows: minmax(280px, auto);
     gap: 15px;
   }
+
   .search input {
     padding: 5px;
-    flex-basis: 250px;
   }
 }
 
@@ -82,14 +94,18 @@
     grid-auto-rows: minmax(150px, auto);
     gap: 10px;
   }
+
   nav input {
     margin-left: 5vw;
   }
+
   .search input {
     padding: 4px;
-    flex-basis: 200px;
+    width: 200px;
+    height: 35px;
   }
 }
+
 .loader {
   margin-top: calc(50vh - 220px);
 }

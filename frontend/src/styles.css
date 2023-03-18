@@ -53,6 +53,7 @@ body {
 }
 
 input {
+  border: 1px solid gray;
   outline-offset: 0px;
 }
 select:focus,
@@ -76,6 +77,7 @@ small {
   text-align: center;
 }
 button {
+  background-color: rgb(239, 239, 239);
   cursor: pointer;
 }
 .error-message {

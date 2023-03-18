@@ -4,10 +4,12 @@
 }
 
 .book-form {
-  margin: auto;
-  width: 50vw;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  width: 500px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px 5px rgba(0, 0, 0, .4);
 }
 
 h5 {
@@ -31,14 +33,13 @@ textarea {
 }
 
 button {
-  font-size: 20px;
+  font-size: 16px;
+  padding: 7px;
   color: black;
-  padding: 10px;
   letter-spacing: 1px;
   transition: background-color 0.2s;
   cursor: pointer;
   border: 1px solid black;
-  border-radius: 5px;
   width: 100%;
 }
 

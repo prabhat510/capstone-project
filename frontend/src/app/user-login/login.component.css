@@ -81,6 +81,9 @@ button:hover {
     width: 300px;
     margin-top: 20px;
   }
+  .input-row label {
+    top: 7px;
+  }
 }
 
 h2 {
