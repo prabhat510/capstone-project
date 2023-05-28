@@ -10,11 +10,6 @@
   width: 300px;
 }
 
-.search input:focus,
-.search input:active {
-  border: 2px solid black;
-}
-
 .book-container {
   margin: 50px;
   display: grid;

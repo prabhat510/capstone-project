@@ -1,7 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { filter, map } from 'rxjs/operators';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,51 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private router: ActivatedRoute) {
+  showAlertBox = false;
+  activeComponentName: string;
+  setBgColor = false;
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
 
   }
   ngOnInit(): void {
-    this.router.url.subscribe(params => console.log("url isbhsbhk", params[0].path)
+    this.authService.authStatusSubject$.subscribe(res => {
+      if(res === 'cancel' || res === 'logout') {
+        this.showAlertBox = false;
+      }
+    })
+    // this code fetches the current active route dynamically
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd), map(route => this.route.firstChild))
+    .subscribe(route => {
+      if(route.routeConfig.component?.name){ 
+          this.activeComponentName = route.routeConfig.component.name;
+          console.log('route active====', this.activeComponentName);
+          this.applyBgColor();
+        }
+    }
     )
+    
   }
   public onRouterOutletActivate(event: any) {
     console.log(event);
   }
 
+  applyBgColor() {
+    switch (this.activeComponentName) {
+      case 'LoginComponent':
+        this.setBgColor = true;
+        break;
+      case 'AddBookComponent':
+        this.setBgColor = true;
+        break;
+      case 'RegisterComponent':
+        this.setBgColor = true;
+        break;
+      case 'UpdateBookComponent':
+        this.setBgColor = true;
+        break;
+      default:
+        this.setBgColor = false;
+        break;
+    }
+  }
 }

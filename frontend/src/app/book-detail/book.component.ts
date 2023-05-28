@@ -25,13 +25,14 @@ export class BookComponent implements OnInit {
       this.loading = false;
     });
   }
+  
   removeBook() {
     this.bookservice.deleteBook(`https://bookstore-backend-hv3g.onrender.com/books/remove/${this.bookId}`).subscribe();
-    this.router.navigate(['']).then(() => window.location.reload());
+    setTimeout(()=> {
+      this.router.navigate(['']).then(() => window.location.reload());
+    }, 1000)
   }
   changeBook() {
-    console.log('prabhat', this.bookId);
-    
     this.router.navigate(['/update-book'], { queryParams: { id: this.bookId } })
   }
 }

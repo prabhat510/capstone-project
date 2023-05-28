@@ -6,20 +6,17 @@
     <span class="bar bar-3"></span>
   </a>
   <div class="navbar-links" [ngClass]="{'active': showMenu}">
-    <ul>
+    <ul [ngClass]="{'show': showMenu}">
       <li class="nav-item" [hidden]="!isAdmin">
         <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/add-book']">Add book</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/feedback']">Submit feedback</a>
+      <li *ngIf="isLoggedIn" class="nav-item welcome-user">
+        <a href="#" (click)="[this.logOutInitialted.emit(), toggleMenu()]"> Logout </a>
       </li>
-      <li *ngIf="isLoggedIn" class="welcome-user">
-        <a href="#" (click)="[signOut(), toggleMenu()]"> Logout </a>
-      </li>
-      <li *ngIf="!isLoggedIn" class="nav-link">
+      <li *ngIf="!isLoggedIn" class="nav-item nav-link">
         <a (click)="toggleMenu()" [routerLink]="['/register']">Signup</a>
       </li>
-      <li *ngIf="!isLoggedIn" class="welcome-user nav-link">
+      <li *ngIf="!isLoggedIn" class="nav-item welcome-user nav-link">
         <a (click)="toggleMenu()" [routerLink]="['/login']">Login</a>
       </li>
     </ul>

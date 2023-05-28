@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     password: '',
     isAdmin: false
   }
+  showLoader = false;
 
   constructor(private authservice: AuthService, private router: Router) { }
 
@@ -57,15 +58,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
   createUser(registration_form: NgForm) {
+    this.showLoader = true;
     if (registration_form.valid) {
-      this.authservice.registerUser('https://bookstore-backend-hv3g.onrender.com/auth/register/user', this.registration_form).subscribe(data =>
-        this.validateUser(data)
-      )
-    } 
-    else {
+      this.authservice.registerUser('https://bookstore-backend-hv3g.onrender.com/auth/register/user', this.registration_form).subscribe(data => {
+        this.validateUser(data);
+      }
+    )
+    } else {
       registration_form.control.markAllAsTouched();
       this.errorMessage = "please fill all the fields";
       this.checkInvalidForm();
+      this.showLoader = false;
     }
   }
 

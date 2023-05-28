@@ -18,6 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-book.component.css'],
 })
 export class AddBookComponent implements OnInit, AfterViewInit {
+  showLoader = false;
   @ViewChild('titleInput') titleInput: ElementRef;
   @ViewChild('authorInput') authorInput: ElementRef;
   @ViewChild('publisherInput') publisherInput: ElementRef;
@@ -110,6 +111,7 @@ export class AddBookComponent implements OnInit, AfterViewInit {
   }
 
   submitBook(bok_form: NgForm) {
+    this.showLoader = true;
     if (bok_form.valid) {
       this.bookservice
         .addBook(
@@ -118,10 +120,15 @@ export class AddBookComponent implements OnInit, AfterViewInit {
         )
         .subscribe((data) => console.log(data));
       // redirecting to home page
-      this.router.navigate(['']);
+     setTimeout(() => {
+      this.router.navigate(['']).catch((error => {
+        console.log('error navigating from addBook component', error);
+      }))
+     }, 1000);
     } else {
       this.errorMessage = 'Please fill all the fields';
       this.checkInvalidForm();
+      this.showLoader = false;
     }
   }
   updateBook() {

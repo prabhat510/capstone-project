@@ -168,6 +168,11 @@
     >
       enter a valid image link
     </small>
-    <button type="submit" class="button">Submit</button>
+    <button type="submit" class="button" [ngClass]="{'no-padding': showLoader, 'bg-color': showLoader}">
+      <span *ngIf="!showLoader">Submit</span>
+      <div class="mobile-loader" *ngIf="showLoader">
+        <img src="assets/loading-state.gif" />
+      </div>
+    </button>
   </form>
 </div>

@@ -69,12 +69,16 @@
       <label> register as admin </label>
     </div>
     <div class="input-row">
-      <button type="submit" class="button">Register</button>
+      <button type="submit" class="button" [ngClass]="{'no-padding': showLoader, 'bg-color': showLoader}" [disabled]="showLoader">  
+        <span *ngIf="!showLoader">Register</span>
+        <div class="mobile-loader" *ngIf="showLoader">
+          <img src="assets/loading-state.gif" />
+        </div></button>
     </div>
-    <p class="login" [routerLink]="['/login']">
+    <p class="login">
       already have account?&nbsp;<strong
         style="text-decoration: underline; cursor: pointer"
-        >Login</strong
+        ><span [routerLink]="['/login']">Login</span></strong
       >
     </p>
   </form>

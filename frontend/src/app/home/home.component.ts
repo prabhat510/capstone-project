@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   books: any;
   filterTerm: string = '';
-  loading: boolean = true;
+  loading = true;
   constructor(private activatedroute: ActivatedRoute, private booksservice: BooksService, private router: Router) { }
 
   ngOnInit() {

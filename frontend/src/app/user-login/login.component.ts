@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     username: '',
     password: ''
   };
+  showLoader = false;
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.usrname.nativeElement.focus();
   }
   signinUser(usrForm: NgForm) {
+    this.showLoader = true
     if (usrForm.valid) {
       this.authservice.loginUser('https://bookstore-backend-hv3g.onrender.com/auth/login/user', this.login_form).subscribe(data => this.isValidUser(data)
       );
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       usrForm.control.markAllAsTouched();
       this.errorMessage = "Please fill all the fields";
       this.checkInvalidForm();
+      this.showLoader = false;
     }
 
   }
@@ -51,10 +54,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     } else if (data.status === 404) {
       this.errorMessage = 'invalid user'
       console.log('invalid user called');
-
     } else {
       this.errorMessage = 'password is incorrect';
     }
+    this.showLoader = false;
   }
 
   checkInvalidForm() {

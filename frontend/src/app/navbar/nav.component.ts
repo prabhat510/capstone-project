@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  @Output() logOutInitialted = new EventEmitter();
   showMenu: boolean = false;
   isAdmin: Boolean = false;
   username: any = '';
@@ -16,6 +17,11 @@ export class NavComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.authservice.authStatusSubject$.subscribe((res)=> {
+      if(res === 'logout') {
+          this.signOut();
+      }
+    })
     this.isLoggedIn = this.authservice.loggedIn()
     if (localStorage.getItem('user')) {
       this.username = JSON.parse(localStorage.getItem('user')).username;
@@ -26,6 +32,9 @@ export class NavComponent implements OnInit {
     this.isLoggedIn = false;
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   }
 
   toggleMenu() {

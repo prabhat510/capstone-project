@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./update-book.component.css']
 })
 export class UpdateBookComponent implements OnInit, AfterViewInit {
-
+  showLoader = false;
   @ViewChild('titleInput') titleInput: ElementRef;
   @ViewChild('authorInput') authorInput: ElementRef;
   @ViewChild('publisherInput') publisherInput: ElementRef;
@@ -95,14 +95,21 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
   }
 
   updateBook(bok_form: NgForm) {
+    this.showLoader = true;
     if (bok_form.valid) {
       this.bookservice.updateBook(`https://bookstore-backend-hv3g.onrender.com/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
       )
-      this.router.navigate(['/book', this.bookId_param])
+      setTimeout(()=> {
+        this.router.navigateByUrl(`/book/${this.bookId_param}`).catch(error => {
+          this.showLoader = false;
+          console.log('error navigating', error);
+        });
+      }, 1000)
     } else {
       this.errorMessage = "Please fill all the fields";
       this.checkInvalidForm();
+      this.showLoader = false;
     }
-
   }
+
 }
