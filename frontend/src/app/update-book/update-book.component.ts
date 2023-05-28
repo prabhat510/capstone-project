@@ -43,7 +43,6 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     console.log('ngoninit called');
-
     // check if the user is valid or not
     this.authservice.verifyToken(`https://bookstore-backend-hv3g.onrender.com/verify/token`).subscribe(data => console.log(data),
       err => {
@@ -61,10 +60,12 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
       this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId_param}`).subscribe(data => {
         this.populateDom(data);
         this.loading = false
+        this.bookservice.scrollToTop();
       })
       // once we got the book that we need to edit, we will populate the dom with the previous data
     } else {
       this.loading = false;
+      this.bookservice.scrollToTop();
     }
   }
   ngAfterViewInit(): void {

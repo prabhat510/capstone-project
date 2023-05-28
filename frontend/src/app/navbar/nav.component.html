@@ -11,7 +11,7 @@
         <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/add-book']">Add book</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item welcome-user">
-        <a href="#" (click)="[this.logOutInitialted.emit(), toggleMenu()]"> Logout </a>
+        <a href="javascript:void(0);" (click)="[this.logOutInitialted.emit(), toggleMenu()]"> Logout </a>
       </li>
       <li *ngIf="!isLoggedIn" class="nav-item nav-link">
         <a (click)="toggleMenu()" [routerLink]="['/register']">Signup</a>

@@ -23,6 +23,7 @@ export class BookComponent implements OnInit {
         this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
       }
       this.loading = false;
+      this.bookservice.scrollToTop();
     });
   }
   
