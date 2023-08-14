@@ -36,7 +36,7 @@
 </div>
 <div class="btn-container" *ngIf="!loading && !loadingMoreBooks">
   <button type="button"class="button topBtn" (click)="goToTop()">Back To Top</button>
-  <button type="button"class="button loadmoreBtn" (click)="loadMoreBooks()">Load More</button>
+  <button type="button"class="button loadmoreBtn" *ngIf="loadMoreOptionAvailable" (click)="loadBooks()">Load More</button>
 </div>
 <div class="loader2" *ngIf="loadingMoreBooks">
   <img src="assets/loading-state.gif" alt="" />
