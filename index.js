@@ -42,10 +42,9 @@ app.get("/books", async (req, res) => {
   const client = await mongoClient.connect(process.env.MONGODB_URI);
   try {
     const db = await client.db("capstone");
-    const books = await db
-      .collection("books")
-      .find().sort({_id: 1}).skip(parseInt(offset)).limit(parseInt(limit)).toArray();
-    res.json(books);
+    const count = await db.collection("books").count();
+    const books = await db.collection("books").find().sort({_id: 1}).skip(parseInt(offset)).limit(parseInt(limit)).toArray();
+    res.json({books: books, totalCount: count});
   } catch (error) {
     console.log(error);
   } finally {
