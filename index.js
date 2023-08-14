@@ -35,15 +35,16 @@ app.use("/books", admin);
 app.use("/auth", auth);
 
 // this route returns the list of all the books
-app.get("/home/:offset", async (req, res) => {
+app.get("/books", async (req, res) => {
   console.log(req.url);
-  const offset = req.params.offset;
+  const offset = req.query.offset;
+  const limit = req.query.limit;
   const client = await mongoClient.connect(process.env.MONGODB_URI);
   try {
     const db = await client.db("capstone");
     const books = await db
       .collection("books")
-      .find().sort({_id: 1}).skip(parseInt(offset)).limit(10).toArray();
+      .find().sort({_id: 1}).skip(parseInt(offset)).limit(parseInt(limit)).toArray();
     res.json(books);
   } catch (error) {
     console.log(error);
