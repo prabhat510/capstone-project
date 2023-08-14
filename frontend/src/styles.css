@@ -41,13 +41,13 @@ body {
   }
 }
 
-.loader {
+.loader, .loader2 {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.loader > img {
+.loader > img, .loader2 > img {
   height: 100px;
   width: 100px;
 }
