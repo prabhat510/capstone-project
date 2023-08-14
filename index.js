@@ -35,19 +35,20 @@ app.use("/books", admin);
 app.use("/auth", auth);
 
 // this route returns the list of all the books
-app.get("/home", async (req, res) => {
+app.get("/home/:offset", async (req, res) => {
   console.log(req.url);
+  const offset = req.params.offset;
   const client = await mongoClient.connect(process.env.MONGODB_URI);
   try {
     const db = await client.db("capstone");
     const books = await db
       .collection("books")
-      .find()
-      .sort({ sort_using: 1 })
-      .toArray();
+      .find().sort({_id: 1}).skip(parseInt(offset)).limit(10).toArray();
     res.json(books);
   } catch (error) {
     console.log(error);
+  } finally {
+    client.close();
   }
 });
 // route for token verification
