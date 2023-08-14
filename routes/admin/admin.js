@@ -5,25 +5,29 @@ const dotenv = require("dotenv");
 const { Book } = require("../mongoose/models");
 const authVerify = require("../auth/authVerify");
 
-
 // supports functionality of .env file
 dotenv.config();
 
-mongoose.connect(
-  process.env.MONGODB_URI
-);
+mongoose.connect(process.env.MONGODB_URI);
 // before adding the book to the database, validation is done using mongoose
 router.post("/add/book", authVerify, async (req, res) => {
   var new_book = await new Book(req.body);
-  await new_book.save(function (error, result) {
-    if (error) {
-      console.log(error);
-      res.json(error);
-    } else {
-      console.log(result);
-      res.json(result);
-    }
-  });
+  try {
+    await new_book.save(function (error, result) {
+      if (error) {
+        console.log(error);
+        res.json(error);
+      } else {
+        console.log(result);
+        res.json(result);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    mongoose.disconnect();
+    console.log('disconnected--');
+  }
 });
 // route for updating the details of a book
 router.put("/edit/:bookId", authVerify, async (req, res) => {
@@ -33,6 +37,9 @@ router.put("/edit/:bookId", authVerify, async (req, res) => {
     res.json(book);
   } catch (error) {
     res.json(error);
+  } finally {
+    mongoose.disconnect();
+    console.log('disconnected--');
   }
 });
 // while deleting the book, pass the _id as a query instead of params while making a request through angular
@@ -43,6 +50,9 @@ router.delete("/remove/:bookId", authVerify, async (req, res) => {
     res.json({ message: "book deleted" });
   } catch (error) {
     res.json(error);
+  } finally {
+    mongoose.disconnect();
+    console.log('disconnected--');
   }
 });
 // route for book detail
@@ -53,6 +63,9 @@ router.get("/:bookId", async (req, res) => {
     res.json(book);
   } catch (error) {
     res.json(error);
+  } finally {
+    mongoose.disconnect();
+    console.log('disconnected--');
   }
 });
 module.exports = router;
