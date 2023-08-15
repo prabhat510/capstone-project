@@ -24,9 +24,6 @@ router.post("/add/book", authVerify, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-  } finally {
-    mongoose.disconnect();
-    console.log('disconnected--');
   }
 });
 // route for updating the details of a book
@@ -37,10 +34,7 @@ router.put("/edit/:bookId", authVerify, async (req, res) => {
     res.json(book);
   } catch (error) {
     res.json(error);
-  } finally {
-    mongoose.disconnect();
-    console.log('disconnected--');
-  }
+  } 
 });
 // while deleting the book, pass the _id as a query instead of params while making a request through angular
 router.delete("/remove/:bookId", authVerify, async (req, res) => {
@@ -50,9 +44,6 @@ router.delete("/remove/:bookId", authVerify, async (req, res) => {
     res.json({ message: "book deleted" });
   } catch (error) {
     res.json(error);
-  } finally {
-    mongoose.disconnect();
-    console.log('disconnected--');
   }
 });
 // route for book detail
@@ -63,9 +54,6 @@ router.get("/:bookId", async (req, res) => {
     res.json(book);
   } catch (error) {
     res.json(error);
-  } finally {
-    mongoose.disconnect();
-    console.log('disconnected--');
   }
 });
 module.exports = router;
