@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 function verifyToken(req, res, next) {
   if (!req.headers.authorization) {
@@ -9,14 +10,14 @@ function verifyToken(req, res, next) {
     return res.status(401).send("unauthorized request");
   } else {
     try {
-      const payload = jwt.verify(token, "random_string");
-      if (!payload) {
-        return res.status(401).send("unauthorized request");
-      }
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, userData) => {
+        if (error) return res.sendStatus(403);
+        req.user = userData;
+        next();
+      });
     } catch (error) {
       return res.status(401).send("unauthorized request");
     }
-    next();
   }
 }
 module.exports = verifyToken;

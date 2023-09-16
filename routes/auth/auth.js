@@ -1,37 +1,30 @@
-const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
 const { User } = require("../mongoose/models");
 
 router.post("/register/user", async (req, res) => {
-  const user_exists = await User.findOne({ username: req.body.username });
-  if (user_exists) {
-    console.log('user exits already');
-    res.json({ status: 409, message: "username already exists" });
-  } else {
-    var new_user = new User(req.body);
-    await new_user.save(function (error, result) {
-      if (error) {
-        console.log(error);
-        res.json(error);
-      } else {
-        console.log(result);
-        res.json(result);
-      }
-    });
-  }
-});
-router.post("/login/user", async (req, res) => {
-  const user = await User.findOne({ username: req.body.username });
-  if (user) {
-    if (user.password === req.body.password) {
-      const token = jwt.sign({ _id: user._id }, "random_string");
-      res.json({ status: 200, token: token, user: user });
+  try {
+    const user_exists = await User.findOne({ username: req.body.username });
+    if (user_exists) {
+      res.json({ status: 409, message: "username already exists" });
     } else {
-      res.json({ status: 401, message: "passwords doesnot match" });
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      const userData = req.body;
+      userData["password"] = hashedPassword;
+      const newUser = new User(userData);
+      await newUser.save(function (error, result) {
+        if (error) {
+          console.log(error);
+          res.json(error);
+        } else {
+          console.log(result);
+          res.json(result);
+        }
+      });
     }
-  } else {
-    res.json({ status: 404, message: "username not found" });
+  } catch (error) {
+    res.status(500).send();
   }
 });
 module.exports = router;

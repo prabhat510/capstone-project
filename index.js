@@ -30,9 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 dotenv.config();
 
 // all routes
-app.use("/feedbacks", feedback);
-app.use("/books", admin);
-app.use("/auth", auth);
+app.use("/api/feedbacks", feedback);
+app.use("/api/books", admin);
+app.use("/api/auth", auth);
 
 // this route returns the list of all the books
 app.get("/books", async (req, res) => {
@@ -55,7 +55,6 @@ app.get("/books", async (req, res) => {
 app.get("/verify/token", verify, (req, res) => {
   res.status(200).send({ message: "token verified" });
 });
-console.log('dgdiygiyd', path.resolve(__dirname, "frontend", "dist", "frontend", "index.html"));
 if (process.env.ENV === "production") {
   app.use(express.static("frontend/dist/frontend"));
   app.get("*", (req, res) =>
