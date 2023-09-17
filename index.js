@@ -35,7 +35,7 @@ app.use("/api/books", admin);
 app.use("/api/auth", auth);
 
 // this route returns the list of all the books
-app.get("/books", async (req, res) => {
+app.get("/api/books", async (req, res) => {
   console.log(req.url);
   const offset = req.query.offset;
   const limit = req.query.limit;
