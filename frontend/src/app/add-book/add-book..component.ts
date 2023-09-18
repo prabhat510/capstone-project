@@ -6,11 +6,10 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { BooksService } from '../services/books.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { getServiceUrl } from '../urls';
 
 @Component({
   selector: 'app-add-book.',
@@ -49,21 +48,6 @@ export class AddBookComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('ngoninit called');
-
-    // check if the user is valid or not
-    this.authservice
-      .verifyToken(`https://bookstore-backend-hv3g.onrender.com/verify/token`)
-      .subscribe(
-        (data) => console.log(data),
-        (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-              this.router.navigate(['/login']);
-            }
-          }
-        }
-      );
     this.activatedroute.queryParamMap.subscribe(
       (params) => (this.bookId_param = params.get('id'))
     );
@@ -72,7 +56,7 @@ export class AddBookComponent implements OnInit, AfterViewInit {
     if (this.bookId_param) {
       this.bookservice
         .getBook(
-          `https://bookstore-backend-hv3g.onrender.com/books/${this.bookId_param}`
+          `${getServiceUrl().bookServiceAPI}/books/${this.bookId_param}`
         )
         .subscribe((data) => {
           this.populateDom(data);
@@ -115,7 +99,7 @@ export class AddBookComponent implements OnInit, AfterViewInit {
     if (bok_form.valid) {
       this.bookservice
         .addBook(
-          'https://bookstore-backend-hv3g.onrender.com/books/add/book',
+          `${getServiceUrl().bookServiceAPI}/books/add/book`,
           this.book_form
         )
         .subscribe((data) => console.log(data));
@@ -134,7 +118,7 @@ export class AddBookComponent implements OnInit, AfterViewInit {
   updateBook() {
     this.bookservice
       .updateBook(
-        `https://bookstore-backend-hv3g.onrender.com/books/edit/${this.bookId_param}`,
+        `${getServiceUrl().bookServiceAPI}/books/edit/${this.bookId_param}`,
         this.book_form
       )
       .subscribe((data) => console.log(data));

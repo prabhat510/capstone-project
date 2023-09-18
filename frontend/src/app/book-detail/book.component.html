@@ -24,21 +24,21 @@
           ><span class="value">{{ book.date_published | date }}</span>
         </p>
       </div>
-      <div [hidden]="!isAdmin">
+      <div *ngIf="isAdmin">
         <span class="action-buttons">
           <button
             type="button"
             class="button edit-button"
             (click)="changeBook()"
           >
-            <span> <img src="assets/icons8-edit-64.png" /> Edit</span>
+            <span> <img src="assets/icons8-edit-64.png" alt="edit book icon"/> Edit</span>
           </button>
           <button
             type="button"
             class="button remove-button"
             (click)="removeBook()"
           >
-            <span> <img src="assets/icons8-trash-64.png" /> Delete</span>
+            <span> <img src="assets/icons8-trash-64.png" alt="delete book icon"/> Delete</span>
           </button></span
         >
       </div>
@@ -51,5 +51,5 @@
 </div>
 
 <div class="loader" *ngIf="loading">
-  <img src="assets/loading-state.gif" />
+  <img src="assets/loading-state.gif" alt="loading spinner"/>
 </div>

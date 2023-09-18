@@ -46,7 +46,7 @@
       <button type="submit" class="button" [ngClass]="{'no-padding': showLoader, 'bg-color': showLoader}" [disabled]="showLoader">
         <span *ngIf="!showLoader">Login</span>
         <div class="mobile-loader" *ngIf="showLoader">
-          <img src="assets/loading-state.gif" />
+          <img src="assets/loading-state.gif" alt="loading spinner"/>
         </div>
       </button>
     </div>

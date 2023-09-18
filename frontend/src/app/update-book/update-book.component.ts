@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { getServiceUrl } from '../urls';
 
 
 @Component({
@@ -42,22 +42,11 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log('ngoninit called');
-    // check if the user is valid or not
-    this.authservice.verifyToken(`https://bookstore-backend-hv3g.onrender.com/verify/token`).subscribe(data => console.log(data),
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(['/login'])
-          }
-        }
-      }
-    );
     this.activatedroute.queryParamMap.subscribe(params => this.bookId_param = params.get('id'));
     console.log('book id param', this.bookId_param);
 
     if (this.bookId_param) {
-      this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId_param}`).subscribe(data => {
+      this.bookservice.getBook(`${getServiceUrl().bookServiceAPI}/books/${this.bookId_param}`).subscribe(data => {
         this.populateDom(data);
         this.loading = false
         this.bookservice.scrollToTop();
@@ -72,7 +61,6 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
     this.titleInput.nativeElement.focus();
   }
   checkInvalidForm() {
-    console.log('checkInvalidForm called ');
     if (!this.book_form.title) {
       this.titleInput.nativeElement.focus();
     } else if (!this.book_form.author) {
@@ -98,7 +86,7 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
   updateBook(bok_form: NgForm) {
     this.showLoader = true;
     if (bok_form.valid) {
-      this.bookservice.updateBook(`https://bookstore-backend-hv3g.onrender.com/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
+      this.bookservice.updateBook(`${getServiceUrl().bookServiceAPI}/books/edit/${this.bookId_param}`, this.book_form).subscribe(data => console.log(data)
       )
       setTimeout(()=> {
         this.router.navigateByUrl(`/book/${this.bookId_param}`).catch(error => {

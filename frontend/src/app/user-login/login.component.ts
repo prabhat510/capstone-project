@@ -1,14 +1,16 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { getServiceUrl } from '../urls';
+import { TokenStorageServiceService } from '../services/token-storage-service.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements AfterViewInit {
 
   @ViewChild('usrname') usrname: ElementRef;
   @ViewChild('passwrd') passwrd: ElementRef;
@@ -18,23 +20,24 @@ export class LoginComponent implements OnInit, AfterViewInit {
     password: ''
   };
   showLoader = false;
-  constructor(private authservice: AuthService, private router: Router) { }
+  constructor(private authservice: AuthService, private router: Router, private tokenService: TokenStorageServiceService) { }
 
-  ngOnInit(): void {
-    if (localStorage.getItem("token")) {
-      this.router.navigate(['']);
-    } else if (window.location.href === 'https://bookstore-backend-hv3g.onrender.com/login') {
-      this.router.navigate(['/login']);
-    }
-  }
   ngAfterViewInit(): void {
     this.usrname.nativeElement.focus();
   }
   signinUser(usrForm: NgForm) {
-    this.showLoader = true
+    this.showLoader = true;
     if (usrForm.valid) {
-      this.authservice.loginUser('https://bookstore-backend-hv3g.onrender.com/auth/login/user', this.login_form).subscribe(data => this.isValidUser(data)
-      );
+      this.authservice.loginUser(`${getServiceUrl().authServiceAPI}/auth/login`, this.login_form)
+      .subscribe({
+        next: data => this.proccessUserData(data), 
+        error: error=> {
+          if(error.status === 404) {
+            this.errorMessage = 'Please check your credentials!';
+            this.showLoader = false;
+          }
+        }
+      });
     } else {
       usrForm.control.markAllAsTouched();
       this.errorMessage = "Please fill all the fields";
@@ -43,20 +46,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
   }
-  isValidUser(data: any) {
+  proccessUserData(data: any) {
     // when credentials are correct
-    if (data.status === 200) {
-      localStorage.setItem('token', data.token)
-      console.log(data.user.username);
-      localStorage.setItem('user', JSON.stringify(data.user))
-      this.router.navigate([''])
-      window.location.reload()
-    } else if (data.status === 404) {
-      this.errorMessage = 'invalid user'
-      console.log('invalid user called');
-    } else {
-      this.errorMessage = 'password is incorrect';
-    }
+    if (data.accessToken && data.refreshToken) {
+      this.tokenService.setToken('token', data.accessToken);
+      this.tokenService.setToken('refresh_token', data.refreshToken);
+      this.authservice.isLoggedIn = true;
+      this.authservice.emitUserLoggedIn(data.user);
+      this.router.navigate(['']);
+    } 
     this.showLoader = false;
   }
 

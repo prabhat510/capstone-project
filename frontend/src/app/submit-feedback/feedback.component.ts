@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackServiceService } from '../services/feedback-service.service';
 import { Router } from '@angular/router';
+import { getServiceUrl } from '../urls';
 
 @Component({
   selector: 'app-feedback',
@@ -23,7 +24,7 @@ export class FeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     // check if user has already given the feedback
-    this.feedbackservice.feedbackExists('https://bookstore-backend-hv3g.onrender.com/feedbacks/user/feedback/exists', { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
+    this.feedbackservice.feedbackExists(`${getServiceUrl().bookServiceAPI}/feedbacks/user/feedback/exists`, { username: JSON.parse(localStorage.getItem('user')).username }).subscribe(data => this.checkFeedbackExistsResponse(data))
 
   }
   retrieveFirstResponse(value: string) {
@@ -38,7 +39,7 @@ export class FeedbackComponent implements OnInit {
     this.res2.push(value)
   }
   submitFeedback() {
-    this.feedbackservice.addFeedback('https://bookstore-backend-hv3g.onrender.com/feedbacks/add/feedback', {
+    this.feedbackservice.addFeedback(`${getServiceUrl().bookServiceAPI}/feedbacks/add/feedback`, {
       liked: this.res1,
       issues: this.res2, feedback: this.res3,
       username: JSON.parse(localStorage.getItem('user')).username,

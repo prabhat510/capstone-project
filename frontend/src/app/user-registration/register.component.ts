@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { getServiceUrl } from '../urls';
 
 @Component({
   selector: 'app-register',
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   createUser(registration_form: NgForm) {
     this.showLoader = true;
     if (registration_form.valid) {
-      this.authservice.registerUser('https://bookstore-backend-hv3g.onrender.com/auth/register/user', this.registration_form).subscribe(data => {
+      this.authservice.registerUser(`${getServiceUrl().bookServiceAPI}/auth/register/user`, this.registration_form).subscribe(data => {
         this.validateUser(data);
       }
     )

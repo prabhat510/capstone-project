@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-
+import { getServiceUrl } from '../urls';
+import { Router } from '@angular/router';
+import { TokenStorageServiceService } from '../services/token-storage-service.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -9,32 +10,35 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavComponent implements OnInit {
   @Output() logOutInitialted = new EventEmitter();
-  showMenu: boolean = false;
-  isAdmin: Boolean = false;
+  showMenu = false;
+  isAdmin = false;
   username: any = '';
-  constructor(private authservice: AuthService, private router: Router) { }
-  isLoggedIn: Boolean = false;
-
+  isLoggedIn = false;
+  userData:any;
+  constructor(private authservice: AuthService, private router: Router, private tokenService: TokenStorageServiceService) { }
 
   ngOnInit(): void {
     this.authservice.authStatusSubject$.subscribe((res)=> {
-      if(res === 'logout') {
+      if(res.value === 'logout') {
           this.signOut();
+      } else if(res.value === 'cancel') {
+      } else {
+        this.isLoggedIn = this.authservice.isLoggedIn;
+        this.userData = res.value;
+        this.isAdmin = this.userData.isAdmin;
+        console.log('user details emitted', res);
       }
     })
-    this.isLoggedIn = this.authservice.loggedIn()
-    if (localStorage.getItem('user')) {
-      this.username = JSON.parse(localStorage.getItem('user')).username;
-      this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
-    }
   }
   signOut() {
     this.isLoggedIn = false;
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    const data = {
+      token: this.tokenService.getToken('refresh_token')
+    }
+    this.authservice.logoutUser(`${getServiceUrl().authServiceAPI}/auth/logout`, data).subscribe();
     setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    this.router.navigate(['/login']);
+    }, 1000);
   }
 
   toggleMenu() {

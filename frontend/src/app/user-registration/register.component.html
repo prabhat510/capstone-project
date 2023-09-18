@@ -65,14 +65,15 @@
         (change)="toggleValue()"
         #_isAdmin
         name="isadmin"
+        id="admin"
       />
-      <label> register as admin </label>
+      <label for="admin"> register as admin </label>
     </div>
     <div class="input-row">
       <button type="submit" class="button" [ngClass]="{'no-padding': showLoader, 'bg-color': showLoader}" [disabled]="showLoader">  
         <span *ngIf="!showLoader">Register</span>
         <div class="mobile-loader" *ngIf="showLoader">
-          <img src="assets/loading-state.gif" />
+          <img src="assets/loading-state.gif" alt="loading spinner"/>
         </div></button>
     </div>
     <p class="login">

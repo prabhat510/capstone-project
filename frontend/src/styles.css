@@ -1,10 +1,11 @@
 *,
 body {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: sans-serif, 'Times New Roman', Times, serif;
   margin: 0;
   padding: 0;
   font-size: 16px;
+  font-weight: 500;
 }
 
 @media (width < 767px) {

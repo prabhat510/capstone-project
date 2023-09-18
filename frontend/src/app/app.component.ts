@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.authService.authStatusSubject$.subscribe(res => {
-      if(res === 'cancel' || res === 'logout') {
+      if(res.type === 'auth' && (res.value === 'cancel' || res.value === 'logout')) {
         this.showAlertBox = false;
       }
     })

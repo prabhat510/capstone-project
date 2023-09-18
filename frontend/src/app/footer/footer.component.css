@@ -103,3 +103,23 @@ button:hover {
   color: black;
   border-top: 1px solid #ccc;
 }
+.contact-link-text {
+  position: relative;
+  transform: translate(5%, 50%);
+  font-weight:500 !important;
+}
+.contact-link-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 110%;
+  height: 2px;
+  width: 0%;
+  background: #333;
+  transition: 0.2s ease-out; 
+}
+
+.contact-link-text:hover::after {
+  width: 100%;
+}

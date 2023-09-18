@@ -43,16 +43,5 @@ describe('BookComponent', () => {
       expect(router.navigate).toHaveBeenCalled();
     })
   })
-  describe('removeBook method', () => {
-    it('should delete the book by calling bookservice', () => {
-      const baseUrl = "https://bookstore-backend-hv3g.onrender.com/";
-      jest.spyOn(bookservice, 'deleteBook');
-      component.bookId = "book1";
-      component.removeBook();
-      // expect(bookservice.deleteBook).toHave(baseUrl+"book1");
-    })
-  })
-
-
 
 });

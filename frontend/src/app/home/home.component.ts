@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from '../services/books.service';
-
+import { getServiceUrl } from '../urls';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,12 +23,12 @@ export class HomeComponent implements OnInit {
   }
   onSelect(event) {
     console.log(event.target.value);
-    this.booksservice.getAllBooks(`https://bookstore-backend-hv3g.onrender.com/home/${event.target.value}`).subscribe(data => this.books = data
+    this.booksservice.getAllBooks(`${getServiceUrl().bookServiceAPI}/home/${event.target.value}`).subscribe(data => this.books = data
     )
   }
   loadBooks() {
     if(!this.loading){this.loadingMoreBooks = true;}
-    this.booksservice.getAllBooks(`https://bookstore-backend-hv3g.onrender.com/books?offset=${this.offset}&limit=${this.limit}`).subscribe((data: any) => {
+    this.booksservice.getAllBooks(`${getServiceUrl().bookServiceAPI}/books?offset=${this.offset}&limit=${this.limit}`).subscribe((data: any) => {
       this.books = this.books.concat(data.books);
       this.offset += this.limit
       if(this.loading) {
