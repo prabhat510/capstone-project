@@ -25,7 +25,6 @@ describe('BookComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BookComponent);
     component = fixture.componentInstance;
-    httpclient = TestBed.inject(HttpClient);
     router = TestBed.inject(Router);
     fixture.detectChanges();
   });
