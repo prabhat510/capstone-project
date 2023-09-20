@@ -72,6 +72,9 @@
   }
   .navbar-links ul {
     width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: none;
   }
   .navbar-links li {
@@ -120,12 +123,6 @@
 
 
   
-  .navbar-links ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: none;
-  }
   
   .navbar-links.active ul.show {
     display: block;
@@ -141,6 +138,8 @@
     text-decoration: none;
     color: #333;
     transition: background-color 0.3s ease;
+    display: none;
+
   }
   
   .navbar-links ul li a:hover {
@@ -149,10 +148,6 @@
   
   .navbar-links ul li.welcome-user a {
     color: #ff0000;
-  }
-  
-  .navbar-links ul li a {
-    display: none;
   }
   
   .navbar-links.active ul.show li a {

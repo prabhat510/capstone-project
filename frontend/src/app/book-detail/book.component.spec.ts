@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BooksService } from '../services/books.service';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { BookComponent } from './book.component';
 
@@ -27,7 +27,6 @@ describe('BookComponent', () => {
     component = fixture.componentInstance;
     httpclient = TestBed.inject(HttpClient);
     router = TestBed.inject(Router);
-    bookservice = new BooksService(httpclient);
     fixture.detectChanges();
   });
 

@@ -37,12 +37,12 @@ export class TokenInterceptorService implements HttpInterceptor {
         next: (data: any) => {
           console.log('new access token', data);
           this.tokenService.setToken('refresh_token', data.accessToken);
-          return next.handle(this.addTokenHeader(req));
+
         },
         error: (error) => {
           console.log('error fetching refresh token');
           const url = getServiceUrl().authServiceAPI + '/auth/logout'
-          this.authservice.logoutUser(getServiceUrl().authServiceAPI, { token: refreshToken });
+          this.authservice.logoutUser(url, { token: refreshToken });
           return throwError(error);
         }
       })

@@ -6,13 +6,11 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './alert-box.component.html',
   styleUrls: ['./alert-box.component.css']
 })
-export class AlertBoxComponent implements OnInit {
+export class AlertBoxComponent  {
 
   @Input() message = 'are you sure you want to logout?';
   constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
-  }
 
   confirmLogOut(logoutUser:boolean) {
     if(logoutUser) {
