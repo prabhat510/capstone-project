@@ -26,4 +26,7 @@ export class BooksService {
   updateBook(url: string, body: object) {
     return this.httpclient.put(url, body)
   }
+  scrollToTop() {
+    window.scrollTo({behavior: 'smooth', top: 0});
+  }
 }

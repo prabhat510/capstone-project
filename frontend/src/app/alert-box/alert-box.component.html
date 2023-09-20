@@ -1,0 +1,16 @@
+<p>alert-box works!</p>
+<div class="alert-parent">
+    <div class="alert-box">
+        <div class="box-header">
+            <span class="cross-icon" (click)="confirmLogOut(false)">&#10005;</span>
+            <img src="assets/question.png" class="question-img" alt="">
+        </div>
+        <div class="box-content">
+            <p class="alert-msg">{{message}}</p>
+            <div class="btn-container">
+                <button (click)="confirmLogOut(true)">Yes</button>
+                <button (click)="confirmLogOut(false)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

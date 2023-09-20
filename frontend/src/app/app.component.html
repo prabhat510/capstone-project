@@ -1,9 +1,10 @@
 <header>
-    <app-nav></app-nav>
+  <app-nav (logOutInitialted)="showAlertBox = true;"></app-nav>
 </header>
-<main class="site-content">
-  <router-outlet></router-outlet>
+<main class="site-content" [ngClass]="{'blue-bg': setBgColor}">
+<router-outlet></router-outlet>
 </main>
 <footer>
-    <app-footer></app-footer>
+  <app-footer></app-footer>
 </footer>
+<app-alert-box *ngIf="showAlertBox"></app-alert-box>

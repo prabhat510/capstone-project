@@ -19,6 +19,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NavComponent } from './navbar/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
+import { AlertBoxComponent } from './alert-box/alert-box.component';
 
 // the HTTP_INTERCEPTORS module is used to send the token to the backend and verify the token using the TokenInterceptorService 
 
@@ -34,7 +35,8 @@ import { UpdateBookComponent } from './update-book/update-book.component';
     RegisterComponent,
     NavComponent,
     FooterComponent,
-    UpdateBookComponent
+    UpdateBookComponent,
+    AlertBoxComponent
   ],
   imports: [
     BrowserModule,

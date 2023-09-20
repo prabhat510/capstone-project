@@ -1,7 +1,7 @@
 <div class="search">
   <input
     type="search"
-    placeholder="Search"
+    placeholder="Search for books, authors and genre"
     aria-label="Search"
     [(ngModel)]="filterTerm"
     class="search-input"
@@ -18,17 +18,29 @@
     *ngFor="let book of books | filter : filterTerm"
   >
     <div class="sub-container">
-      <img [src]="book.image" class="cover-image" alt="book image" loading="lazy" />
+      <img
+        [src]="book.image"
+        class="cover-image"
+        alt="book image"
+        loading="lazy"
+      />
       <div class="book-info">
         <strong>{{ book.title | titlecase }}</strong>
         <p>
           {{ book.author | titlecase }}
         </p>
-        <strong>{{ book.genre | titlecase}}</strong>
+        <strong>{{ book.genre | titlecase }}</strong>
       </div>
     </div>
   </div>
 </div>
+<div class="btn-container" *ngIf="!loading && !loadingMoreBooks">
+  <button type="button"class="button topBtn" (click)="goToTop()">Back To Top</button>
+  <button type="button"class="button loadmoreBtn" *ngIf="loadMoreOptionAvailable" (click)="loadBooks()">Load More</button>
+</div>
+<div class="loader2" *ngIf="loadingMoreBooks">
+  <img src="assets/loading-state.gif" alt="loading spinner" />
+</div>
 <div class="loader" *ngIf="loading">
-  <img src="assets/loading-state.gif" alt="">
+  <img src="assets/loading-state.gif" alt="loading spinner" />
 </div>

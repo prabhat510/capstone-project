@@ -10,11 +10,6 @@
   width: 300px;
 }
 
-.search input:focus,
-.search input:active {
-  border: 2px solid black;
-}
-
 .book-container {
   margin: 50px;
   display: grid;
@@ -108,4 +103,34 @@
 
 .loader {
   margin-top: calc(50vh - 220px);
+}
+.topBtn:hover {
+  background: #333;
+  color: #fff;
+}
+.loadmoreBtn {
+  background: #333;
+  color: #fff;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+.btn-container button {
+  border: none;
+
+    outline: 2px solid #000000;
+    padding: 10px;
+}
+
+.search-input::placeholder {
+  letter-spacing: 0.3px;
+}
+
+@media  (max-width: 768px) {
+  .search-input::placeholder {
+    font-size: 14px;
+  }
 }

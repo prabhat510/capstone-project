@@ -1,174 +1,176 @@
 <div class="loader" *ngIf="loading">
-    <img src="assets/loading-state.gif"/>
+  <img src="assets/loading-state.gif" alt="loading spinner"/>
+</div>
+<div class="book-form" *ngIf="!loading">
+  <h5 style="text-align: center">Add New Book</h5>
+  <div class="error-message">
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
-  <div class="book-form" *ngIf="!loading">
-    <h5 style="text-align: center">Add New Book</h5>
-    <div class="error-message">
-      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <form (ngSubmit)="updateBook(bok_form)" #bok_form="ngForm">
+    <div class="input-row">
+      <label class="label">Book Name:</label>
+      <input
+        #titleInput
+        type="text"
+        class="text-input"
+        id="exampleFormControlInput1"
+        placeholder="title.."
+        [(ngModel)]="book_form.title"
+        name="title"
+        ngModel
+        required
+      />
     </div>
-    <form (ngSubmit)="updateBook(bok_form)" #bok_form="ngForm">
-      <div class="input-row">
-        <label class="label">Book Name:</label>
-        <input
-          #titleInput
-          type="text"
-          class="text-input"
-          id="exampleFormControlInput1"
-          placeholder="title.."
-          [(ngModel)]="book_form.title"
-          name="title"
-          ngModel
-          required
-        />
-      </div>
-      <small
-        class="error-message"
-        *ngIf="titleInput.touched && titleInput.errors"
+    <small
+      class="error-message"
+      *ngIf="titleInput.touched && titleInput.errors"
+    >
+      enter a valid title
+    </small>
+    <div class="input-row">
+      <label for="exampleFormControlInput1" class="label">Author:</label>
+
+      <input
+        #authorInput
+        type="text"
+        class="text-input"
+        id="exampleFormControlInput1"
+        placeholder="author.."
+        [(ngModel)]="book_form.author"
+        name="author"
+        ngModel
+        required
+      />
+    </div>
+    <small
+      class="error-message"
+      *ngIf="authorInput.touched && authorInput.errors"
+    >
+      enter a valid author name
+    </small>
+    <div class="input-row">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Publisher:</label
       >
-        enter a valid title
-      </small>
-      <div class="input-row">
-        <label for="exampleFormControlInput1" class="label">Author:</label>
-  
-        <input
-          #authorInput
-          type="text"
-          class="text-input"
-          id="exampleFormControlInput1"
-          placeholder="author.."
-          [(ngModel)]="book_form.author"
-          name="author"
-          ngModel
-          required
-        />
-      </div>
-      <small
-        class="error-message"
-        *ngIf="authorInput.touched && authorInput.errors"
+
+      <input
+        #publisherInput
+        type="text"
+        class="text-input"
+        id="exampleFormControlInput1"
+        placeholder="publisher.."
+        [(ngModel)]="book_form.publisher"
+        name="publisher"
+        ngModel
+        required
+      />
+    </div>
+    <small
+      class="error-message"
+      *ngIf="publisherInput.touched && publisherInput.errors"
+    >
+      enter a valid publisher name
+    </small>
+    <div class="input-row">
+      <label for="exampleFormControlInput1" class="label"
+        >Date published:</label
       >
-        enter a valid author name
-      </small>
-      <div class="input-row">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Publisher:</label
-        >
-  
-        <input
-          #publisherInput
-          type="text"
-          class="text-input"
-          id="exampleFormControlInput1"
-          placeholder="publisher.."
-          [(ngModel)]="book_form.publisher"
-          name="publisher"
-          ngModel
-          required
-        />
-      </div>
-      <small
-        class="error-message"
-        *ngIf="publisherInput.touched && publisherInput.errors"
+
+      <input
+        #dateInput
+        type="date"
+        id="exampleFormControlInput1"
+        placeholder="published on.."
+        [(ngModel)]="book_form.date_published"
+        name="date"
+        ngModel
+        required
+      />
+    </div>
+    <small class="error-message" *ngIf="dateInput.touched && dateInput.errors">
+      choose a valid date
+    </small>
+    <div class="input-row">
+      <label for="exampleFormControlInput1" class="label"> Genre:</label>
+      <select
+        #genreInput
+        aria-label=".form-select-sm example"
+        [(ngModel)]="book_form.genre"
+        name="genre"
+        ngModel
+        required
       >
-        enter a valid publisher name
-      </small>
-      <div class="input-row">
-        <label for="exampleFormControlInput1" class="label"
-          >Date published:</label
-        >
-  
-        <input
-          #dateInput
-          type="date"
-          id="exampleFormControlInput1"
-          placeholder="published on.."
-          [(ngModel)]="book_form.date_published"
-          name="date"
-          ngModel
-          required
-        />
+        <option selected>select genre</option>
+        <option value="fiction">fiction</option>
+        <option value="autobiography">autobiography</option>
+        <option value="science">science</option>
+        <option value="history">history</option>
+        <option value="mathematics">mathematics</option>
+        <option value="law">law</option>
+        <option value="medicine">medicine</option>
+        <option value="technology & engineering">technology & engineering</option>
+        <option value="finance">finance</option>
+        <option value="art">art</option>
+        <option value="travel">travel</option>
+        <option value="self-help book">self-help book</option>
+        <option value="thriller">thriller</option>
+      </select>
+    </div>
+    <small
+      class="error-message"
+      *ngIf="genreInput.touched && genreInput.errors"
+    >
+      enter a valid genre
+    </small>
+    <div class="input-row">
+      <label for="exampleFormControlInput1" class="label">Description:</label>
+
+      <textarea
+        cols="20"
+        rows="7"
+        #descriptionInput
+        type="text"
+        class="text-input"
+        id="exampleFormControlInput1"
+        placeholder="enter description"
+        [(ngModel)]="book_form.description"
+        name="description"
+        ngModel
+        required
+      ></textarea>
+    </div>
+    <small
+      class="error-message"
+      *ngIf="descriptionInput.touched && descriptionInput.errors"
+    >
+      enter a valid description
+    </small>
+    <div class="input-row">
+      <label for="exampleFormControlInput1" class="label">Image link:</label>
+
+      <input
+        #imageInput
+        type="text"
+        class="text-input"
+        id="exampleFormControlInput1"
+        placeholder="image link.."
+        [(ngModel)]="book_form.image"
+        name="image url"
+        ngModel
+        required
+      />
+    </div>
+    <small
+      class="error-message"
+      *ngIf="imageInput.touched && imageInput.errors"
+    >
+      enter a valid image link
+    </small>
+    <button type="submit" class="button" [ngClass]="{'no-padding': showLoader, 'bg-color': showLoader}">
+      <span *ngIf="!showLoader">Submit</span>
+      <div class="mobile-loader" *ngIf="showLoader">
+        <img src="assets/loading-state.gif" alt="loading spinner"/>
       </div>
-      <small class="error-message" *ngIf="dateInput.touched && dateInput.errors">
-        choose a valid date
-      </small>
-      <div class="input-row">
-        <label for="exampleFormControlInput1" class="label"> Genre:</label>
-        <select
-          #genreInput
-          aria-label=".form-select-sm example"
-          [(ngModel)]="book_form.genre"
-          name="genre"
-          ngModel
-          required
-        >
-          <option selected>select genre</option>
-          <option value="fiction">fiction</option>
-          <option value="autobiography">autobiography</option>
-          <option value="science">science</option>
-          <option value="history">history</option>
-          <option value="mathematics">mathematics</option>
-          <option value="law">law</option>
-          <option value="medicine">medicine</option>
-          <option value="technology & engineering">
-            technology & engineering
-          </option>
-          <option value="finance">finance</option>
-          <option value="art">art</option>
-          <option value="travel">travel</option>
-          <option value="self-help book">self-help book</option>
-          <option value="thriller">thriller</option>
-        </select>
-      </div>
-      <small
-        class="error-message"
-        *ngIf="genreInput.touched && genreInput.errors"
-      >
-        enter a valid genre
-      </small>
-      <div class="input-row">
-        <label for="exampleFormControlInput1" class="label">Description:</label>
-  
-        <textarea
-          cols="20"
-          rows="7"
-          #descriptionInput
-          type="text"
-          class="text-input"
-          id="exampleFormControlInput1"
-          placeholder="enter description"
-          [(ngModel)]="book_form.description"
-          name="description"
-          ngModel
-          required
-        ></textarea>
-      </div>
-      <small
-        class="error-message"
-        *ngIf="descriptionInput.touched && descriptionInput.errors"
-      >
-        enter a valid description
-      </small>
-      <div class="input-row">
-        <label for="exampleFormControlInput1" class="label">Image link:</label>
-  
-        <input
-          #imageInput
-          type="text"
-          class="text-input"
-          id="exampleFormControlInput1"
-          placeholder="image link.."
-          [(ngModel)]="book_form.image"
-          name="image url"
-          ngModel
-          required
-        />
-      </div>
-      <small
-        class="error-message"
-        *ngIf="imageInput.touched && imageInput.errors"
-      >
-        enter a valid image link
-      </small>
-      <button type="submit" class="button">Submit</button>
-    </form>
-  </div>
-  
+    </button>
+  </form>
+</div>

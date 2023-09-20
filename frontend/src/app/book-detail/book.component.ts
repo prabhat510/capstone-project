@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../services/books.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { getServiceUrl } from '../urls';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-book',
@@ -9,29 +10,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  loading: boolean = true;
-  isAdmin: Boolean = false
-  bookId: string = ''
+  loading = true;
+  isAdmin = false;
+  bookId = '';
   book: any;
-  constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router) { }
+  constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedroute.snapshot.paramMap.get('id');
-    this.bookservice.getBook(`https://bookstore-backend-hv3g.onrender.com/books/${this.bookId}`).subscribe(data => {
+    this.isAdmin = this.authService.isAdmin;
+    this.bookservice.getBook(`${getServiceUrl().bookServiceAPI}/books/${this.bookId}`).subscribe(data => {
       this.book = data;
-      if (localStorage.getItem('user')) {
-        this.isAdmin = JSON.parse(localStorage.getItem('user')).isAdmin;
-      }
       this.loading = false;
+      this.bookservice.scrollToTop();
     });
   }
+  
   removeBook() {
-    this.bookservice.deleteBook(`https://bookstore-backend-hv3g.onrender.com/books/remove/${this.bookId}`).subscribe();
-    this.router.navigate(['']).then(() => window.location.reload());
+    this.bookservice.deleteBook(`${getServiceUrl().bookServiceAPI}/books/remove/${this.bookId}`).subscribe();
+    setTimeout(()=> {
+      this.router.navigate(['']).then(() => window.location.reload());
+    }, 1000)
   }
   changeBook() {
-    console.log('prabhat', this.bookId);
-    
     this.router.navigate(['/update-book'], { queryParams: { id: this.bookId } })
   }
 }

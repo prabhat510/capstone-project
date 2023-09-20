@@ -13,6 +13,9 @@ MIT
 @angular/router
 MIT
 
+ng2-cookies
+MIT
+
 ng2-search-filter
 MIT
 MIT License

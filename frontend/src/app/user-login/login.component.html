@@ -43,12 +43,17 @@
       >
     </div>
     <div class="input-row">
-      <button type="submit" class="button">Login</button>
+      <button type="submit" class="button" [ngClass]="{'no-padding': showLoader, 'bg-color': showLoader}" [disabled]="showLoader">
+        <span *ngIf="!showLoader">Login</span>
+        <div class="mobile-loader" *ngIf="showLoader">
+          <img src="assets/loading-state.gif" alt="loading spinner"/>
+        </div>
+      </button>
     </div>
-    <p class="register" [routerLink]="['/register']">
+    <p class="register">
       don't have an account?&nbsp;<strong
         style="text-decoration: underline; cursor: pointer"
-        >Create Account</strong
+        ><span [routerLink]="['/register']">Create Account</span></strong
       >
     </p>
   </form>

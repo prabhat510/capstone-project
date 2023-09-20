@@ -1,10 +1,11 @@
 .footer-area {
-  background-color: #333;
+  background-color: #fff;
+  box-shadow: 0px 0px 2px black;
 }
 
 .footer {
   padding: 15px;
-  color: #ffffff;
+  color: black;
   display: flex;
   justify-content: space-around;
 }
@@ -49,21 +50,19 @@
 .footer-form>*:not(:last-child):not(:first-child) {
   margin-bottom: 10px;
   padding: 6px;
-  border: none;
 }
 
 button {
   color: #ffffff;
   border: 1px solid #ffffff;
-  background-color: #333;
-  height: 30px;
+  background-color: black;
+  height: 35px;
   padding: 6px;
   transition: .2s;
 }
 
 button:hover {
-  color: #333;
-  background-color: #ffffff;
+  background-color: #333;
 }
 
 @media (max-width: 1023px) {
@@ -101,6 +100,26 @@ button:hover {
   font-size: 14px;
   text-align: center;
   padding: 10px 0;
-  color: #ffffff;
+  color: black;
   border-top: 1px solid #ccc;
+}
+.contact-link-text {
+  position: relative;
+  transform: translate(5%, 50%);
+  font-weight:500 !important;
+}
+.contact-link-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 110%;
+  height: 2px;
+  width: 0%;
+  background: #333;
+  transition: 0.2s ease-out; 
+}
+
+.contact-link-text:hover::after {
+  width: 100%;
 }

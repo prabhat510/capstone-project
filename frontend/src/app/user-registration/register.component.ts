@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { getServiceUrl } from '../urls';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     password: '',
     isAdmin: false
   }
+  showLoader = false;
 
   constructor(private authservice: AuthService, private router: Router) { }
 
@@ -57,15 +59,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
   createUser(registration_form: NgForm) {
+    this.showLoader = true;
     if (registration_form.valid) {
-      this.authservice.registerUser('https://bookstore-backend-hv3g.onrender.com/auth/register/user', this.registration_form).subscribe(data =>
-        this.validateUser(data)
-      )
-    } 
-    else {
+      this.authservice.registerUser(`${getServiceUrl().bookServiceAPI}/auth/register/user`, this.registration_form).subscribe(data => {
+        this.validateUser(data);
+      }
+    )
+    } else {
       registration_form.control.markAllAsTouched();
       this.errorMessage = "please fill all the fields";
       this.checkInvalidForm();
+      this.showLoader = false;
     }
   }
 

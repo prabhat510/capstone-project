@@ -1,6 +1,6 @@
 import { NavComponent } from './nav.component';
 import { AuthService } from '../services/auth.service';
-import { IRouter, Router } from 'express';
+import { Router } from 'express';
 import { HttpClient } from '@angular/common/http';
 
 describe('NavComponent', () => {
