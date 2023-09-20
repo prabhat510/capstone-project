@@ -22,6 +22,7 @@ export class NavComponent implements OnInit {
       if(res.value === 'logout') {
           this.signOut();
       } else if(res.value === 'cancel') {
+        console.log('cancelled');
       } else {
         this.isLoggedIn = this.authservice.isLoggedIn;
         this.userData = res.value;

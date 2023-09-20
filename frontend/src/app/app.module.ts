@@ -10,8 +10,6 @@ import { HomeComponent } from './home/home.component';
 import { BooksService } from './services/books.service';
 import { BookComponent } from './book-detail/book.component';
 import { AddBookComponent } from './add-book/add-book..component';
-import { FeedbackComponent } from './submit-feedback/feedback.component';
-import { FeedbacksComponent } from './display-feedbacks/feedbacks.component';
 import { LoginComponent } from './user-login/login.component';
 import { RegisterComponent } from './user-registration/register.component';
 import { AuthGuard } from './auth.guard';
@@ -29,8 +27,6 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
     HomeComponent,
     BookComponent,
     AddBookComponent,
-    FeedbackComponent,
-    FeedbacksComponent,
     LoginComponent,
     RegisterComponent,
     NavComponent,

@@ -7,8 +7,6 @@ import { Cookie } from 'ng2-cookies';
 })
 export class TokenStorageServiceService {
 
-  constructor() { }
-
   getToken(key: string) {
     return Cookie.get(key);
   }

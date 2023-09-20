@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
       if(route.routeConfig.component?.name){ 
           this.activeComponentName = route.routeConfig.component.name;
           console.log('route active====', this.activeComponentName);
-          this.applyBgColor();
         }
     }
     )
@@ -37,23 +36,4 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
 
-  applyBgColor() {
-    switch (this.activeComponentName) {
-      case 'LoginComponent':
-        this.setBgColor = true;
-        break;
-      case 'AddBookComponent':
-        this.setBgColor = true;
-        break;
-      case 'RegisterComponent':
-        this.setBgColor = true;
-        break;
-      case 'UpdateBookComponent':
-        this.setBgColor = true;
-        break;
-      default:
-        this.setBgColor = false;
-        break;
-    }
-  }
 }

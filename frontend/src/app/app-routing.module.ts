@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddBookComponent } from './add-book/add-book..component';
 import { BookComponent } from './book-detail/book.component';
 import { HomeComponent } from './home/home.component';
-import { FeedbackComponent } from './submit-feedback/feedback.component';
 import { LoginComponent } from './user-login/login.component';
 import { RegisterComponent } from './user-registration/register.component';
 import { AuthGuard } from './auth.guard';
@@ -26,14 +25,6 @@ const routes: Routes = [
     path: 'update-book', component: UpdateBookComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'feedback', component: FeedbackComponent,
-    canActivate: [AuthGuard]
-  },
-  // {
-  //   path: 'feedbacks', component: FeedbacksComponent,
-  //   canActivate: [AuthGuard]
-  // },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
 ];
