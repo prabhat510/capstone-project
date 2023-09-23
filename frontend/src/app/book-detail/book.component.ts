@@ -19,7 +19,7 @@ export class BookComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookId = this.activatedroute.snapshot.paramMap.get('id');
-    this.isAdmin = this.authService.isAdmin;
+    this.isAdmin = JSON.parse(localStorage.getItem('userData'))? JSON.parse(localStorage.getItem('userData')).isAdmin : false;
     this.bookservice.getBook(`${getServiceUrl().bookServiceAPI}/books/${this.bookId}`).subscribe(data => {
       this.book = data;
       this.loading = false;

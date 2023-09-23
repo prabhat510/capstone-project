@@ -19,4 +19,7 @@ export class TokenStorageServiceService {
     Cookie.delete(key);  
   }
 
+  deleteAllTokens() {
+    Cookie.deleteAll();
+  }
 }
