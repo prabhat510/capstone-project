@@ -20,8 +20,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authservice.loggedIn;
-    const cookieData = JSON.parse(this.tokenService.getToken('userData'));
-    this.userData = cookieData ? cookieData:'';
+    this.userData = this.tokenService.getToken('userData') ? JSON.parse(this.tokenService.getToken('userData')): '';
     this.interceptorService.accessTokenSubject.subscribe(res => {
       if(res === null) {
         console.log('access token has expired');
