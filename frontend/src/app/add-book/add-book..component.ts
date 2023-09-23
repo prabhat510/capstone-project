@@ -41,7 +41,6 @@ export class AddBookComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private authservice: AuthService,
     private bookservice: BooksService,
     private router: Router,
     private activatedroute: ActivatedRoute

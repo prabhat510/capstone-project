@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { getServiceUrl } from '../urls';
 import { Router } from '@angular/router';
 import { TokenStorageServiceService } from '../services/token-storage-service.service';
+import { TokenInterceptorService } from '../services/token-interceptor.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -12,19 +13,33 @@ export class NavComponent implements OnInit {
   @Output() logOutInitialted = new EventEmitter();
   showMenu = false;
   isAdmin = false;
-  username: any = '';
   isLoggedIn = false;
   userData:any;
-  constructor(private authservice: AuthService, private router: Router, private tokenService: TokenStorageServiceService) { }
+  constructor(private authservice: AuthService, private router: Router, private tokenService: TokenStorageServiceService,
+    private interceptorService: TokenInterceptorService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authservice.loggedIn;
+    this.userData = this.tokenService.getToken('userData') ? JSON.parse(this.tokenService.getToken('userData')): '';
+    this.interceptorService.accessTokenSubject.subscribe(res => {
+      if(res === null) {
+        console.log('access token has expired');
+        // this.isLoggedIn = false;
+      } else {
+        console.log('new access token is recieved and window is reloaded');
+        this.isLoggedIn = true;
+        const userDetails = this.tokenService.getToken('userData');
+        this.userData = JSON.parse(userDetails);
+        window.location.reload();
+      }
+    })
     this.authservice.authStatusSubject$.subscribe((res)=> {
       if(res.value === 'logout') {
           this.signOut();
       } else if(res.value === 'cancel') {
         console.log('cancelled');
       } else {
-        this.isLoggedIn = this.authservice.isLoggedIn;
+        this.isLoggedIn = this.authservice.loggedIn;
         this.userData = res.value;
         this.isAdmin = this.userData.isAdmin;
         console.log('user details emitted', res);

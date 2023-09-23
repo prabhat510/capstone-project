@@ -51,8 +51,8 @@ export class LoginComponent implements AfterViewInit {
     if (data.accessToken && data.refreshToken) {
       this.tokenService.setToken('token', data.accessToken);
       this.tokenService.setToken('refresh_token', data.refreshToken);
-      this.authservice.isLoggedIn = true;
       this.authservice.emitUserLoggedIn(data.user);
+      localStorage.setItem('userData', JSON.stringify(data.user));
       this.router.navigate(['']);
     } 
     this.showLoader = false;

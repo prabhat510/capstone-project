@@ -7,7 +7,7 @@
   </a>
   <div class="navbar-links" [ngClass]="{'active': showMenu}">
     <ul [ngClass]="{'show': showMenu}">
-      <li class="nav-item" *ngIf="isLoggedIn && isAdmin">
+      <li class="nav-item" *ngIf="isLoggedIn && userData?.isAdmin">
         <a class="nav-link" (click)="toggleMenu()" [routerLink]="['/add-book']">Add book</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item welcome-user">

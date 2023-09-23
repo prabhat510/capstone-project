@@ -5,7 +5,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser"); // added to help post data on mongodb
 
 const admin = require("./routes/admin/admin");
-const feedback = require("./routes/feedbacks/feedback");
 const auth = require("./routes/auth/auth");
 const verify = require("./routes/auth/authVerify");
 const path = require('path');
@@ -30,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 dotenv.config();
 
 // all routes
-app.use("/api/feedbacks", feedback);
 app.use("/api/books", admin);
 app.use("/api/auth", auth);
 
