@@ -35,10 +35,16 @@
 
 .book {
   border: 1px solid black;
+  border-radius: 10px;
   box-shadow: 5px 5px 12px lightgray;
   padding: 5px 8px 0px 8px;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+
+.book-title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .book:hover {
@@ -48,7 +54,7 @@
 
 .cover-image {
   width: 100%;
-  flex: 1;
+  height: 300px;
 }
 
 .sub-container {
@@ -104,32 +110,36 @@
 .loader {
   margin-top: calc(50vh - 220px);
 }
+
 .topBtn:hover {
   background: #333;
   color: #fff;
 }
+
 .loadmoreBtn {
   background: #333;
   color: #fff;
 }
+
 .btn-container {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
   gap: 15px;
 }
+
 .btn-container button {
   border: none;
 
-    outline: 2px solid #000000;
-    padding: 10px;
+  outline: 2px solid #000000;
+  padding: 10px;
 }
 
 .search-input::placeholder {
   letter-spacing: 0.3px;
 }
 
-@media  (max-width: 768px) {
+@media (max-width: 768px) {
   .search-input::placeholder {
     font-size: 14px;
   }

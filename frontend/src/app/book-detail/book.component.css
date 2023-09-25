@@ -1,7 +1,6 @@
 .book-container {
   display: flex;
   margin-top: 20px;
-  margin-left: 20vw;
   gap: 50px;
 }
 .book-image img {
@@ -11,7 +10,9 @@
 .book-image {
   box-shadow: 5px 5px 12px lightgray;
   margin-bottom: 15px;
-  flex-basis: 200px;
+  margin-left: 10%;
+  height: 270px;
+  width: 270px;
 }
 .book-data {
   flex-grow: 1;
@@ -77,6 +78,8 @@ strong {
   }
   .book-image {
     height: 250px;
+  margin-left: 0%;
+
   }
   .book-title {
     font-size: 18px;
@@ -137,4 +140,14 @@ button span {
 button span img {
   height: 20px;
   width: 20px;
+}
+
+@media (max-width: 576px) {
+  button span img {
+    height: 15px;
+    width: 15px;
+  }  
+  .book-image {
+    margin-left: 0;
+  }
 }

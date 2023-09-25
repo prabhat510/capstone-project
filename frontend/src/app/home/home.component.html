@@ -25,11 +25,10 @@
         loading="lazy"
       />
       <div class="book-info">
-        <strong>{{ book.title | titlecase }}</strong>
-        <p>
+        <p class="book-title">{{ book.title | titlecase }}</p>
+        <p [ngStyle]="{'color': 'rgb(51,51,51)'}">
           {{ book.author | titlecase }}
         </p>
-        <strong>{{ book.genre | titlecase }}</strong>
       </div>
     </div>
   </div>
