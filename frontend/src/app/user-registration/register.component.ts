@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   validateUser(data: any) {
     if (data.status === 409) {
       this.errorMessage = data.message;
+      this.showLoader = false;
     } else {
       this.router.navigate(['/login']);
     }
@@ -61,10 +62,18 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   createUser(registration_form: NgForm) {
     this.showLoader = true;
     if (registration_form.valid) {
-      this.authservice.registerUser(`${getServiceUrl().bookServiceAPI}/auth/register/user`, this.registration_form).subscribe(data => {
-        this.validateUser(data);
-      }
-    )
+      this.authservice.registerUser(`${getServiceUrl().bookServiceAPI}/auth/register/user`, this.registration_form)
+        .subscribe({
+          next: (data) => {
+            this.validateUser(data);
+          },
+          error: (error)=>{
+            this.showLoader = false;
+            this.errorMessage = "something went wrong!";
+            console.log('error', error);
+          }
+        }
+        )
     } else {
       registration_form.control.markAllAsTouched();
       this.errorMessage = "please fill all the fields";
