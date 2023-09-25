@@ -1,18 +1,20 @@
 const bcrypt = require("bcrypt");
+const sanitize = require('mongo-sanitize');
 const router = require("express").Router();
 const { User } = require("../mongoose/models");
 
 router.post("/register/user", async (req, res) => {
+  const userPayload = req.body;
+  userPayload['username'] = sanitize(req.body.username);
   try {
-    const user_exists = await User.findOne({ username: req.body.username });
+    const user_exists = await User.findOne({ username: userPayload.username });
     if (user_exists) {
       res.json({ status: 409, message: "username already exists" });
     } else {
       const salt = await bcrypt.genSalt();
-      const hashedPassword = await bcrypt.hash(req.body.password, salt);
-      const userData = req.body;
-      userData["password"] = hashedPassword;
-      const newUser = new User(userData);
+      const hashedPassword = await bcrypt.hash(userPayload.password, salt);
+      userPayload["password"] = hashedPassword;
+      const newUser = new User(userPayload);
       await newUser.save(function (error, result) {
         if (error) {
           console.log(error);
