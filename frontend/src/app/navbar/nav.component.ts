@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ElementRef, Renderer2 } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { getServiceUrl } from '../urls';
 import { Router } from '@angular/router';
@@ -16,11 +16,11 @@ export class NavComponent implements OnInit {
   isLoggedIn = false;
   userData:any;
   constructor(private authservice: AuthService, private router: Router, private tokenService: TokenStorageServiceService,
-    private interceptorService: TokenInterceptorService) { }
+    private interceptorService: TokenInterceptorService, private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authservice.loggedIn;
-    this.userData = this.tokenService.getToken('userData') ? JSON.parse(this.tokenService.getToken('userData')): '';
+    this.userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')): '';
     this.interceptorService.accessTokenSubject.subscribe(res => {
       if(res === null) {
         console.log('access token has expired');
@@ -59,5 +59,12 @@ export class NavComponent implements OnInit {
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
+  }
+
+  logoutUser() {
+    const body = this.elementRef.nativeElement.ownerDocument.body;
+    this.renderer.setStyle(body, 'overflow', 'hidden');
+    this.logOutInitialted.emit();
+    this.toggleMenu()
   }
 }

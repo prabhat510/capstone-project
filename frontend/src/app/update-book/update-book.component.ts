@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BooksService } from '../services/books.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { getServiceUrl } from '../urls';
 
@@ -12,7 +10,7 @@ import { getServiceUrl } from '../urls';
   templateUrl: './update-book.component.html',
   styleUrls: ['./update-book.component.css']
 })
-export class UpdateBookComponent implements OnInit, AfterViewInit {
+export class UpdateBookComponent implements OnInit {
   showLoader = false;
   @ViewChild('titleInput') titleInput: ElementRef;
   @ViewChild('authorInput') authorInput: ElementRef;
@@ -37,7 +35,7 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
   };
 
 
-  constructor(private authservice: AuthService, private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
+  constructor(private bookservice: BooksService, private router: Router, private activatedroute: ActivatedRoute) {
 
   }
 
@@ -56,9 +54,6 @@ export class UpdateBookComponent implements OnInit, AfterViewInit {
       this.loading = false;
       this.bookservice.scrollToTop();
     }
-  }
-  ngAfterViewInit(): void {
-    this.titleInput.nativeElement.focus();
   }
   checkInvalidForm() {
     if (!this.book_form.title) {

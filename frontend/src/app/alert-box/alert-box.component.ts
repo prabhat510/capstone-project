@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,13 +9,15 @@ import { AuthService } from '../services/auth.service';
 export class AlertBoxComponent  {
 
   @Input() message = 'are you sure you want to logout?';
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private renderer: Renderer2, private elementRef: ElementRef) { }
 
 
   confirmLogOut(logoutUser:boolean) {
+    const body = this.elementRef.nativeElement.ownerDocument.body;
     if(logoutUser) {
       this.authService.emitLogout();
     } else {
+      this.renderer.setStyle(body, 'overflow', 'visible');
       this.authService.emitCancelLogout();
     }
   }

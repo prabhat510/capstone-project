@@ -44,12 +44,7 @@ button:hover {
 }
 
 @media (max-width: 576px) {
-  label,
-  input {
-    font-size: 12px;
-  }
   button {
-    font-size: 12px;
     padding: 5px;
   }
   h5 {
