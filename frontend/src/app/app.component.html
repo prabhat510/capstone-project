@@ -1,4 +1,4 @@
-<header>
+<header *ngIf="displayHeader">
   <app-nav (logOutInitialted)="showAlertBox = true;"></app-nav>
 </header>
 <main class="site-content">

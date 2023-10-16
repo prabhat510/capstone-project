@@ -11,8 +11,8 @@
   box-shadow: 5px 5px 12px lightgray;
   margin-bottom: 15px;
   margin-left: 10%;
-  height: 270px;
-  width: 270px;
+  height: 250px;
+  width: 250px;
 }
 .book-data {
   flex-grow: 1;

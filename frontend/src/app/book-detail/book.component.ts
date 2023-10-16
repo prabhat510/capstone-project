@@ -15,11 +15,12 @@ export class BookComponent implements OnInit {
   bookId = '';
   book: any;
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router,
-    private authService: AuthService) { }
+    private authservice: AuthService) { }
 
   ngOnInit(): void {
+    const isLoggedIn = this.authservice.isLoggedIn;
     this.bookId = this.activatedroute.snapshot.paramMap.get('id');
-    this.isAdmin = JSON.parse(localStorage.getItem('userData'))? JSON.parse(localStorage.getItem('userData')).isAdmin : false;
+    this.isAdmin = isLoggedIn && JSON.parse(localStorage.getItem('userData'))? JSON.parse(localStorage.getItem('userData')).isAdmin : false;
     this.bookservice.getBook(`${getServiceUrl().bookServiceAPI}/books/${this.bookId}`).subscribe(data => {
       this.book = data;
       this.loading = false;

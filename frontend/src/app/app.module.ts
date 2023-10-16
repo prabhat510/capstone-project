@@ -13,7 +13,7 @@ import { AddBookComponent } from './add-book/add-book..component';
 import { LoginComponent } from './user-login/login.component';
 import { RegisterComponent } from './user-registration/register.component';
 import { AuthGuard } from './auth.guard';
-import { TokenInterceptorService } from './services/token-interceptor.service';
+import { TokenInterceptor } from './services/token-interceptor.service';
 import { NavComponent } from './navbar/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
@@ -43,7 +43,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
   ],
   providers: [BooksService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
+    useClass: TokenInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

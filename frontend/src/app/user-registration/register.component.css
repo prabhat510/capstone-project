@@ -16,6 +16,7 @@
   font-size: 14px;
   color: gray;
   transition: all 0.3s ease;
+  letter-spacing: .3px;
 }
 
 input:focus:not([type='checkbox'])+label,

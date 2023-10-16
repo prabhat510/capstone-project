@@ -1,75 +1,72 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { BehaviorSubject, catchError, switchMap, throwError } from 'rxjs';
-import { getServiceUrl } from '../urls';
 import { TokenStorageServiceService } from './token-storage-service.service';
-import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TokenInterceptorService implements HttpInterceptor {
+@Injectable()
+export class TokenInterceptor implements HttpInterceptor {
+  private refreshTokenInProgress = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  public accessTokenSubject = new BehaviorSubject<any>(null);
-  constructor(private authservice: AuthService, private tokenService: TokenStorageServiceService, private router: Router) { }
+  constructor(
+    private authService: AuthService, // Replace with your authentication service
+    private tokenService: TokenStorageServiceService
+  ) {}
 
-  // intercept runs before request is sent out to the server and before the response is forwarded to subscribe
-  // next() is called to continue the request flow
-  // the request object is immutable, therefore you can only copy the existing request and in that add any headers
-  // while adding headers, use append method so that the existing headers are retained in the request
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    return next.handle(this.addTokenHeader(req)).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && !req.url.includes('/auth/login') && !req.url.includes('/auth/logout')) {
-        console.log('there is error', error);
-        return this.handleErrorResponse(req, next);
-      }
-      return throwError(()=>new Error(error));
-    }))
-  }
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const accessToken = this.authService.getAccessToken();
+    if (accessToken) {
+      request = this.addAccessTokenToRequest(request, accessToken);
+    }
 
-  private handleErrorResponse(req: HttpRequest<any>, next: HttpHandler) {
-    console.log('getting new access token..');
-    // got 401 that means token has expired, emitting null value to the subscribers
-    this.accessTokenSubject.next(null); 
-    const refreshToken = this.tokenService.getToken('refresh_token');
-    const url = getServiceUrl().authServiceAPI + '/auth/token';
-    if (refreshToken) {
-      return this.authservice.getNewAccessToken(url, { token: refreshToken }).pipe(
-          switchMap((data: any) => {
-            console.log('got new access token', data);
-            this.tokenService.setToken('token', data.accessToken);
-            // got the new accessToken sending it to the subscribers
-            this.accessTokenSubject.next(data.accessToken);
-            return next.handle(this.addTokenHeader(req));
-          }),
-          catchError((error) => {
-            console.log('error fetching refresh token', error);
-            return this.logoutUser(refreshToken);
+    return next.handle(request).pipe(
+      catchError((error: any) => {
+        if (!request.url.includes('login') && !request.url.includes('logout') && error instanceof HttpErrorResponse) {
+          // Token expired or unauthorized
+          if (!this.refreshTokenInProgress) {
+            this.refreshTokenInProgress = true;
+            this.refreshTokenSubject.next(null);
+
+            // Call your refresh token method and obtain a new access token
+            return this.authService.getNewAccessToken({token: this.authService.getRefreshToken()}).pipe(
+              switchMap((newAccessToken: any) => {
+                console.log('newAccessToken response', newAccessToken);
+                this.refreshTokenInProgress = false;
+                this.refreshTokenSubject.next(newAccessToken);
+                request = this.addAccessTokenToRequest(request, newAccessToken.accessToken);
+                this.authService.setUserData(newAccessToken);
+                return next.handle(request);
+              }),
+              catchError((refreshError: any) => {
+                this.authService.logoutUser({token: this.authService.getRefreshToken()}); // Log the user out if refresh token fails
+                return throwError(()=> new Error(refreshError));
+              })
+            );
+          } else {
+            // Wait for the new token and then retry the request
+            return this.refreshTokenSubject.pipe(
+              filter((token) => token !== null),
+              take(1),
+              switchMap((newAccessToken) => {
+                request = this.addAccessTokenToRequest(request, newAccessToken);
+                return next.handle(request);
+              })
+            );
           }
-        ))
-    } else {
-      return this.logoutUser(refreshToken);
-    }
+        } else {
+          return throwError(()=> new Error(error));
+        }
+      })
+    );
   }
 
-  private addTokenHeader(req: HttpRequest<any>) {
-    if (req.url.includes('login') || req.url.includes('logout') || req.url.includes('register')) {
-      return req;
-    }
-    return req.clone({
-      headers: req.headers.append('Authorization', `Bearer ${this.tokenService.getToken('token')}`)
+  private addAccessTokenToRequest(request: HttpRequest<any>, accessToken: string): HttpRequest<any> {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
   }
-
-  private logoutUser(refreshToken: string) { 
-    this.tokenService.deleteAllTokens();
-    this.authservice.logoutUser(getServiceUrl().authServiceAPI, {token: refreshToken});
-    this.router.navigate(['/']);
-    return throwError(()=> new Error('session has expired'));
-  }
-
 }
-
-// we can interact with response also in the interceptor by using handle(handle gives us an observable which is expected beacuse our
-// request is also an observable) and adding certain methods like catchError to catch any error from the response. 

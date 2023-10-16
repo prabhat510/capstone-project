@@ -17,8 +17,8 @@ export class AlertBoxComponent  {
     if(logoutUser) {
       this.authService.emitLogout();
     } else {
-      this.renderer.setStyle(body, 'overflow', 'visible');
       this.authService.emitCancelLogout();
     }
+    this.renderer.setStyle(body, 'overflow', 'visible');
   }
 }

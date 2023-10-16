@@ -28,7 +28,7 @@ export class LoginComponent implements AfterViewInit {
   signinUser(usrForm: NgForm) {
     this.showLoader = true;
     if (usrForm.valid) {
-      this.authservice.loginUser(`${getServiceUrl().authServiceAPI}/auth/login`, this.login_form)
+      this.authservice.loginUser(this.login_form)
       .subscribe({
         next: data => this.proccessUserData(data), 
         error: error=> {
@@ -48,12 +48,16 @@ export class LoginComponent implements AfterViewInit {
   }
   proccessUserData(data: any) {
     // when credentials are correct
-    if (data.accessToken && data.refreshToken) {
-      this.tokenService.setToken('token', data.accessToken);
-      this.tokenService.setToken('refresh_token', data.refreshToken);
-      this.authservice.emitUserLoggedIn(data.user);
+    if (data) {
+      const redirectTo = this.authservice.getCurrentRoute();
       localStorage.setItem('userData', JSON.stringify(data.user));
-      this.router.navigate(['']);
+      this.authservice.setUserData(data);
+      this.authservice.emitUserLoggedIn(data.user);
+      if(redirectTo!==null) {
+        this.router.navigate(['/' + redirectTo]);
+      } else {
+        this.router.navigate(['']);
+      }
     } 
     this.showLoader = false;
   }
