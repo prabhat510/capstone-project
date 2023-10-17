@@ -34,6 +34,7 @@ input::placeholder {
   font-size: 14px;
   color: gray;
   transition: all 0.2s ease;
+  letter-spacing: .3px;
 }
 input:focus + label, .active {
   font-size: 12px !important;

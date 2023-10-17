@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   createUser(registration_form: NgForm) {
     this.showLoader = true;
     if (registration_form.valid) {
-      this.authservice.registerUser(`${getServiceUrl().bookServiceAPI}/auth/register/user`, this.registration_form)
+      this.authservice.registerUser(this.registration_form)
         .subscribe({
           next: (data) => {
             this.validateUser(data);

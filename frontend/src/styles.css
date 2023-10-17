@@ -1,7 +1,7 @@
 *,
 body {
   box-sizing: border-box;
-  font-family: sans-serif, 'Times New Roman', Times, serif;
+  font-family: open sans, 'Times New Roman', Times, serif;
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -117,4 +117,12 @@ button {
 .mobile-loader img{
   height: 35px;
   width: 35px;
+}
+
+main {
+  background-color: #fafafa;
+}
+
+input::placeholder, textarea::placeholder {
+  letter-spacing: .3px;
 }

@@ -49,10 +49,7 @@ app.get("/api/books", async (req, res) => {
     client.close();
   }
 });
-// route for token verification
-app.get("/verify/token", verify, (req, res) => {
-  res.status(200).send({ message: "token verified" });
-});
+
 if (process.env.ENV === "production") {
   app.use(express.static("frontend/dist/frontend"));
   app.get("*", (req, res) =>
