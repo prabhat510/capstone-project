@@ -15,7 +15,6 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "esModuleInterop": true,
     "types": ["reflect-metadata", "jest"],
     "typeRoots": ["./types", "./node_modules/@types"],
     "target": "es2020",

@@ -1,7 +1,8 @@
-import { Component, OnInit, EventEmitter, Output, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ElementRef, Renderer2, PLATFORM_ID, Inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { TokenStorageServiceService } from '../services/token-storage-service.service';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -12,23 +13,28 @@ export class NavComponent implements OnInit {
   showMenu = false;
   isAdmin = false;
   isLoggedIn = false;
+  isBrowser = false;
   userData:any;
   constructor(private authservice: AuthService, private router: Router, private tokenService: TokenStorageServiceService,
- private elementRef: ElementRef, private renderer: Renderer2) { }
+ private elementRef: ElementRef, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object) { 
+  this.isBrowser = isPlatformBrowser(platformId);
+ }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authservice.isLoggedIn;
-    this.userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')): '';
-    this.authservice.authStatusSubject$.subscribe((res)=> {
-      if(res.type === 'auth' && res.value === 'logout') {
-          this.signOut();
-      } else if(res.type === 'userData') {
-        this.isLoggedIn = this.authservice.isLoggedIn;
-        this.userData = res.value;
-        this.isAdmin = this.userData.isAdmin;
-        console.log('user details emitted', res);
-      } 
-    })
+    if(this.isBrowser) {
+      this.isLoggedIn = this.authservice.isLoggedIn;
+      this.userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')): '';
+      this.authservice.authStatusSubject$.subscribe((res)=> {
+        if(res.type === 'auth' && res.value === 'logout') {
+            this.signOut();
+        } else if(res.type === 'userData') {
+          this.isLoggedIn = this.authservice.isLoggedIn;
+          this.userData = res.value;
+          this.isAdmin = this.userData.isAdmin;
+          console.log('user details emitted', res);
+        } 
+      })
+    }
   }
   signOut() {
     this.isLoggedIn = false;

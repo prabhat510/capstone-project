@@ -35,7 +35,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
     AlertBoxComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

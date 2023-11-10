@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getServiceUrl } from '../urls';
 import { AuthService } from '../services/auth.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-book',
@@ -13,19 +14,25 @@ export class BookComponent implements OnInit {
   loading = true;
   isAdmin = false;
   bookId = '';
+  isBrowser = false;
   book: any;
   constructor(private activatedroute: ActivatedRoute, private bookservice: BooksService, private router: Router,
-    private authservice: AuthService) { }
+    private authservice: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object) { 
+      this.isBrowser = isPlatformBrowser(platformId);
+    }
 
   ngOnInit(): void {
-    const isLoggedIn = this.authservice.isLoggedIn;
-    this.bookId = this.activatedroute.snapshot.paramMap.get('id');
-    this.isAdmin = isLoggedIn && JSON.parse(localStorage.getItem('userData'))? JSON.parse(localStorage.getItem('userData')).isAdmin : false;
-    this.bookservice.getBook(`${getServiceUrl().bookServiceAPI}/books/${this.bookId}`).subscribe(data => {
-      this.book = data;
-      this.loading = false;
-      this.bookservice.scrollToTop();
-    });
+    if(this.isBrowser) {
+      const isLoggedIn = this.authservice.isLoggedIn;
+      this.bookId = this.activatedroute.snapshot.paramMap.get('id');
+      this.isAdmin = isLoggedIn && JSON.parse(localStorage.getItem('userData'))? JSON.parse(localStorage.getItem('userData')).isAdmin : false;
+      this.bookservice.getBook(`${getServiceUrl().bookServiceAPI}/books/${this.bookId}`).subscribe(data => {
+        this.book = data;
+        this.loading = false;
+        this.bookservice.scrollToTop();
+      });
+    }
   }
   
   removeBook() {
