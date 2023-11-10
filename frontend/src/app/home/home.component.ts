@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { getServiceUrl } from '../urls';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,7 +17,10 @@ export class HomeComponent implements OnInit {
   loadingMoreBooks = false;
   pendingBooksCount = 0;
   loadMoreOptionAvailable = true;
-  constructor(private booksservice: BooksService) { }
+  isBrowser = false;
+  constructor(private booksservice: BooksService, @Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+   }
 
   ngOnInit() {
     this.loadBooks();
@@ -27,6 +31,7 @@ export class HomeComponent implements OnInit {
     )
   }
   loadBooks() {
+   if(this.isBrowser) {
     if(!this.loading){this.loadingMoreBooks = true;}
     this.booksservice.getAllBooks(`${getServiceUrl().bookServiceAPI}/books?offset=${this.offset}&limit=${this.limit}`).subscribe((data: any) => {
       this.books = this.books.concat(data.books);
@@ -41,6 +46,7 @@ export class HomeComponent implements OnInit {
       if(this.pendingBooksCount <=0)this.loadMoreOptionAvailable = false;
       console.log('total count and pending count', data.totalCount, this.pendingBooksCount);
     }); 
+   }
   }
   goToTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
