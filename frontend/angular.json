@@ -129,7 +129,8 @@
           "options": {
             "routes": [
               "/"
-            ]
+            ],
+            "routesFile": "book-routes"
           },
           "configurations": {
             "production": {

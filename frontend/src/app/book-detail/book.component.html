@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!loading">
+<div class="container">
   <div class="book-container">
     <div class="book-image">
       <img [src]="book.image" alt="book image" />
@@ -48,8 +48,4 @@
     <strong>About the Book:</strong>
     <p>{{ book.description }}</p>
   </div>
-</div>
-
-<div class="loader" *ngIf="loading">
-  <img src="assets/loading-state.gif" alt="loading spinner"/>
 </div>
