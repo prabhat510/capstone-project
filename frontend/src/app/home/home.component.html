@@ -12,9 +12,9 @@
 <div class="book-container" *ngIf="!loading">
   <!-- to pass _id of the book as a parameter, put it in the second place of routerLink array and also update the 
    path in app-routing.module.ts -->
-  <div
+  <a
     class="book"
-    [routerLink]="['/book', book._id]"
+    [href]="'/book/' + book._id"
     *ngFor="let book of books | filter : filterTerm"
   >
     <div class="sub-container">
@@ -31,7 +31,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </a>
 </div>
 <div class="btn-container" *ngIf="!loading && !loadingMoreBooks">
   <button type="button"class="button topBtn" (click)="goToTop()">Back To Top</button>
