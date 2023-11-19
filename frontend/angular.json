@@ -130,7 +130,7 @@
             "routes": [
               "/"
             ],
-            "routesFile": "book-routes"
+            "routesFile": "book-routes.txt"
           },
           "configurations": {
             "production": {
