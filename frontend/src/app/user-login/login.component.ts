@@ -31,11 +31,9 @@ export class LoginComponent implements AfterViewInit {
       this.authservice.loginUser(this.login_form)
       .subscribe({
         next: data => this.proccessUserData(data), 
-        error: error=> {
-          if(error.status === 404) {
+        error: error => {
             this.errorMessage = 'Please check your credentials!';
             this.showLoader = false;
-          }
         }
       });
     } else {
